@@ -64,6 +64,23 @@ div#main h2 span.t-time{
 	font-weight: normal;
 }
 
+a.thread_new{
+	margin: 0 10px 0 auto;
+	width: 120px;
+	display: block;
+	padding: 8px 0 8px 20px;
+	color: #333333;
+	font-weight: bold;
+	font-size: 13px;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border: 5px solid #EEEEEE;
+}
+
+a.thread_new:hover{
+	border: 5px solid #87CEEB;
+}
+
 div.entry-box{
 	width: 570px;
 	padding: 20px 40px;

@@ -4,7 +4,7 @@
   function db_link(){
 
     //データベース接続情報	
-    $dsn = 'mysql:dnname=training01;host=localhost';
+    $dsn = 'mysql:dbname=training01;host=localhost';
     $user= 'root';
     $password = 'root';
 
@@ -14,7 +14,6 @@
         print('Error:'.$e->getMessage());
 	    die();
       }
-	  
 	  return $dbh;
   }
   
