@@ -14,14 +14,16 @@
 <div id="main">
 <h1>*** 掲示板 ***</h1>
 <h2><span>*</span>新着スレッド</h2>
-<table class="thread">
-<tr>
-  <th>No.</th>
-  <th>title</th>
-  <th>&nbsp;</th>
-</tr>
-
-
+<div class="btn-thread-new">
+<a href="thread/index.php" class="thread_new">新規スレッド作成</a>
+</div>
+<div class="new-list">
+<ul>
+  <li>
+    
+  </li>
+</ul>
+</div>
 
 </div><!-- /bbs-box -->
 </div><!-- /main -->

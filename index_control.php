@@ -4,20 +4,17 @@
   require_once("common/db.php");
   require_once("common/sql.php");
 
-  //データベース接続
-  $dbh = db_link();
 
-  //boardに登録されているデータ全取得
-  $stmt = get_allData_board($dbh);
+  //データベース接続
+  $link = db_link();
+
+  $strSQL = '';
+  $strSQL = 'SELECT * FROM board';
+  $strSQL = 'ORDER BY desc';
 
 /*
-  echo '<table class="thread">';
-  echo '<tr>';
-	echo '<th>No.</th>';
-	echo '<th>title</th>';
-	echo '<th>&nbsp;</th>';
-  echo '</tr>';
-*/
+  //boardに登録されているデータ全取得
+  $stmt = get_allData_board($dbh);
 
   //boardデータ全件出力
   while($result = $stmt->fetch(PDO::FETCH_BOTH)){
@@ -29,8 +26,8 @@
   }
   echo '</table>';
  
-
+*/
   //データベース切断
-  db_cut($dbh);
+  db_cut($link);
 
 ?>

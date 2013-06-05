@@ -5,7 +5,7 @@
 	
 	$chk_flg = true;
 
-	if(empty($val)){
+	if(empty($val) || $val == ""){
 	  $chk_flg = false;
 	}
 
@@ -13,6 +13,7 @@
 
   }
   
+/*
   //文字数チェック
   function strNumChk($key){
 
@@ -26,3 +27,4 @@
 	return $chk_flg;
 
   }
+*/

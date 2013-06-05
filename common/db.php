@@ -1,25 +1,25 @@
 <?php
-
+	
   //データベース接続
   function db_link(){
 
-    //データベース接続情報	
-    $dsn = 'mysql:dbname=training01;host=localhost';
+    //データベース接続情報
+	$server = 'localhost';
     $user= 'root';
     $password = 'root';
-
-    try{
-        $dbh = new PDO($dsn, $user, $password);
-      }catch(PDOException $e){
-        print('Error:'.$e->getMessage());
-	    die();
-      }
-	  return $dbh;
+	$datebase = 'training01';
+	
+	$link = mysqli_connect($server,$user,$password,$datebase);
+	
+	if(!$link){
+		die("データベース接続に失敗しました。".mysqli_error());
+	}
+	return $link;
   }
   
   //データベース切断
-  function db_cut($dbh){
-    $dbh = null;
+  function db_cut($link){
+    mysqli_close($link);
   }
 
 ?>
