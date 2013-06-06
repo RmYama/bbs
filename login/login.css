@@ -4,7 +4,7 @@ div#main{
 	width: 450px;
 }
 
-p{
+p.txt{
 	padding-left: 10px;
 	margin-bottom: 15px;
 }

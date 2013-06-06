@@ -6,8 +6,7 @@
 	function make_thread(){
 
 		//セッションから値を取得
-//		$user_id = $_SESSION["join"]["user_id"];   //ログイン後、セッションで持っている予定。
-		$user_id = 1;
+		$user_id = $_SESSION["users"]["user_id"];
 		$title = $_SESSION["join"]["title"];
 		$comment = $_SESSION["join"]["comment"];
 		
@@ -28,6 +27,9 @@
 	//boardテーブルに新規追加とidの取得
 	function board_insert($link,$title){
 	
+		//SQLインジェクション対策
+		$title = mysqli_real_escape_string($link,trim($title));
+
 		$strSQL = 'INSERT INTO board(title)'.
 		          ' VALUES ("'.$title.'")';
 		$result = mysqli_query($link, $strSQL);
@@ -44,6 +46,9 @@
 
 	//commentテーブルに新規追加
 	function comment_insert($link, $board_id, $user_id, $comment){
+		
+		//SQLインジェクション対策
+		$comment = mysqli_real_escape_string($link,trim($comment));
  
 		$strSQL = 'INSERT INTO comment(board_id, res_id, user_id, contents)'.
 		          ' VALUES ('.$board_id.',0,'. $user_id .',"'.$comment.'")';

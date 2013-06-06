@@ -11,6 +11,14 @@
 	}else{
 		$action = "";
 	}
+
+	//ログイン状態の確認
+	if (!isset($_SESSION['users'])) {
+		$login_flg = "false";
+	}else{
+		$nickname = $_SESSION['users']['nickname'];
+		$login_flg = "true";
+	}
 	
 	switch($action){
 		case "":
@@ -19,7 +27,7 @@
 			break;
 			
 		case "check":
-			require_once("../common/dataChk.php");
+/*			require_once("../common/dataChk.php");
 
 			//値の取得
 			$nickname = $_POST["nickname"];
@@ -28,13 +36,31 @@
 			if(isset($_POST["preview"])){
 				$preview = "checked";
 			}
-
 			//入力チェック
 			$result = inputCheck($title, $comment);
 
 			//結果の取得
 			$next = $result["flg"];
+*/
+			//入力チェック
+			$err_chk = new entryDataChk;
+			
+			//プロパティに値を代入
+			$err_chk->title = $_POST["title"];
+			$err_chk->comment = $_POST["comment"];
+			
+			//メソッドを実行して値を取得
+			$err1 = $err_chk->chkTitle();
+			$err2 = $err_chk->chkComment();
+			
+			if($err1 != "" || $err2 != ""){
+				//OK
 
+			}else{
+
+				//エラー表示
+			}
+/*
 			//次の処理判定
 			switch($next){
 				case "error":
@@ -63,7 +89,8 @@
 						redirect("end.php");
 					}
 				break;
-			}
+*/			}
+			
 			break;
 
 		case "back":
@@ -90,7 +117,7 @@
 			break;
 	}
 
-
+/*
 
 	//リダイレクト関数
 	function redirect($pagename) { 
@@ -129,6 +156,6 @@
 	
 		return $result;
 	}
-
+*/
 
 ?>

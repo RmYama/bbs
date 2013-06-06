@@ -9,6 +9,9 @@
 <!--
 <h1>*** 掲示板 ***</h1>
 -->
+<?php
+if(isset($login_flg) && $login_flg == "true"){
+?>
 <div class="entry-box">
 <h2><span>*</span>スレッド投稿フォーム</h2>
 <p>以下の項目を入力し、「投稿」ボタンを選択してください。</p>
@@ -51,6 +54,14 @@
 </div>
 </form>
 </div><!-- /entry-box -->
+<?php
+}else{
+?>
+<h2>ログインをする必要があります</h2>
+<a href="../login/index.php"> > ログインはこちら</a>
+<?php
+}
+?>
 </div><!-- /main -->
 </body>
 </html>
