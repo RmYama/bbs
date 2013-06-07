@@ -1,33 +1,35 @@
 <?php
-	session_start();
 
-     //セッション破棄
-	 unset($_SESSION['users']);
+	require_once("class.php");
+	require_once("model.php");
 
-?>
+	//アクションの判定をする
+	if(array_key_exists("action", $_GET)){
+		$action = $_GET["action"];
+	}else{
+		$action = "";
+	}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="style.css">
-<title>掲示板</title>
-</head>
-<body>
-<div id="main">
-<h1>*** 掲示板 ***</h1>
-<h2><span>*</span>新着スレッド</h2>
-<div class="btn-thread-new">
-<a href="thread/index.php" class="thread_new">新規スレッド作成</a>
-</div>
-<div class="new-list">
-<ul>
-  <li>
-    
-  </li>
-</ul>
-</div>
 
-</div><!-- /bbs-box -->
-</div><!-- /main -->
-</body>
-</html>
+	switch($action){
+		case "":
+			//初期表示
+			//クラスのインスタンス化
+			$db= new dbAccess;
+		
+			//データベース接続
+			$link = $db->db_link();
+			
+			$result = listNewThread($link);
+			
+			require_once("top.php");
+
+			//データベース切断
+			$db->db_cut($link);
+
+			break;
+			
+		default:
+			echo "actionの異常エラー";
+			break;
+	}

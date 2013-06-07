@@ -1,7 +1,5 @@
 <?php
 	//新規スレッドDB登録(model)
-	
-	require_once("../common/db.php");
 
 	function make_thread(){
 
@@ -10,8 +8,11 @@
 		$title = $_SESSION["join"]["title"];
 		$comment = $_SESSION["join"]["comment"];
 		
+		//データベースクラスのインスタンス化
+		$db = new dbAccess;
+
 		//データベース接続
-		$link = db_link();
+		$link = $db->db_link();
 		
 		//boardテーブルに新規追加とidの取得
 		$board_id = board_insert($link,$title);
@@ -20,7 +21,7 @@
 		comment_insert($link, $board_id, $user_id, $comment);
 		
 		//データベース切断
-		db_cut($link);
+		$db->db_cut($link);
 	
 	}
 

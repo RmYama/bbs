@@ -2,8 +2,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="thread.css">
 <title>掲示板</title>
 </head>
+<div id="header">
+<h1><span>*</span> 掲示板 <span>*</span></h1>
+<div class="btn-menu">
+<ul>
+  <li><a href="../index.php">トップページ</a></li>
+  <li><a href="../login/index.php?action=signup">新規登録</a></li>
+  <li><a href="../login/index.php?action=logout">ログアウト</a></li>
+</ul>
+</div><!-- /btn-menu -->
+</div><!-- /header -->
 <body>
 <div id="main">
 <!--

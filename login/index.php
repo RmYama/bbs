@@ -2,7 +2,7 @@
 	session_start();
 	
 	 //データベース
-	 require_once("../common/class.php");
+	 require_once("../class.php");
 	 require_once("model.php");
 
 
@@ -32,13 +32,14 @@
 			$err2 = $err_chk->chkPassword();
 			
 			if($err1 != "" || $err2 != ""){
-
+				//入力エラー
 				//フォームに値のセット
 				$user_name = $_POST["user_name"];
 				$password = $_POST["password"];
 
 				//エラー表示
 				require_once("login.php");
+
 			}else{
 				//ユーザーの確認
 				$user_name = $_POST["user_name"];
@@ -64,6 +65,14 @@
 						break;
 				}
 			}
+			break;
+		
+		case "logout":
+			 //セッション破棄
+			if(isset($_SESSION['users'])){
+				unset($_SESSION['users']);
+			}
+			require_once("login.php");
 			break;
 
 		default:

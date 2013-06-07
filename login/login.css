@@ -1,7 +1,7 @@
 
-div#main{
+div.login-box{
 	margin: 30px auto 0 auto;
-	width: 450px;
+	width: 650px;
 }
 
 p.txt{
@@ -10,7 +10,7 @@ p.txt{
 }
 
 table{
-	margin: 0 10px;
+	margin: 0 auto;
 	border-spacing: 0;
 	border-collapse: collapse;
 }
@@ -30,4 +30,22 @@ table th{
 
 div.btn-area{
 	margin-top: 20px;
+}
+
+
+
+div.signup-link{
+	padding-top: 20px;
+	text-align: center;
+}
+
+div.signup-link a{
+	font-size: 14px;
+	color: #0FB4D8;
+	text-decoration: underline;
+}
+
+div.signup-link a:hover{
+	color: #FF9D00;
+	text-decoration: none;
 }

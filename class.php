@@ -1,5 +1,28 @@
-
 <?php
+
+//データベース接続・切断
+class dbAccess{
+
+    //データベース接続情報
+	const DB_HOST = 'localhost';
+	const DB_USER = 'root';
+	const DB_PASSWORD = 'root';
+	const DB_NAME = 'training01';
+
+	//データベース接続
+	function db_link(){
+		$link = mysqli_connect(self::DB_HOST,self::DB_USER,self::DB_PASSWORD,self::DB_NAME);
+		if(!$link){
+			die("データベース接続に失敗しました。".mysqli_error());
+		}
+		return $link;
+	}
+	
+	//データベース切断
+	function db_cut($link){
+		mysqli_close($link);
+	}
+}
 
 //画面遷移
 class pageMove{

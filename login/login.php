@@ -6,10 +6,20 @@
 <title>掲示板 -ログイン画面- </title>
 </head>
 <body id="login">
+<div id="header">
+<h1><span>*</span> 掲示板 <span>*</span></h1>
+<div class="btn-menu">
+<ul>
+  <li><a href="../index.php">トップページ</a></li>
+  <li><a href="index.php?action=signup">新規登録</a></li>
+  <li><a href="index.php">ログイン</a></li>
+</ul>
+</div>
+<!-- /btn-menu -->
+</div><!-- /header -->
 <div id="main">
-<h1>*** ログイン画面 ***</h1>
+<div class="login-box">
 <h2><span>*</span>ログイン</h2>
-<p class="txt">IDとパスワードを入力して「ログイン」ボタンを押してください。</p>
 <p class="err-txt" style="text-align: center; font-size:16px;">
   <?php
     if(isset($err3) && $err3 != ""){
@@ -48,6 +58,10 @@
 <input type="submit" value="ログイン" />　<input type="reset" value="リセット" />
 </div>
 </form>
+</div><!-- /login-box -->
+<div class="signup-link">
+<a href="index.php?action=signup"> > 新規登録はこちら</a>
+</div>
 </div><!-- /main -->
 </body>
 </html>
