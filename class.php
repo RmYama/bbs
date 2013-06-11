@@ -9,42 +9,83 @@ class dbAccess{
 	const DB_PASSWORD = 'root';
 	const DB_NAME = 'training01';
 
-	//データベース接続
-	function db_link(){
-		$link = mysqli_connect(self::DB_HOST,self::DB_USER,self::DB_PASSWORD,self::DB_NAME);
-		if(!$link){
+	public $link;
+	public $cur_rec;
+
+	function __construct(){
+		//データベース接続
+		$db_link = mysqli_connect(self::DB_HOST,self::DB_USER,self::DB_PASSWORD,self::DB_NAME);
+		if(!$db_link){
 			die("データベース接続に失敗しました。".mysqli_error());
 		}
-		return $link;
+		
+		$this->link = $db_link;
+	}
+
+	//SQLインジェクション対策
+	function injection($value){
+	
+		$value = mysqli_real_escape_string($this->link,trim($value));
+		
+		return $value;
+	}
+
+	//クエリ実行
+	function sql($strSQL){
+
+		$result = mysqli_query($this->link, $strSQL);
+
+		if(!$result){
+			die("クエリ失敗".mysqli_error());
+		}
+		
+		//SQL文判定
+        if (preg_match("/^\s*(?:select|show|describe|explain)/i", $strSQL)){
+			$this->cur_rec = $result;
+		}
+		return $result;
+	}
+
+	//値取得
+	function fetch_array(){
+		return mysqli_fetch_array($this->cur_rec);
 	}
 	
 	//データベース切断
-	function db_cut($link){
-		mysqli_close($link);
+	function db_cut(){
+		mysqli_close($this->link);
 	}
 }
 
-//画面遷移
-class pageMove{
-
-	//プロパティを定義
-	public $pagename;
+//ログイン状態確認
+class loginState{
 	
-	public function __construct(){
-		$this->pagename = "";
-	}
+	public function state(){
 	
-	function redirect() { 
+		if(!isset($_SESSION["users"])){
+			$login_flg = "false";
+		}else{
+			$login_flg = "true";
+		}
 
-	    if (headers_sent()) {
-	        exit("Error: redirect: Already header has sent!");
-	    }
-
-	    $host  = $_SERVER['HTTP_HOST'];
-	    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-	    header("Location: http://$host$uri/$this->pagename");
-	    exit;
+		return $login_flg;
 	}
+}
+
+//アクション判定
+class getAction{
+	
+	public function action($get_data){
+
+		if(array_key_exists("action",$get_data)){
+			$action = $get_data["action"];
+		}else{
+			$action = "";
+		}
+		
+		return $action;
+	}
+
 }
 
 //ユーザー情報入力チェック
@@ -124,3 +165,25 @@ class entryDataChk{
 		return $err_msg;
 	}
 }
+
+//画面遷移
+class pageMove{
+
+	//プロパティを定義
+	public $pagename;
+	
+	public function __construct(){
+		$this->pagename = "";
+	}
+
+	public function redirect(){
+	    if(headers_sent()){
+	        exit("Error: redirect: Already header has sent!");
+	    }
+	    $host = $_SERVER['HTTP_HOST'];
+	    $url = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	    header("Location: http://$host$url/$this->pagename");
+	    exit;
+	}
+}
+

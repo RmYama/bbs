@@ -2,7 +2,7 @@
 	session_start();
 
 	//値の受け取り
-	$nickname = $_SESSION['users']['nickname'];
+	$nickname = $_SESSION['join']['nickname'];
 	$title = $_SESSION['join']['title'];
 	$comment = $_SESSION['join']['comment'];
 ?>

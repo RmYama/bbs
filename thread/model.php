@@ -11,55 +11,29 @@
 		//データベースクラスのインスタンス化
 		$db = new dbAccess;
 
-		//データベース接続
-		$link = $db->db_link();
-		
-		//boardテーブルに新規追加とidの取得
-		$board_id = board_insert($link,$title);
-		
-		//commentテーブルに新規追加
-		comment_insert($link, $board_id, $user_id, $comment);
-		
-		//データベース切断
-		$db->db_cut($link);
-	
-	}
-
-	//boardテーブルに新規追加とidの取得
-	function board_insert($link,$title){
-	
 		//SQLインジェクション対策
-		$title = mysqli_real_escape_string($link,trim($title));
-
+		$title = $db->injection($title);
+		$comment = $db->injection($comment);
+		
+		//boardテーブルに新規追加
 		$strSQL = 'INSERT INTO board(title)'.
 		          ' VALUES ("'.$title.'")';
-		$result = mysqli_query($link, $strSQL);
-		
-		if(!$result){
-			die("スレッドの新規作成に失敗しました（１）".mysqli_error());
-		}
 
+		//SQL文実行
+		$db->sql($strSQL);
+		
 		//idの取得
-		$board_id = mysqli_insert_id($link);
-		
-		return $board_id;
+		$board_id = mysqli_insert_id($db->link);
+
+		//commentテーブルに新規追加
+		$strSQL2 = 'INSERT INTO comment(board_id, res_id, user_id, contents)'.
+		           ' VALUES ('.$board_id.',0,'. $user_id .',"'.$comment.'")';
+
+		$db->sql($strSQL2);
+
+		//データベース切断
+		$db->db_cut();
+
 	}
 
-	//commentテーブルに新規追加
-	function comment_insert($link, $board_id, $user_id, $comment){
-		
-		//SQLインジェクション対策
-		$comment = mysqli_real_escape_string($link,trim($comment));
- 
-		$strSQL = 'INSERT INTO comment(board_id, res_id, user_id, contents)'.
-		          ' VALUES ('.$board_id.',0,'. $user_id .',"'.$comment.'")';
-		$result = mysqli_query($link, $strSQL);
-	
-		if(!$result){
-			die("スレッドの新規作成に失敗しました（３）".mysqli_error());
-		} 
-	}
-
-
-	
 ?>

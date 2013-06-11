@@ -1,29 +1,47 @@
 <?php
 	session_start();
 
-	//スレッド新規登録処理(Controller)
+	//一覧表示画面(Controller)
 	require_once("../class.php");
 	require_once("model.php");
-
+	
 	//ログイン状態の確認
 	$login = new loginState;
 	$state = $login->state();
 
 	if($state == true){
-		//ニックネームを取得
+		//ニックネーム取得
 		$nickname = $_SESSION["users"]["nickname"];
 	}
 
 	//アクションの判定をする
 	$getA = new getAction;
 	$action = $getA->action($_GET);
-
+	
 	switch($action){
-		case "":
+		case "list":
 			//初期表示
-			require_once("entry_form.php");
-			break;
+			if(array_key_exists("no",$_GET)){
+				$no = $_GET["no"];
+			}else{
+				exit("エラー");
+			}
 			
+			//データベースクラスのインスタンス化
+			$db = new dbAccess;
+			
+			$result = make_list($db,$no);
+
+			$flg = $result["flg"];
+			$title = $result["title"];
+			
+			
+			
+
+			require_once("list.php");
+			break;
+
+/*			
 		case "check":
 			//プレビュー保持
 			if(isset($_POST["preview"])){
@@ -90,7 +108,7 @@
 			//完了画面
 			nextPage("end.php");
 			break;
-
+*/
 		default:
 			echo "actionの異常エラー";
 			break;

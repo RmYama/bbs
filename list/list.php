@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
-<link rel="stylesheet" type="text/css" href="thread.css">
+<link rel="stylesheet" type="text/css" href="list.css">
 <title>掲示板</title>
 </head>
 <body>
@@ -17,11 +17,44 @@
 </div><!-- /btn-menu -->
 </div><!-- /header -->
 <div id="main">
+<div class="list">
+<div class="thread">
+<h2><span>*</span><?php echo $title ?></h2>
+<p class="text"><?php echo $comment ?></p>
+<p class="info"><span class="name"><?php echo $name ?></span>　<span class="time"><?php echo $time ?></span></p>
+<div class="links"><a href="index.php?aciton=edit">編集</a>　<a href="index.php?aciton=del">削除</a></div>
+</div><!-- /thread -->
+<ul class="res">
+<li>
+  <p class="info">[No] <span class="name">名前</span>　<span class="time">時間</span></p>
+  <p class="text">レス本文</p>
+  <div class="links"><a href="index.php?aciton=edit">編集</a>　<a href="index.php?aciton=del">削除</a></div>
+<!--
+  <p class="title"><a href="list/index.php?action=list&no=<?php echo $id ?>"><?php echo $title ?></a><span class="rescount"><span>レス数</span><br /><?php echo $res_cnt ?></span></p>
+  <p class="text"><?php echo $comment ?></p>
+  <p class="time"><?php echo $time ?></p>
+-->
+</li>
+<!--
+<li>
+  <p class="info">[No] <span class="name">名前</span>　<span class="time">時間</span></p>
+  <p class="text">レス本文</p>
+  <div class="links"><a href="index.php?aciton=edit">編集</a>　<a href="index.php?aciton=del">削除</a></div>
+</li>
+
+<li>
+  <p class="info">[No] <span class="name">名前</span>　<span class="time">時間</span></p>
+  <p class="text">レス本文</p>
+  <div class="links"><a href="index.php?aciton=edit">編集</a>　<a href="index.php?aciton=del">削除</a></div>
+</li>
+-->
+
+</ul><!-- /res -->
 <?php
 if(isset($state) && $state == "true"){
 ?>
 <div class="entry-box">
-<h2><span>*</span>スレッド投稿フォーム</h2>
+<h2><span>*</span>レス投稿フォーム</h2>
 <p>以下の項目を入力し、「投稿」ボタンを選択してください。</p>
 <form method="post" action="index.php?action=check" name="fm1">
 <table class="entry">
@@ -66,13 +99,14 @@ if(isset($state) && $state == "true"){
 }else{
 ?>
 <div class="login-note">
-<h2><span>*</span>ログインをする必要があります</h2>
+<h2><span>*</span>レスを投稿するにはログインをする必要があります</h2>
 <br />
 <a href="../login/index.php"> > ログインはこちら</a>
 </div>
 <?php
 }
 ?>
+</div><!-- /list -->
 </div><!-- /main -->
 </body>
 </html>

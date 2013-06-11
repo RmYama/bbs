@@ -24,18 +24,18 @@
 <div class="new-list">
 <ul>
 <?php
-if(isset($result)){
-	while($row = mysqli_fetch_array($result)){
+if($result == true){
+	while($row = $db->fetch_array()){
 		$id = $row["id"];
 		$title = $row["title"];
 		$comment = $row["comment"];
-		$time = $row["time"];
+		$time = $row["add_time"];
 		$res_cnt = $row["res_cnt"];
 		$res_id = $row["res_id"];
 		$comment = mb_strimwidth($comment,0,63,"…");
 ?>
   <li>
-     <p class="title"><a href="res/index.php?no=<?php echo $id ?>"><?php echo $title ?></a><span class="rescount"><span>レス数</span><br /><?php echo $res_cnt ?></span></p>
+     <p class="title"><a href="list/index.php?action=list&no=<?php echo $id ?>"><?php echo $title ?></a><span class="rescount"><span>レス数</span><br /><?php echo $res_cnt ?></span></p>
 	 <p class="text"><?php echo $comment ?></p>
 	 <p class="time"><?php echo $time ?></p>
   </li>

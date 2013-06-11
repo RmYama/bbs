@@ -2,35 +2,24 @@
 
 	//新着スレッド表示(model)
 	
-	function listNewThread($link){
-/*
-		//クラスのインスタンス化
-		$db= new dbAccess;
-		
-		//データベース接続
-		$link = $db->db_link();
-*/
+	function listNewThread($db){
 
-		$strSQL = "SELECT a.id as id, a.title as title, a.created_At as time, b.contents as comment, count(a.id) as res_cnt, b.res_id as res_id".
+		//SQL実行判定
+		$sql_flg = false;
+		
+		$strSQL = "SELECT a.id as id, a.title as title, a.created_At as add_time, b.contents as comment, count(a.id) as res_cnt, b.res_id as res_id".
 		          " FROM board as a LEFT JOIN comment as b".
 				  " ON a.id = b.board_id".
 				  " GROUP BY a.id".
 				  " HAVING b.res_id = 0".
 				  " ORDER BY a.created_at desc";
 
-		$result = mysqli_query($link,$strSQL);
-
+		//SQL実行
+		$db->sql($strSQL);
 		
-		if(!$result){
-			die("新着スレッドの取得に失敗しました".mysqli_error());
-		}
+		$sql_flg = true;
 
-/*
-			//データベース切断
-			$db->db_cut($link);
-*/		
-		return $result;
-	
+		return $sql_flg;
 	}
 
 
