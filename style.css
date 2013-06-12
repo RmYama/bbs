@@ -182,3 +182,16 @@ p.err-txt{
 	font-size: 12px;
 }
 
+div.nav{
+	margin-bottom: 5px;
+}
+
+div.nav a{
+	color: #0FB4D8;
+	font-size: 85%;
+}
+
+div.nav a:hover{
+	color: #FF9D00;
+	text-decoration: none;
+}

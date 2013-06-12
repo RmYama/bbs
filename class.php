@@ -180,10 +180,10 @@ class pageMove{
 	    if(headers_sent()){
 	        exit("Error: redirect: Already header has sent!");
 	    }
+
 	    $host = $_SERVER['HTTP_HOST'];
-	    $url = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-	    header("Location: http://$host$url/$this->pagename");
+	    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	    header("Location: http://$host$uri/$this->pagename");
 	    exit;
 	}
 }
-

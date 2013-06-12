@@ -9,7 +9,7 @@
 	$login = new loginState;
 	$state = $login->state();
 
-	if($state == true){
+	if($state == "true"){
 		//ニックネームを取得
 		$nickname = $_SESSION["users"]["nickname"];
 	}
@@ -57,7 +57,7 @@
 				$_SESSION["join"]["comment"] = $_POST["comment"];
 				
 				//プレビュー判定
-				if($preview = "checked"){
+				if($preview == "checked"){
 					
 					//プレビューもセッションに保持
 					$_SESSION["join"]["preview"] = $preview;

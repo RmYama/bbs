@@ -13,7 +13,7 @@
 			//クラスのインスタンス化
 			$db= new dbAccess;
 
-			$result = listNewThread($db);
+			$flg = listNewThread($db);
 			
 			require_once("top.php");
 

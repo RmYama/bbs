@@ -2,15 +2,15 @@
 	session_start();
 
 	//値の受け取り
-	$nickname = $_SESSION['join']['nickname'];
-	$title = $_SESSION['join']['title'];
+	$nickname = $_SESSION['users']['nickname'];
 	$comment = $_SESSION['join']['comment'];
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../style.css">
-<link rel="stylesheet" type="text/css" href="thread.css">
+<link rel="stylesheet" type="text/css" href="list.css">
 <title>掲示板</title>
 </head>
 <body>
@@ -34,11 +34,7 @@
   <td><?php echo $nickname; ?></td>
 </tr>
 <tr>
-  <th>タイトル</th>
-  <td><?php echo $title; ?></td>
-</tr>
-<tr>
-  <th>スレッド本文</th>
+  <th>レス本文</th>
   <td><?php echo nl2br($comment); ?></td>
 </tr>
 </table>

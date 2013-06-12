@@ -20,72 +20,9 @@
 <div class="nav">
 <a href="../index.php"><< 前の画面に戻る</a>
 </div>
-<div class="list-box">
-<h2><span>*</span><?php echo $title ?></h2>
-<ul class="list">
-<?php
-if($flg == true){
-	while($row = $db->fetch_array()){
-		$c_id = $row["c_id"];
-		$board_id = $row["board_id"];
-		$res_no = $row["res_id"];
-		$contents = $row["contents"];
-		$add_time = $row["add_time"];
-		$writer = $row["writer"];
-		$del_flg = $row["del_flg"];
-
-		if($res_no == 0){
-			//スレッド
-?>
-			<li class="thread">
-			  <p class="text"><?php echo nl2br($contents) ?></p>
-			  <p class="info"><span class="name"><?php echo $writer ?></span>　<span class="time"><?php echo $add_time ?></span></p>
-<?php
-			if(isset($nickname) && $nickname == $writer){
-?>
-				  <div class="links"><a href="index.php?aciton=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
-<?php 
-			}
-?>
-			</li>
-<?php
-		}else{
-			//レス
-?>
-			<li class="res">
-<?php
-			if($del_flg != 1){
-?>
-			  <p class="info">[<?php echo $res_no ?>] <span class="name"><?php echo $writer ?></span>　<span class="time"><?php echo $add_time ?></span></p>
-			  <p class="text"><?php echo nl2br($contents) ?></p>
-<?php
-			  if(isset($nickname) && $nickname == $writer){
-?>
-			    <div class="links"><a href="index.php?aciton=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
-<?php
-			  }
-
-			}else{
-?>
-			  <p class="info">[<?php echo $res_no ?>] <span class="name">---</span>　<span class="time"><?php echo $add_time ?></span></p>
-			  <p class="text">このレスは削除されました。</p>
-<?php
-			}
-?>
-			</li>
-<?php
-		}
-	}
-}
-?>
-</ul><!-- /list -->
-</div><!-- /list-box -->
-<?php
-if(isset($state) && $state == "true"){
-?>
 <div class="entry-box">
-<h2><span>*</span>レス投稿フォーム</h2>
-<p>以下の項目を入力し、「投稿」ボタンを選択してください。</p>
+<h2><span>*</span>編集画面</h2>
+<p>修正を行う場合は、以下の項目を編集し「投稿」ボタンを選択してください。</p>
 <form method="post" action="index.php?action=check" name="fm1">
 <input type="hidden" name="no" value ="<?php if(isset($no)){ echo $no; } ?>" />
 <table class="entry">
@@ -122,9 +59,6 @@ if(isset($state) && $state == "true"){
 <br />
 <a href="../login/index.php"> > ログインはこちら</a>
 </div>
-<?php
-}
-?>
 </div><!-- /main -->
 </body>
 </html>

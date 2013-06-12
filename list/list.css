@@ -1,5 +1,5 @@
-div.list{
-	margin: 0 auto;
+div.list-box{
+	margin: 0 auto 30px auto;
 	width: 730px;
 	padding: 20px;
 	border: 5px solid #CCCCCC;
@@ -36,37 +36,37 @@ div.links a:hover{
 	text-decoration: none;
 }
 
-div.thread{
+ul.list li.thread{
 	padding-bottom: 10px;
 	border-bottom: 2px solid #CCCCCC;
 }
 
-ul.res li{
+ul.list li.res{
 	padding: 10px 0 10px 8px;
 	border-bottom: 2px solid #CCCCCC;
 }
 
-ul.res li p.info{
+ul.list li.res p.info{
 	text-align: left;
 }
 
 
-div.entry-box{
+div.entry-box,
+div.login-note{
 	margin-top: 30px;
 }
 
-/*
+
 div.entry-box{
-	width: 560px;
 	margin: 0 auto 50px auto;
-	padding: 20px 40px;
-	background-color: #FFEAE9;
-	border: 5px solid #CCCCCC;
+	width: 730px;
+	padding: 20px;
+	border: 5px solid #FFD2D1;
 }
 
 table.entry{
-	margin-bottom: 20px;
-	width: 560px;
+	margin: 20px auto;
+	width: 640px;
 	border-spacing:0;
 	border-collapse:collapse;
 }
@@ -77,11 +77,13 @@ table.entry td{
 	text-align: left;
 	vertical-align: middle;
 	line-height: 1.0;
+	border-top: 1px dotted #FF6076;
 	border-bottom: 1px dotted #FF6076;
 	font-size: 80%;
 }
 
 table.entry th{
+	padding-left: 40px;
 	width: 25%;
 	color: #666666;
 	font-size: 80%;
@@ -109,4 +111,3 @@ div.login-note a{
 div.login-note a:hover{
 	border: 5px solid #FF9D00;
 }
-*/

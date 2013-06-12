@@ -24,13 +24,13 @@
 <div class="new-list">
 <ul>
 <?php
-if($result == true){
+if($flg == true){
 	while($row = $db->fetch_array()){
 		$id = $row["id"];
 		$title = $row["title"];
 		$comment = $row["comment"];
 		$time = $row["add_time"];
-		$res_cnt = $row["res_cnt"];
+		$res_cnt = $row["res_cnt"]-1;
 		$res_id = $row["res_id"];
 		$comment = mb_strimwidth($comment,0,63,"…");
 ?>

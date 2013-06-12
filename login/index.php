@@ -50,19 +50,29 @@
 						break;
 	
 					case "success":
+						//前の画面に戻る
+						echo $_SERVER['HTTP_REFERER'];
 						$move = new pageMove;
-						$move->pagename ="../thread/index.php";
-						$move->redirect();
+						$move->pagename ="../index.php";
+//						$move->redirect();
 						break;
 				}
 			}
 			break;
+
+		case "":
+
 		
 		case "logout":
 			 //セッション破棄
 			if(isset($_SESSION['users'])){
 				unset($_SESSION['users']);
 			}
+
+			if(isset($_SESSION['join'])){
+				unset($_SESSION['join']);
+			}
+
 			require_once("login.php");
 			break;
 

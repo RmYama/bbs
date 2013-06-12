@@ -26,8 +26,8 @@
 		$board_id = mysqli_insert_id($db->link);
 
 		//commentテーブルに新規追加
-		$strSQL2 = 'INSERT INTO comment(board_id, res_id, user_id, contents)'.
-		           ' VALUES ('.$board_id.',0,'. $user_id .',"'.$comment.'")';
+		$strSQL2 = "INSERT INTO comment(board_id, res_id, user_id, contents, del_flg)".
+		           " VALUES (".$board_id.",0,". $user_id .",'".$comment."',0)";
 
 		$db->sql($strSQL2);
 
