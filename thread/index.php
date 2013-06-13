@@ -28,6 +28,8 @@
 			//プレビュー保持
 			if(isset($_POST["preview"])){
 				$preview = "checked";
+			}else{
+				$preview = "";
 			}
 
 			//入力チェック
@@ -67,7 +69,12 @@
 
 				}else{
 					//データベース登録
-					make_thread();
+					makeThread();
+
+					//投稿系のセッション破棄
+					$delS = new delSession;
+					$delS->entry();
+
 					//完了画面
 					nextPage("end.php");
 				}
@@ -86,7 +93,10 @@
 
 		case "entry":
 			//データベースに登録
-			make_thread();
+			makeThread();
+			//投稿系のセッション破棄
+			$delS = new delSession;
+			$delS->entry();
 			//完了画面
 			nextPage("end.php");
 			break;

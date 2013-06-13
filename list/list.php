@@ -29,11 +29,15 @@ if($flg == true){
 		$c_id = $row["c_id"];
 		$board_id = $row["board_id"];
 		$res_no = $row["res_id"];
+		$writer_id = $row["writer_id"];
 		$contents = $row["contents"];
 		$add_time = $row["add_time"];
 		$writer = $row["writer"];
 		$del_flg = $row["del_flg"];
 
+/*		echo "user_id".$user_id."<br />";
+		echo "writer_id".$writer_id;
+*/
 		if($res_no == 0){
 			//スレッド
 ?>
@@ -41,9 +45,9 @@ if($flg == true){
 			  <p class="text"><?php echo nl2br($contents) ?></p>
 			  <p class="info"><span class="name"><?php echo $writer ?></span>　<span class="time"><?php echo $add_time ?></span></p>
 <?php
-			if(isset($nickname) && $nickname == $writer){
+			if(isset($user_id) && $user_id == $writer_id){
 ?>
-				  <div class="links"><a href="index.php?aciton=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
+				  <div class="links"><a href="index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
 <?php 
 			}
 ?>
@@ -61,7 +65,7 @@ if($flg == true){
 <?php
 			  if(isset($nickname) && $nickname == $writer){
 ?>
-			    <div class="links"><a href="index.php?aciton=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
+			    <div class="links"><a href="index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
 <?php
 			  }
 

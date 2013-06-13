@@ -1,7 +1,7 @@
 <?php
 	//新規スレッドDB登録(model)
 
-	function make_thread(){
+	function makeThread(){
 
 		//セッションから値を取得
 		$user_id = $_SESSION["users"]["user_id"];

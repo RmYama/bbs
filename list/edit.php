@@ -4,6 +4,14 @@
 <link rel="stylesheet" type="text/css" href="../style.css">
 <link rel="stylesheet" type="text/css" href="list.css">
 <title>掲示板</title>
+<script language="JavaScript">
+<!--
+function Del(){
+	document.fm1.action = "index.php?action=delCheck";
+	document.fm1.submit();
+}
+-->
+</script>
 </head>
 <body>
 <div id="header">
@@ -18,17 +26,25 @@
 </div><!-- /header -->
 <div id="main">
 <div class="nav">
-<a href="../index.php"><< 前の画面に戻る</a>
+<a href="index.php?action=list&no=<?php echo $_SESSION["join"]["board_id"]; ?>"><< 前の画面に戻る</a>
 </div>
 <div class="entry-box">
-<h2><span>*</span>編集画面</h2>
-<p>修正を行う場合は、以下の項目を編集し「投稿」ボタンを選択してください。</p>
-<form method="post" action="index.php?action=check" name="fm1">
-<input type="hidden" name="no" value ="<?php if(isset($no)){ echo $no; } ?>" />
+<h2><span>*</span>編集フォーム</h2>
+<p style="padding-left:30px;">修正を行う場合は、以下の項目を編集し「修正」ボタンを選択してください。<br />
+削除を行う場合は、「削除」ボタンを選択してください。削除ボタンを選択すると確認画面へ移動します。<br />
+<span style="color:red;">※スレッドのタイトルやニックネームの変更は出来ません。</span>
+</p>
+<form method="post" action="index.php?action=editCheck" name="fm1">
 <table class="entry">
+<?php if($res_id == 0){ ?>
+<tr>
+  <th>タイトル</th>
+  <td><?php if(isset($title)){ echo $title; } ?><input type="hidden" name="title" value="<?php if(isset($title)){ echo $title; } ?>" /></td>
+</tr>
+<?php } ?>
 <tr>
   <th>ニックネーム</th>
-  <td><input type="text" size="45" value="<?php if(isset($nickname)){ echo $nickname; } ?>" name="nickname" disabled="disabled" /></td>
+  <td><?php if(isset($nickname)){ echo $nickname; } ?></td>
 </tr>
 <tr>
   <th>レス本文</th>
@@ -47,18 +63,10 @@
 </tr>
 </table>
 <div class="btn-area">
-<input type="submit" name="submit" value="投稿" />　<input type="button" value="クリア" onClick="" />
+<input type="submit" name="btn_edit" value="修正" />　<input type="button" name="btn_del" value="削除" onClick="Del();" />
 </div>
 </form>
 </div><!-- /entry-box -->
-<?php
-}else{
-?>
-<div class="login-note">
-<h2><span>*</span>レスを投稿するにはログインをする必要があります</h2>
-<br />
-<a href="../login/index.php"> > ログインはこちら</a>
-</div>
 </div><!-- /main -->
 </body>
 </html>

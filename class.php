@@ -72,6 +72,42 @@ class loginState{
 	}
 }
 
+//セッション破棄
+class delSession{
+	
+	//ユーザー情報破棄
+	public function users(){
+		if(isset($_SESSION['users'])){
+			unset($_SESSION['users']);
+		}
+	}
+	
+	//投稿情報破棄
+	public function entry(){
+		if(isset($_SESSION['join'])){
+			unset($_SESSION['join']);
+		}
+	}
+
+	//ログアウト時
+	public function logout(){
+
+		$this->users();
+		$this->entry();
+			
+		$_SESSION = array();
+	
+		if (isset($_COOKIE["PHPSESSID"])) {
+	    	setcookie("PHPSESSID", '', time() - 1800, '/');
+		}
+
+		session_destroy();	
+
+	}
+
+
+}
+
 //アクション判定
 class getAction{
 	
@@ -180,9 +216,9 @@ class pageMove{
 	    if(headers_sent()){
 	        exit("Error: redirect: Already header has sent!");
 	    }
-
 	    $host = $_SERVER['HTTP_HOST'];
 	    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		echo $uri;
 	    header("Location: http://$host$uri/$this->pagename");
 	    exit;
 	}
