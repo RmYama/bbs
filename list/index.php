@@ -16,8 +16,8 @@
 	}
 
 	//アクションの判定をする
-	$getA = new getAction;
-	$action = $getA->action($_GET);
+	$getP = new getParameter;
+	$action = $getP->action($_GET);
 	
 	switch($action){
 		case "list":
@@ -91,12 +91,13 @@
 					//データベース登録
 					makeRes();
 
+					//完了画面
+					nextPage("end.php");
+
 					//投稿系のセッション破棄
 					$delS = new delSession;
 					$delS->entry();
 
-					//完了画面
-					nextPage("end.php");
 				}
 			}
 			break;
@@ -128,12 +129,12 @@
 			//データベースに登録
 			makeRes();
 
-			//投稿系のセッション破棄
-			 $delS = new delSession;
-			 $delS->entry();
-
 			//完了画面
 			nextPage("end.php");
+
+			//投稿系のセッション破棄
+			$delS = new delSession;
+			$delS->entry();
 
 			break;
 
@@ -207,13 +208,14 @@
 				}else{
 					//データベース修正
 					updateRes();
+					
+					//完了画面
+					nextPage("e_end.php");
 
 					//投稿系のセッション破棄
 					$delS = new delSession;
 					$delS->entry();
-					
-					//完了画面
-					nextPage("e_end.php");
+
 				}
 			}
 			break;
@@ -240,6 +242,10 @@
 			
 			//完了画面
 			nextPage("e_end.php");
+
+			//投稿系のセッション破棄
+			$delS = new delSession;
+			$delS->entry();
 			break;
 
 		case "delCheck":
@@ -258,8 +264,12 @@
 			//削除
 			deleteData();
 			
-			//完了画面
+			//完了画面へ移動
 			nextPage("e_end.php");
+
+			//投稿系のセッション破棄
+			$delS = new delSession;
+			$delS->entry();
 			break;
 
 		default:

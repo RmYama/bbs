@@ -2,6 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/thread.css">
 <title>掲示板</title>
 </head>
 <div id="header">
@@ -16,13 +17,10 @@
 </div><!-- /header -->
 <body>
 <div id="main">
-<!--
-<h1>*** 掲示板 ***</h1>
--->
-<h2><span>*</span>投稿完了</h2>
-<p>レスの投稿が完了しました！</p>
+<h2><span>*</span>ユーザー登録完了</h2>
+<p>登録が完了しました！</p>
 <br /><br />
-<a href="../index.php" class="back">トップページに戻る</a>
+<a href="../login/index.php" class="back">ログイン画面へ</a>　<a href="../index.php" class="back">トップページに戻る</a>
 </div><!-- /main -->
 </body>
 </html>

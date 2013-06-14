@@ -6,12 +6,19 @@
 	 require_once("model.php");
 
 	//アクションの判定をする
-	$getA = new getAction;
-	$action = $getA->action($_GET);
+	$getP = new getParameter;
+	$action = $getP->action($_GET);
 
 	switch($action){
 		case "":
 			//初期表示
+
+			//移動してきたページ情報取得
+			$page = $getP->page($_GET);
+			if($page != ""){
+				$_SESSION["join"]["backpage"] = $page;
+			}
+
 			require_once("login.php");
 			break;
 
@@ -39,7 +46,7 @@
 			}else{
 
 				//ユーザーの確認
-				$next = chk_user($user_name,$password);
+				$next = chkUser($user_name,$password);
 
 				//次の処理判定
 				switch($next){
@@ -53,20 +60,44 @@
 						//前の画面に戻る
 						$move = new pageMove;
 						$move->pagename ="index.php";
+						
+						if(isset($_SESSION["join"]["backpage"])){
+
+							$page = $_SESSION["join"]["backpage"];
+
+							if($page == "thread"){
+								//スレッド
+								$move->uri = "/bbs/".$page;
+	
+							}elseif($page == "list"){
+								//レス
+								if(isset($_SESSION["join"]["board_id"])){
+									$move->uri = "/bbs/".$page;
+									$move->pagename ="index.php?action=".$page."&no=".$_SESSION["join"]["board_id"];
+								}else{
+									//トップページへ
+									$move->uri = "/bbs";
+								}
+							}
+						}else{
+							//トップページへ
+							$move->uri = "/bbs";
+						}
+						
 						$move->redirect();
 						break;
 				}
 			}
 			break;
-
-		case "":
-
 		
 		case "logout":
 			 //セッション破棄
 			 $delS = new delSession;
 			 $delS->logout();
-			 require_once("login.php");
+			 //トップページに戻る
+			 $move = new pageMove;
+			 $move->pagename ="logout.php";
+			 $move->redirect();
 			 break;
 
 		default:

@@ -1,11 +1,16 @@
 <?php
+	session_start();
 
 	require_once("class.php");
 	require_once("model.php");
 
+	//ログイン状態の確認
+	$login = new loginState;
+	$state = $login->state();
+
 	//アクションの判定をする
-	$getA = new getAction;
-	$action = $getA->action($_GET);
+	$getP = new getParameter;
+	$action = $getP->action($_GET);
 
 	switch($action){
 		case "":

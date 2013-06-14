@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="../css/signup.css">
 <title>掲示板 -ログイン画面- </title>
 <script type="text/javascript" src="../js/fcontrol.js"></script>
 </head>
@@ -12,19 +12,25 @@
 <div class="btn-menu">
 <ul>
   <li><a href="../index.php">トップページ</a></li>
-  <li><a href="../signup/index.php">新規登録</a></li>
-  <li><a href="index.php">ログイン</a></li>
+  <li><a href="index.php">新規登録</a></li>
+<?php
+ if($state == "true"){ ?>
+  <li><a href="../login/index.php?action=logout">ログアウト</a></li>
+<?php }else{ ?>
+  <li><a href="../login/index.php">ログイン</a></li>
+<?php } ?>
 </ul>
 </div>
 <!-- /btn-menu -->
 </div><!-- /header -->
 <div id="main">
 <div class="login-box">
-<h2><span>*</span>ログイン</h2>
+<h2><span>*</span>会員登録</h2>
+<p style="padding-bottom:15px; text-align: center;">下記の項目を入力して「登録」ボタンを選択してください。</p>
 <p class="err-txt" style="text-align: center; font-size:16px;">
   <?php
-    if(isset($err3) && $err3 != ""){
-		echo $err3;
+    if(isset($err4) && $err4 != ""){
+		echo $err4;
 	}
   ?>
 </p>
@@ -43,8 +49,8 @@
 </td>
 </tr>
 <tr>
-  <th>パスワード</th>
-  <td><input type="password" size="35" name="password" value ="<?php if(isset($password)){ echo $password; } ?>" />
+  <th>ニックネーム</th>
+  <td><input type="text" size="35" name="nickname" value="<?php if(isset($nickname)){ echo $nickname; } ?>"  />
   <p class="err-txt">
   <?php
     if(isset($err2) && $err2 != ""){
@@ -54,15 +60,24 @@
   </p>
 </td>
 </tr>
+<tr>
+  <th>パスワード</th>
+  <td><input type="password" size="35" name="password" value ="<?php if(isset($password)){ echo $password; } ?>" />
+  <p class="err-txt">
+  <?php
+    if(isset($err3) && $err3 != ""){
+		echo $err3;
+	}
+  ?>
+  </p>
+</td>
+</tr>
 </table>
 <div class="btn-area">
-<input type="submit" value="ログイン" />　<input type="button" onClick="clearFormAll();" value="クリア" />
+<input type="submit" value="登　録" />　<input type="button" onClick="clearFormAll();" value="クリア" />
 </div>
 </form>
 </div><!-- /login-box -->
-<div class="signup-link">
-<a href="index.php?action=signup"> > 新規登録はこちら</a>
-</div>
 </div><!-- /main -->
 </body>
 </html>

@@ -1,9 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="../style.css">
-<link rel="stylesheet" type="text/css" href="thread.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/thread.css">
 <title>掲示板</title>
+<script type="text/javascript" src="../js/fcontrol.js"></script>
 </head>
 <body>
 <div id="header">
@@ -11,8 +12,13 @@
 <div class="btn-menu">
 <ul>
   <li><a href="../index.php">トップページ</a></li>
-  <li><a href="../login/index.php?action=signup">新規登録</a></li>
+  <li><a href="../signup/index.php">新規登録</a></li>
+<?php
+ if($state == "true"){ ?>
   <li><a href="../login/index.php?action=logout">ログアウト</a></li>
+<?php }else{ ?>
+  <li><a href="../login/index.php">ログイン</a></li>
+<?php } ?>
 </ul>
 </div><!-- /btn-menu -->
 </div><!-- /header -->
@@ -58,7 +64,7 @@ if(isset($state) && $state == "true"){
 </tr>
 </table>
 <div class="btn-area">
-<input type="submit" name="submit" value="投稿" />　<input type="button" value="クリア" onClick="" />
+<input type="submit" name="submit" value="投稿" />　<input type="button" onClick="clearFormAll();" value="クリア" />
 </div>
 </form>
 </div><!-- /entry-box -->
@@ -68,7 +74,7 @@ if(isset($state) && $state == "true"){
 <div class="login-note">
 <h2><span>*</span>ログインをする必要があります</h2>
 <br />
-<a href="../login/index.php"> > ログインはこちら</a>
+<a href="../login/index.php?page=thread"> > ログインはこちら</a>
 </div>
 <?php
 }

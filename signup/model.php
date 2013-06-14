@@ -18,16 +18,9 @@
 		$db->sql($strSQL);
 
 		if(mysqli_num_rows($db->cur_rec) == 1){
-			//idとニックネームをセッションで保持
-
-			$row = $db->fetch_array();
-
-			$_SESSION["users"]["user_id"] = $row["id"];
-			$_SESSION["users"]["nickname"] = $row["nickname"];
-			$user_flg = "success";
-
-		}else{
 			$user_flg = "error";
+		}else{
+			$user_flg = "success";
 
 		}
 		
@@ -35,6 +28,19 @@
 		$db->db_cut();
 		
 		return $user_flg;
+	}
+
+	function makeUser($user_name,$nickname,$password){
+	
+		//データベースクラスのインスタンス化
+		$db = new dbAccess;
+		
+		$strSQL = "INSERT INTO users".
+		          " (user_name, nickname, password)".
+				  " VALUES('".$user_name."','".$nickname."','".$password."')";
+
+		$db->sql($strSQL);
+	
 	}
 
 ?>

@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" type="text/css" href="top.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/top.css">
 <title>掲示板</title>
 </head>
 <body>
@@ -11,9 +11,15 @@
 <div class="btn-menu">
 <ul>
   <li><a href="index.php">トップページ</a></li>
-  <li><a href="login/index.php?action=signup">新規登録</a></li>
+  <li><a href="signup/index.php">新規登録</a></li>
+<?php
+ if($state == "true"){ ?>
+  <li><a href="login/index.php?action=logout">ログアウト</a></li>
+<?php }else{ ?>
   <li><a href="login/index.php">ログイン</a></li>
+<?php } ?>
 </ul>
+<p></p>
 </div><!-- /btn-menu -->
 </div><!-- /header -->
 <div id="main">

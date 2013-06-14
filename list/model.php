@@ -124,10 +124,6 @@
 		$res_id = $_SESSION["join"]["res_id"];
 		$comment = $_SESSION["join"]["comment"];
 
-		echo "board_id = ".$board_id."<br />";
-		echo "res_id = ".$res_id."<br />";
-		echo "comment = ".$comment."<br />";
-		
 		//データベースクラスのインスタンス化
 		$db = new dbAccess;
 		
@@ -149,13 +145,24 @@
 		//セッションから値を取得
 		$board_id = $_SESSION["join"]["board_id"];
 		$res_id = $_SESSION["join"]["res_id"];
+
+		//データベースクラスのインスタンス化
+		$db = new dbAccess;
 		
 		//レス番号によって処理をわける
 		if($res_id == 0){
 			//スレッド削除
-			
 			//関連するレス削除
-			
+			$strSQL = "DELETE FROM comment".
+			          " WHERE board_id = ".$board_id;
+			//SQl実行
+			$db->sql($strSQL);
+
+			//スレッド削除
+			$strSQL2 = "DELETE FROM board".
+			           " WHERE id = ".$board_id;
+			//SQl実行
+			$db->sql($strSQL2);
 
 		}else{
 			//レス削除
@@ -163,13 +170,12 @@
 			//del_flgに1を立てる
 			$strSQL = "UPDATE comment".
 			          " SET del_flg = 1".
-			          " WHERE board_id = ". $board_id.
+			          " WHERE board_id = ".$board_id.
 					  " AND res_id = ".$res_id;
 			//SQl実行
 			$db->sql($strSQL);
 		}
 		
-
 		//データベース切断
 		$db->db_cut();
 	}

@@ -109,7 +109,7 @@ class delSession{
 }
 
 //アクション判定
-class getAction{
+class getParameter{
 	
 	public function action($get_data){
 
@@ -121,6 +121,18 @@ class getAction{
 		
 		return $action;
 	}
+
+	public function page($get_data){
+
+		if(array_key_exists("page",$get_data)){
+			$page = $get_data["page"];
+		}else{
+			$page = "";
+		}
+		
+		return $page;
+	}
+
 
 }
 
@@ -143,8 +155,13 @@ class userDataChk{
 	public function chkUserName(){
 		if(empty($this->user_name) || $this->user_name == ""){
 			$err_msg = "ユーザー名を入力してください。";
+
 		}else{
-			$err_msg = "";
+			if(preg_match("/^[a-zA-Z0-9]+$/",$this->user_name)){
+				$err_msg = "";
+			}else{
+				$err_msg = "ユーザー名は半角英数字で入力してください。";
+			}
 		}
 		return $err_msg;
 	}
@@ -159,7 +176,7 @@ class userDataChk{
 	}
 	
 	public function chkNickname(){
-		if(empty($this->chkNickname) || $this->chkNickname == ""){
+		if(empty($this->nickname) || $this->nickname == ""){
 			$err_msg = "ニックネームを入力してください。";
 		}else{
 			$err_msg = "";
@@ -207,19 +224,25 @@ class pageMove{
 
 	//プロパティを定義
 	public $pagename;
-	
+	public $url;
+	public $host;
+	public $uri;
+
 	public function __construct(){
 		$this->pagename = "";
+		$this->url = "";
+//	    $this->host = $_SERVER['HTTP_HOST'];
+	    $this->uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	}
 
 	public function redirect(){
 	    if(headers_sent()){
 	        exit("Error: redirect: Already header has sent!");
 	    }
-	    $host = $_SERVER['HTTP_HOST'];
-	    $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		echo $uri;
-	    header("Location: http://$host$uri/$this->pagename");
+				
+		$this->url = "http://localhost$this->uri/$this->pagename";
+
+	    header("Location: $this->url");
 	    exit;
 	}
 }

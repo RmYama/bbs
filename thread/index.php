@@ -15,8 +15,8 @@
 	}
 
 	//アクションの判定をする
-	$getA = new getAction;
-	$action = $getA->action($_GET);
+	$getP = new getParameter;
+	$action = $getP->action($_GET);
 
 	switch($action){
 		case "":
