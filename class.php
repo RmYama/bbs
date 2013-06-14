@@ -1,7 +1,46 @@
 <?php
 
+class dbAccess extends PDO{
+
+	function __construct(){
+
+		$host = "localhost";
+		$database  = "training01";
+		$user = "root";
+		$password = "root";
+	
+		//DSNセット
+		$dsn = 'mysql:dbname=' . $database . ";host=" . $host;
+		
+		try{
+			//親クラスのコンストラクタ
+			parent::__construct(
+				$dsn,   //DSN
+				$user,  //ユーザー名
+				$password,  //パスワード
+				array(
+					PDO::ATTR_PERSISTENT         => true,                       // 接続管理
+					PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,     // エラーモード
+					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,           // フェッチモード
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`", // 文字コード			
+				)
+			);
+		} catch (PDOException $e){
+			die($e);
+		}
+	}
+
+	//データベース切断
+	function db_cut($dbh){
+		$dbh = null
+	}
+
+}
+
+
+
 //データベース接続・切断
-class dbAccess{
+/*class dbAccess{
 
     //データベース接続情報
 	const DB_HOST = 'localhost';
@@ -56,7 +95,7 @@ class dbAccess{
 		mysqli_close($this->link);
 	}
 }
-
+*/
 //ログイン状態確認
 class loginState{
 	
