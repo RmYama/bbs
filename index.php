@@ -18,12 +18,12 @@
 			//クラスのインスタンス化
 			$db= new dbAccess;
 
-			$flg = listNewThread($db);
+			$stmt = listNewThread($db);
 			
 			require_once("top.php");
 
 			//データベース切断
-			$db->db_cut();
+			$db->db_cut($db);
 
 			break;
 			

@@ -9,15 +9,20 @@
 		$db = new dbAccess;
 		
 		//ユーザーチェック
-		$strSQL  = '';
-		$strSQL  = 'SELECT * FROM users';
-		$strSQL .= ' WHERE user_name = "'.$user_name.'"';
-		$strSQL .= ' AND password = "'.$password.'"';
+		$strSQL = "SELECT * FROM users".
+				  " WHERE user_name = :user_name".
+				  " AND password = :password";
+
+		//SQL文準備
+		$stmt = $db->preparation($strSQL);
+
+		$stmt->bindValue(':user_name',$user_name);
+		$stmt->bindValue(':password',$password);
 		
 		//SQL実行
-		$db->sql($strSQL);
+		$db->execute();
 
-		if(mysqli_num_rows($db->cur_rec) == 1){
+		if($db->rowCount() == 1){
 			$user_flg = "error";
 		}else{
 			$user_flg = "success";
@@ -25,7 +30,7 @@
 		}
 		
 		//データベース切断
-		$db->db_cut();
+		$db->db_cut($db);
 		
 		return $user_flg;
 	}
@@ -34,13 +39,22 @@
 	
 		//データベースクラスのインスタンス化
 		$db = new dbAccess;
-		
-		$strSQL = "INSERT INTO users".
-		          " (user_name, nickname, password)".
-				  " VALUES('".$user_name."','".$nickname."','".$password."')";
 
-		$db->sql($strSQL);
-	
+		$strSQL = "INSERT INTO users (user_name, nickname, password)".
+				  " VALUES(:user_name, :nickname, :password)";
+
+		//SQL文準備
+		$stmt = $db->preparation($strSQL);
+
+		$stmt->bindValue(':user_name',$user_name);
+		$stmt->bindValue(':nickname',$nickname);
+		$stmt->bindValue(':password',$password);
+
+		//SQL実行
+		$db->execute();
+		
+		//データベース切断
+		$db->db_cut($db);
 	}
 
 ?>

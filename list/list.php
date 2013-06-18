@@ -31,7 +31,7 @@
 <ul class="list">
 <?php
 if($flg == true){
-	while($row = $db->fetch_array()){
+	while($row = $db->fetch()){
 		$c_id = $row["c_id"];
 		$board_id = $row["board_id"];
 		$res_no = $row["res_id"];
@@ -41,9 +41,6 @@ if($flg == true){
 		$writer = $row["writer"];
 		$del_flg = $row["del_flg"];
 
-/*		echo "user_id".$user_id."<br />";
-		echo "writer_id".$writer_id;
-*/
 		if($res_no == 0){
 			//スレッド
 ?>

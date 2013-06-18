@@ -199,3 +199,9 @@ div.nav a:hover{
 	color: #FF9D00;
 	text-decoration: none;
 }
+
+p.users{
+	padding-top: 5px;
+	padding-right: 3px;
+	text-align: right;
+}

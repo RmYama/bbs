@@ -13,10 +13,10 @@
 		          " WHERE id = ".$board_id;
 		
 		//SQl実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 		
 		//値の取得
-		$row = $db->fetch_array();	
+		$row = $db->fetch();	
 		$result["title"] = $row["title"];
 
 		//レス全件取得
@@ -29,7 +29,7 @@
 				 " ORDER BY res_id asc";
 				 
 		//SQL実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 
 		$result["flg"] = true;
 			
@@ -47,18 +47,15 @@
 		//データベースクラスのインスタンス化
 		$db = new dbAccess;
 
-		//SQLインジェクション対策
-		$comment = $db->injection($comment);
-		
 		//res_idの最大値取得
 		$strSQL = "SELECT MAX(res_id) as res_id FROM comment".
 		          " WHERE board_id = ".$board_id;
 		
 		//SQL実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 		
 		//値の取得
-		$row = $db->fetch_array();
+		$row = $db->fetch();
 		$res_id = $row["res_id"];
 		
 		//res_id + 1
@@ -69,10 +66,10 @@
 		           " VALUES (".$board_id.",".$res_id.",".$user_id.",'".$comment."',0)";
 		
 		//SQL実行
-		$db->sql($strSQL2);
+		$db->query($strSQL2);
 
 		//データベース切断
-		$db->db_cut();
+		$db->db_cut($db);
 
 	}
 	
@@ -85,10 +82,10 @@
 		$strSQL = "SELECT title FROM board".
 		          " WHERE id = ". $board_id;
 		//SQl実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 		
 		//値の取得
-		$row = $db->fetch_array();
+		$row = $db->fetch();
 		$result = $row["title"];
 		
 		return $result;
@@ -106,10 +103,10 @@
 		          " WHERE board_id = ". $board_id.
 				  " AND res_id = ".$res_id;
 		//SQl実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 		
 		//値の取得
-		$row = $db->fetch_array();
+		$row = $db->fetch();
 		$result = $row["contents"];
 		
 		return $result;
@@ -133,10 +130,10 @@
 				  " AND res_id = ".$res_id;
 		
 		//SQl実行
-		$db->sql($strSQL);
+		$db->query($strSQL);
 		
 		//データベース切断
-		$db->db_cut();
+		$db->db_cut($db);
 	}
 
 	//削除
@@ -156,13 +153,13 @@
 			$strSQL = "DELETE FROM comment".
 			          " WHERE board_id = ".$board_id;
 			//SQl実行
-			$db->sql($strSQL);
+			$db->query($strSQL);
 
 			//スレッド削除
 			$strSQL2 = "DELETE FROM board".
 			           " WHERE id = ".$board_id;
 			//SQl実行
-			$db->sql($strSQL2);
+			$db->query($strSQL2);
 
 		}else{
 			//レス削除
@@ -173,10 +170,10 @@
 			          " WHERE board_id = ".$board_id.
 					  " AND res_id = ".$res_id;
 			//SQl実行
-			$db->sql($strSQL);
+			$db->query($strSQL);
 		}
 		
 		//データベース切断
-		$db->db_cut();
+		$db->db_cut($db);
 	}
 ?>

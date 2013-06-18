@@ -42,7 +42,7 @@
 			require_once("list.php");
 
 			//データベース切断
-			$db->db_cut();	
+			$db->db_cut($db);	
 			break;
 
 		case "check":
@@ -73,7 +73,7 @@
 				require_once("list.php");
 	
 				//データベース切断
-				$db->db_cut();	
+				$db->db_cut($db);	
 
 			}else{
 				//セッションに値を保存
@@ -122,7 +122,7 @@
 			require_once("list.php");
 
 			//データベース切断
-			$db->db_cut();	
+			$db->db_cut($db);	
 			break;
 
 		case "entry":
@@ -158,7 +158,7 @@
 			$comment = selectRes($db);
 			
 			//データベース切断
-			$db->db_cut();
+			$db->db_cut($db);
 			
 			//編集・削除画面表示
 			require_once("edit.php");

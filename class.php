@@ -2,7 +2,9 @@
 
 class dbAccess extends PDO{
 
-	function __construct(){
+	protected $stmt = null;
+
+	public function __construct(){
 
 		$host = "localhost";
 		$database  = "training01";
@@ -22,7 +24,7 @@ class dbAccess extends PDO{
 					PDO::ATTR_PERSISTENT         => true,                       // 接続管理
 					PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,     // エラーモード
 					PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,           // フェッチモード
-					PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`", // 文字コード			
+					PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`", // 文字コード
 				)
 			);
 		} catch (PDOException $e){
@@ -30,72 +32,44 @@ class dbAccess extends PDO{
 		}
 	}
 
-	//データベース切断
-	function db_cut($dbh){
-		$dbh = null
+	//クエリ実行
+	public function query($strSQL){
+		$this->stmt = parent::query($strSQL);
+		return $this->stmt;
 	}
-
-}
-
-
-
-//データベース接続・切断
-/*class dbAccess{
-
-    //データベース接続情報
-	const DB_HOST = 'localhost';
-	const DB_USER = 'root';
-	const DB_PASSWORD = 'root';
-	const DB_NAME = 'training01';
-
-	public $link;
-	public $cur_rec;
-
-	function __construct(){
-		//データベース接続
-		$db_link = mysqli_connect(self::DB_HOST,self::DB_USER,self::DB_PASSWORD,self::DB_NAME);
-		if(!$db_link){
-			die("データベース接続に失敗しました。".mysqli_error());
-		}
-		
-		$this->link = $db_link;
-	}
-
-	//SQLインジェクション対策
-	function injection($value){
 	
-		$value = mysqli_real_escape_string($this->link,trim($value));
-		
-		return $value;
+	//SQL文準備
+	public function preparation($strSQL){
+		$this->stmt = parent::prepare($strSQL);
+		return $this->stmt;
 	}
 
 	//クエリ実行
-	function sql($strSQL){
-
-		$result = mysqli_query($this->link, $strSQL);
-
-		if(!$result){
-			die("クエリ失敗".mysqli_error());
-		}
-		
-		//SQL文判定
-        if (preg_match("/^\s*(?:select|show|describe|explain)/i", $strSQL)){
-			$this->cur_rec = $result;
-		}
-		return $result;
+	public function execute(){
+		$this->stmt->execute();
 	}
 
-	//値取得
-	function fetch_array(){
-		return mysqli_fetch_array($this->cur_rec);
+	//件数取得
+	public function rowCount(){
+		return $this->stmt->rowCount();
 	}
 	
+	//値取得
+	public function fetch(){
+		return $this->stmt->fetch();
+	}
+	
+	public function fetchAll(){
+		return $this->stmt->fetchAll();
+	}
+
 	//データベース切断
-	function db_cut(){
-		mysqli_close($this->link);
+	public function db_cut($db){
+		$this->stmt = null;
+		$db = null;
 	}
 }
-*/
+
 //ログイン状態確認
 class loginState{
 	

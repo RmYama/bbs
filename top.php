@@ -13,13 +13,20 @@
   <li><a href="index.php">トップページ</a></li>
   <li><a href="signup/index.php">新規登録</a></li>
 <?php
- if($state == "true"){ ?>
+if($state == "true"){ ?>
   <li><a href="login/index.php?action=logout">ログアウト</a></li>
 <?php }else{ ?>
   <li><a href="login/index.php">ログイン</a></li>
 <?php } ?>
 </ul>
-<p></p>
+<?php
+if($state == "true" && isset($_SESSION["users"]["nickname"])){
+	$login_users = $_SESSION["users"]["nickname"] ;
+}else{
+	$login_users = "ゲスト";
+}
+?>
+<p class="users">ようこそ <b><?php echo $login_users ?></b> さん。</p>
 </div><!-- /btn-menu -->
 </div><!-- /header -->
 <div id="main">
@@ -30,8 +37,9 @@
 <div class="new-list">
 <ul>
 <?php
-if($flg == true){
-	while($row = $db->fetch_array()){
+if($stmt != false){
+//	while($row = $db->fetchAll()){
+	foreach ($stmt as $row) {
 		$id = $row["id"];
 		$title = $row["title"];
 		$comment = $row["comment"];

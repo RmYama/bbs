@@ -10,30 +10,39 @@
 		
 		//データベースクラスのインスタンス化
 		$db = new dbAccess;
-
-		//SQLインジェクション対策
-		$title = $db->injection($title);
-		$comment = $db->injection($comment);
 		
 		//boardテーブルに新規追加
-		$strSQL = 'INSERT INTO board(title)'.
-		          ' VALUES ("'.$title.'")';
+		$strSQL = "INSERT INTO board(title) VALUES (:title)";
+
+		//SQL文準備
+		$stmt = $db->preparation($strSQL);
+
+		$stmt->bindValue(':title',$title);
 
 		//SQL文実行
-		$db->sql($strSQL);
-		
+		$db->execute();
+
 		//idの取得
-		$board_id = mysqli_insert_id($db->link);
+		$board_id = $db->lastInsertId();
 
-		//commentテーブルに新規追加
 		$strSQL2 = "INSERT INTO comment(board_id, res_id, user_id, contents, del_flg)".
-		           " VALUES (".$board_id.",0,". $user_id .",'".$comment."',0)";
+		           " VALUES (:board_id, :res_id, :user_id, :contents, :del_flg)";
 
-		$db->sql($strSQL2);
+		//SQL文準備
+		$stmt = null;
+		$stmt = $db->preparation($strSQL2);
+
+		$stmt->bindValue(':board_id',$board_id);
+		$stmt->bindValue(':res_id',0,PDO::PARAM_INT);
+		$stmt->bindValue(':user_id',$user_id);
+		$stmt->bindValue(':contents',$comment);
+		$stmt->bindValue(':del_flg',0,PDO::PARAM_INT);
+
+		//SQL文実行
+		$db->execute();
 
 		//データベース切断
-		$db->db_cut();
-
+		$db->db_cut($db);
 	}
 
 ?>
