@@ -31,3 +31,4 @@
 			echo "actionの異常エラー";
 			break;
 	}
+?>

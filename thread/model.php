@@ -32,9 +32,9 @@
 		$stmt = null;
 		$stmt = $db->preparation($strSQL2);
 
-		$stmt->bindValue(':board_id',$board_id);
+		$stmt->bindValue(':board_id',$board_id,PDO::PARAM_INT);
 		$stmt->bindValue(':res_id',0,PDO::PARAM_INT);
-		$stmt->bindValue(':user_id',$user_id);
+		$stmt->bindValue(':user_id',$user_id,PDO::PARAM_INT);
 		$stmt->bindValue(':contents',$comment);
 		$stmt->bindValue(':del_flg',0,PDO::PARAM_INT);
 
