@@ -59,11 +59,8 @@ if($stmt != false){
 ?>
 </ul>
 </div>
+
 </div><!-- /bbs-box -->
 </div><!-- /main -->
-<div id="footer">
-
-</div>
-<div style="padding:0 15px 15px 0; text-align:right; font-size:12px;"><a href="admin/index.php" style="color:#0FB4D8;">管理画面</a></div>
 </body>
 </html>
