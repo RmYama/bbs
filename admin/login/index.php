@@ -6,7 +6,7 @@
 	 require_once("model.php");
 
 	//アクションの判定をする
-	$getP = new getParameter;
+	$getP = new getParameter();
 	$action = $getP->action($_GET);
 
 	switch($action){
@@ -24,7 +24,7 @@
 
 		case "check":
 			//入力チェック
-			$err_chk = new userDataChk;
+			$err_chk = new userDataChk();
 
 			//値を取得
 			$user_name = $_POST["user_name"];
@@ -58,7 +58,7 @@
 	
 					case "success":
 						//前の画面に戻る
-						$move = new pageMove;
+						$move = new pageMove();
 						$move->pagename ="index.php";
 						
 						if(isset($_SESSION["join"]["backpage"])){
@@ -92,10 +92,10 @@
 		
 		case "logout":
 			 //セッション破棄
-			 $delS = new delSession;
+			 $delS = new delSession();
 			 $delS->logout();
 			 //トップページに戻る
-			 $move = new pageMove;
+			 $move = new pageMove();
 			 $move->pagename ="logout.php";
 			 $move->redirect();
 			 break;

@@ -6,7 +6,7 @@
 	require_once("model.php");
 
 	//ログイン状態の確認
-	$login = new loginState;
+	$login = new loginState();
 	$state = $login->state();
 
 	if($state == "true"){
@@ -15,7 +15,7 @@
 	}
 
 	//アクションの判定をする
-	$getP = new getParameter;
+	$getP = new getParameter();
 	$action = $getP->action($_GET);
 
 	switch($action){
@@ -33,7 +33,7 @@
 			}
 
 			//入力チェック
-			$err_chk = new entryDataChk;
+			$err_chk = new entryDataChk();
 			
 			//プロパティに値を代入
 			$err_chk->title = $_POST["title"];
@@ -72,7 +72,7 @@
 					makeThread();
 
 					//投稿系のセッション破棄
-					$delS = new delSession;
+					$delS = new delSession();
 					$delS->entry();
 
 					//完了画面
@@ -95,7 +95,7 @@
 			//データベースに登録
 			makeThread();
 			//投稿系のセッション破棄
-			$delS = new delSession;
+			$delS = new delSession();
 			$delS->entry();
 			//完了画面
 			nextPage("end.php");
@@ -110,7 +110,7 @@
 	function nextPage($pagename){
 
 		//classインスタンス化
-		$move = new pageMove;
+		$move = new pageMove();
 		$move->pagename = $pagename;
 		$move->redirect();
 

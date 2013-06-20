@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="css/top.css">
 <title>掲示板 -ログイン画面- </title>
 <script type="text/javascript" src="../js/fcontrol.js"></script>
 </head>
@@ -13,48 +13,31 @@
 </div>
 <!-- /btn-menu -->
 </div><!-- /header -->
+<div class="nav" style="margin: 0 auto; width: 780px; padding:6px 0; border-bottom:1px solid #CCCCCC;">
+　<a href="../index.php">掲示板を見る</a>
+</div>
 <div id="main">
-<div class="login-box">
-<h2><span>*</span>ログイン</h2>
-<p class="err-txt" style="text-align: center; font-size:16px;">
-  <?php
-    if(isset($err3) && $err3 != ""){
-		echo $err3;
-	}
-  ?>
-</p>
-<form method="post" action="index.php?action=check" name="fm1">
+<h2><span>*</span>管理メニュー</h2>
 <table>
 <tr>
-  <th>ＩＤ</th>
-  <td><input type="text" size="35" name="user_name" value="<?php if(isset($login_id)){ echo $login_id; } ?>"  />
-  <p class="err-txt">
-  <?php
-    if(isset($err1) && $err1 != ""){
-		echo $err1;
-	}
-  ?>
-  </p>
-</td>
+  <th>基本設定</th>
 </tr>
 <tr>
-  <th>パスワード</th>
-  <td><input type="password" size="35" name="password" value ="<?php if(isset($login_pass)){ echo $login_pass; } ?>" />
-  <p class="err-txt">
-  <?php
-    if(isset($err2) && $err2 != ""){
-		echo $err2;
-	}
-  ?>
-  </p>
-</td>
+  <td>・<a href="">管理人情報</a></td>
+</tr>
+<tr>
+  <th>サイトデザイン設定</th>
+</tr>
+<tr>
+  <td>・<a href="design/index.php">サイトレイアウト</a></td>
+</tr>
+<tr>
+  <th>会員管理</th>
+</tr>
+<tr>
+  <td>・<a href="member/index.php">登録会員一覧</a></td>
 </tr>
 </table>
-<div class="btn-area">
-<input type="submit" value="ログイン" />　<input type="button" onClick="clearFormAll();" value="クリア" />
-</div>
-</form>
-</div><!-- /login-box -->
 </div><!-- /main -->
 </body>
 </html>

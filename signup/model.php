@@ -6,7 +6,7 @@
 	function chkUser($user_name,$password){
 		
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 		
 		//ユーザーチェック
 		$strSQL = "SELECT * FROM users".
@@ -38,7 +38,7 @@
 	function makeUser($user_name,$nickname,$password){
 	
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 
 		$strSQL = "INSERT INTO users (user_name, nickname, password)".
 				  " VALUES(:user_name, :nickname, :password)";

@@ -6,7 +6,7 @@
 	require_once("model.php");
 	
 	//ログイン状態の確認
-	$login = new loginState;
+	$login = new loginState();
 	$state = $login->state();
 
 	if($state == "true"){
@@ -16,7 +16,7 @@
 	}
 
 	//アクションの判定をする
-	$getP = new getParameter;
+	$getP = new getParameter();
 	$action = $getP->action($_GET);
 	
 	switch($action){
@@ -30,7 +30,7 @@
 			
 			//データ取得して画面出力
 			//データベースクラスのインスタンス化
-			$db = new dbAccess;
+			$db = new dbAccess();
 			
 			$board_id = $_SESSION["join"]["board_id"];
 			
@@ -61,7 +61,7 @@
 			if($err1 != ""){
 				//データ取得して画面出力
 				//データベースクラスのインスタンス化
-				$db = new dbAccess;
+				$db = new dbAccess();
 				
 				$board_id = $_SESSION["join"]["board_id"];
 				
@@ -95,7 +95,7 @@
 					nextPage("end.php");
 
 					//投稿系のセッション破棄
-					$delS = new delSession;
+					$delS = new delSession();
 					$delS->entry();
 
 				}
@@ -110,7 +110,7 @@
 
 			//データ取得して画面出力
 			//データベースクラスのインスタンス化
-			$db = new dbAccess;
+			$db = new dbAccess();
 			
 			$board_id = $_SESSION["join"]["board_id"];
 			
@@ -133,7 +133,7 @@
 			nextPage("end.php");
 
 			//投稿系のセッション破棄
-			$delS = new delSession;
+			$delS = new delSession();
 			$delS->entry();
 
 			break;
@@ -148,7 +148,7 @@
 			}
 			
 			//データベースクラスのインスタンス化
-			$db = new dbAccess;
+			$db = new dbAccess();
 			
 			//スレッド修正の場合はタイトル取得。
 			if($res_id == 0){
@@ -213,7 +213,7 @@
 					nextPage("e_end.php");
 
 					//投稿系のセッション破棄
-					$delS = new delSession;
+					$delS = new delSession();
 					$delS->entry();
 
 				}
@@ -244,7 +244,7 @@
 			nextPage("e_end.php");
 
 			//投稿系のセッション破棄
-			$delS = new delSession;
+			$delS = new delSession();
 			$delS->entry();
 			break;
 
@@ -268,7 +268,7 @@
 			nextPage("e_end.php");
 
 			//投稿系のセッション破棄
-			$delS = new delSession;
+			$delS = new delSession();
 			$delS->entry();
 			break;
 
@@ -281,7 +281,7 @@
 	//入力チェック
 	function chkData($comment){
 
-		$err_chk = new entryDataChk;
+		$err_chk = new entryDataChk();
 		
 		//プロパティに値を代入
 		$err_chk->comment = $comment;
@@ -296,7 +296,7 @@
 	function nextPage($pagename){
 
 		//classインスタンス化
-		$move = new pageMove;
+		$move = new pageMove();
 		$move->pagename = $pagename;
 		$move->redirect();
 

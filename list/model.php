@@ -55,7 +55,7 @@
 		$comment = $_SESSION["join"]["comment"];
 		
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 
 		//res_idの最大値取得
 		$strSQL = "SELECT MAX(res_id) as res_id FROM comment".
@@ -159,7 +159,7 @@
 		$comment = $_SESSION["join"]["comment"];
 
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 		
 		$strSQL = "UPDATE comment".
 		          " SET contents = :comment".
@@ -188,7 +188,7 @@
 		$res_id = $_SESSION["join"]["res_id"];
 
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 		
 		//レス番号によって処理をわける
 		if($res_id == 0){

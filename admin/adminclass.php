@@ -1,23 +1,37 @@
 <?php
-class changeString{
-	
-	public $list = array("<" => "&lt;", ">" => "&gt;");
-	public $value = "";
-	
-	//置換
-	public function replace($string){
-	
-		$this->value = str_replace(array_keys($this->list), array_values($this->list), $string);
-		
-		return $this->value;
+//tag入力チェック
+class tagDataChk{
+
+	//プロパティを定義
+	public $tag_header;
+	public $tag_footer;
+
+	public function __construct(){
+		$this->tag_header = "";
+		$this->tag_footer = "";
 	}
 
-	//戻す
-	public function restore($string){
-		$this->value = str_replace(array_values($this->list), array_keys($this->list), $string);
-
-		return $this->value;
+	//メソッド定義
+	//必須入力
+	public function chkHeader(){
+		if(empty($this->tag_header) || $this->tag_header == ""){
+			$err_msg = "ヘッダーエリアしてください。";
+		}else{
+			$err_msg = "";
+		}
+		return $err_msg;
+	}
+	
+	public function chkFooter(){
+		if(empty($this->tag_footer) || $this->tag_footer == ""){
+			$err_msg = "フッターエリアを入力してください。";
+		}else{
+			$err_msg = "";
+		}
+		return $err_msg;
 	}
 }
+
+
 
 ?>

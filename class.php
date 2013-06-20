@@ -32,18 +32,19 @@ class dbAccess extends PDO{
 		}
 	}
 
-	//クエリ実行
-	public function query($strSQL){
-		$this->stmt = parent::query($strSQL);
-		return $this->stmt;
-	}
-	
 	//SQL文準備
 	public function preparation($strSQL){
 		$this->stmt = parent::prepare($strSQL);
 		return $this->stmt;
 	}
 
+
+	//クエリ実行
+	public function query($strSQL){
+		$this->stmt = parent::query($strSQL);
+		return $this->stmt;
+	}
+	
 	//クエリ実行
 	public function execute(){
 		$this->stmt->execute();
@@ -144,6 +145,70 @@ class getParameter{
 		}
 		
 		return $page;
+	}
+}
+
+class changeString{
+	
+	public $value = "";
+	
+	//HTMLエンティティ
+	public function entity($string){
+	
+		$this->value = htmlspecialchars($string, ENT_QUOTES);
+		
+		return $this->value;
+	}
+
+	//HTMLエンティティデコード
+	public function decode($string){
+
+		$this->value = html_entity_decode($string, ENT_QUOTES);
+
+		return $this->value;
+	}
+}
+
+class setLayout extends changeString{
+	
+	protected $db;
+	
+	public function __construct(){
+		$this->db = new dbAccess();
+	}
+	
+	public function setHeader(){
+		
+		$strSQL = "SELECT tag_header FROM designsettings";
+		
+		$this->db->query($strSQL);
+		
+		$row = $this->db->fetch();
+		
+		$result = $row["tag_header"];
+
+		$this->db->db_cut($this->db);
+
+		$result = parent::decode($result);
+
+		return $result;
+	}
+
+	public function setFooter(){
+		
+		$strSQL = "SELECT tag_footer FROM designsettings";
+		
+		$this->db->query($strSQL);
+		
+		$row = $this->db->fetch();
+		
+		$result = $row["tag_footer"];
+
+		$this->db->db_cut($this->db);
+
+		$result = parent::decode($result);
+
+		return $result;
 	}
 
 

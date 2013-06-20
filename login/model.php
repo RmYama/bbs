@@ -5,7 +5,7 @@
 	function chkUser($user_name,$password){
 		
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 		
 		//ユーザーチェック
 		$strSQL  = "SELECT * FROM users".

@@ -6,10 +6,10 @@
 	 require_once("model.php");
 
 	//アクションの判定をする
-	$getP = new getParameter;
+	$getP = new getParameter();
 	$action = $getP->action($_GET);
 
-	$login = new loginState;
+	$login = new loginState();
 	$state = $login->state();
 
 	switch($action){
@@ -20,7 +20,7 @@
 
 		case "check":
 			//入力チェック
-			$err_chk = new userDataChk;
+			$err_chk = new userDataChk();
 
 			//値を取得
 			$user_name = $_POST["user_name"];
@@ -58,7 +58,7 @@
 						makeUser($user_name,$nickname,$password);
 
 						//前の画面に戻る
-						$move = new pageMove;
+						$move = new pageMove();
 						$move->pagename ="end.php";
 						$move->redirect();
 						break;

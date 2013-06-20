@@ -9,7 +9,7 @@
 		$comment = $_SESSION["join"]["comment"];
 		
 		//データベースクラスのインスタンス化
-		$db = new dbAccess;
+		$db = new dbAccess();
 		
 		//boardテーブルに新規追加
 		$strSQL = "INSERT INTO board(title) VALUES (:title)";

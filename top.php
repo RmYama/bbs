@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="header">
-<h1><span>*</span> 掲示板 <span>*</span></h1>
+<?php if(isset($tag_header)){ echo  $tag_header."\r\n"; } ?>
 <div class="btn-menu">
 <ul>
   <li><a href="index.php">トップページ</a></li>
@@ -62,7 +62,7 @@ if($stmt != false){
 </div><!-- /bbs-box -->
 </div><!-- /main -->
 <div id="footer">
-
+<?php if(isset($tag_footer)){ echo  $tag_footer."\r\n"; } ?>
 </div>
 <div style="padding:0 15px 15px 0; text-align:right; font-size:12px;"><a href="admin/index.php" style="color:#0FB4D8;">管理画面</a></div>
 </body>

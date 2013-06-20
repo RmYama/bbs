@@ -1,7 +1,8 @@
 <?php
 	session_start();
 
-	require_once("../class.php");
+	require_once("../../class.php");
+	require_once("../adminclass.php");
 	require_once("model.php");
 
 	//ログイン状態の確認
@@ -14,19 +15,29 @@
 
 	switch($action){
 		case "":
-			//ログイン画面表示
-
-			require_once("top.php");
-			break;
-
-		case "menu":
-			//管理メニュー
-			require_once("top.php");
+			//会員一覧
 			
+			
+			//リスト作成
+			
+			
+			
+			require_once("list.php");
 			break;
 
 		default:
 			echo "actionの異常エラー";
 			break;
 	}
+
+	//リダイレクト
+	function nextPage($pagename){
+
+		//classインスタンス化
+		$move = new pageMove();
+		$move->pagename = $pagename;
+		$move->redirect();
+
+	}
+
 ?>
