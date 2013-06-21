@@ -14,9 +14,9 @@
 			//初期表示
 
 			//移動してきたページ情報取得
-			$page = $getP->page($_GET);
-			if($page != ""){
-				$_SESSION["join"]["backpage"] = $page;
+			$pagename = $getP->backPage($_GET);
+			if($pagename != ""){
+				$_SESSION["join"]["backpage"] = $pagename;
 			}
 
 			require_once("login.php");
@@ -63,17 +63,17 @@
 						
 						if(isset($_SESSION["join"]["backpage"])){
 
-							$page = $_SESSION["join"]["backpage"];
+							$pagename = $_SESSION["join"]["backpage"];
 
-							if($page == "thread"){
+							if($pagename == "thread"){
 								//スレッド
-								$move->uri = "/bbs/".$page;
+								$move->uri = "/bbs/".$pagename;
 	
 							}elseif($page == "list"){
 								//レス
 								if(isset($_SESSION["join"]["board_id"])){
-									$move->uri = "/bbs/".$page;
-									$move->pagename ="index.php?action=".$page."&no=".$_SESSION["join"]["board_id"];
+									$move->uri = "/bbs/".$pagename;
+									$move->pagename ="index.php?action=".$pagename."&no=".$_SESSION["join"]["board_id"];
 								}else{
 									//トップページへ
 									$move->uri = "/bbs";

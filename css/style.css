@@ -206,6 +206,41 @@ p.users{
 	text-align: right;
 }
 
+
+div.paging{
+	margin: 0 auto 50px auto;
+	width: 780px;
+}
+
+div.paging ul{
+	text-align: center;
+	width: 780px;
+	overflow: hidden;
+}
+
+div.paging ul li{
+	display: inline;
+	text-align: center;
+}
+
+
+div.paging ul li a{
+	color: #0FB4D8;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+div.paging ul li.previous a,
+div.paging ul li.next a{
+	font-size: 14px;
+}
+div.paging ul li.active a,
+div.paging ul li a:hover{
+	color: #FF9D00;
+}
+
+
 div#footer{
 	width: 760px;
 	margin: 10px auto 0 auto;
@@ -213,3 +248,4 @@ div#footer{
 	background-color: #FFEAE9;
 	overflow: hidden;
 }
+

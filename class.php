@@ -47,7 +47,7 @@ class dbAccess extends PDO{
 	
 	//クエリ実行
 	public function execute(){
-		$this->stmt->execute();
+		return $this->stmt->execute();
 	}
 
 	//件数取得
@@ -114,12 +114,8 @@ class delSession{
 		if (isset($_COOKIE["PHPSESSID"])) {
 	    	setcookie("PHPSESSID", '', time() - 1800, '/');
 		}
-
 		session_destroy();	
-
 	}
-
-
 }
 
 //アクション判定
@@ -136,15 +132,34 @@ class getParameter{
 		return $action;
 	}
 
-	public function page($get_data){
+	public function pageNo($get_data){
 
 		if(array_key_exists("page",$get_data)){
+
 			$page = $get_data["page"];
+			
+			if (preg_match('/^[1-9][0-9]*$/', $page)) {
+				$page = (int)$page;
+			}else{
+				$page = 1;
+			}
+			
 		}else{
-			$page = "";
+			$page = 1;
+		}
+		return $page;
+	}
+
+
+	public function backPage($get_data){
+
+		if(array_key_exists("page",$get_data)){
+			$pagename = $get_data["page"];
+		}else{
+			$pagename = "";
 		}
 		
-		return $page;
+		return $pagename;
 	}
 }
 
@@ -155,7 +170,7 @@ class changeString{
 	//HTMLエンティティ
 	public function entity($string){
 	
-		$this->value = htmlspecialchars($string, ENT_QUOTES);
+		$this->value = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 		
 		return $this->value;
 	}
@@ -163,7 +178,7 @@ class changeString{
 	//HTMLエンティティデコード
 	public function decode($string){
 
-		$this->value = html_entity_decode($string, ENT_QUOTES);
+		$this->value = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
 
 		return $this->value;
 	}
@@ -211,7 +226,22 @@ class setLayout extends changeString{
 		return $result;
 	}
 
+	public function setSiteBgcolor(){
+		
+		$strSQL = "SELECT site_bgcolor FROM designsettings";
+		
+		$this->db->query($strSQL);
+		
+		$row = $this->db->fetch();
+		
+		$result = $row["site_bgcolor"];
 
+		$this->db->db_cut($this->db);
+
+		$result = parent::decode($result);
+
+		return $result;
+	}
 }
 
 //ユーザー情報入力チェック
@@ -295,6 +325,46 @@ class entryDataChk{
 		}
 		return $err_msg;
 	}
+}
+
+//ページング
+class paging{
+
+	public $item_cnt;
+	public $total;
+	public $totalpages;
+	
+	public function __construct(){
+		$db = new dbAccess();
+		$this->getDisplayReviews($db);
+		$this->getAllReviews($db);
+		$this->totalpages = ceil($this->total/$this->item_cnt);
+		$db->db_cut($db);
+	}
+	
+	//1ページの表示件数取得
+	protected function getDisplayReviews($db){
+		
+		$strSQL = "SELECT paging_cnt FROM designsettings";
+		$cnt = $db->query($strSQL)->fetchColumn();
+		$this->item_cnt = (int)$cnt;
+	}
+
+	//全件取得
+	protected function getAllReviews($db){
+		
+		$strSQL = "SELECT COUNT(*) FROM board";
+		$this->total = $db->query($strSQL)->fetchColumn();
+	}
+	
+	//offset取得
+	public function getOffset($cur_page){
+	
+		$cur_page = (int)$cur_page;
+		
+		return $this->item_cnt * ($cur_page - 1);
+	}
+
 }
 
 //画面遷移

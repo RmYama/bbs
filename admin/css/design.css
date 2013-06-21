@@ -1,0 +1,9 @@
+div.setcolor label{
+padding-right: 5px;
+	font-size: 14px;
+	line-height: 2.5;
+}
+
+div.setcolor input{
+	padding: 2px;
+}

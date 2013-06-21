@@ -4,6 +4,15 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/top.css">
 <title>掲示板</title>
+<style type="text/css">
+<!--
+body {
+<?php if(isset($site_bgcolor)){ ?>
+	background-color:<?php echo $site_bgcolor ?>;
+<?php } ?>
+}
+-->
+</style> 
 </head>
 <body>
 <div id="header">
@@ -37,9 +46,8 @@ if($state == "true" && isset($_SESSION["users"]["nickname"])){
 <div class="new-list">
 <ul>
 <?php
-if($stmt != false){
-//	while($row = $db->fetchAll()){
-	foreach ($stmt as $row) {
+if($flg != false){
+	while($row = $db->fetch()){
 		$id = $row["id"];
 		$title = $row["title"];
 		$comment = $row["comment"];
@@ -60,6 +68,23 @@ if($stmt != false){
 </ul>
 </div>
 </div><!-- /bbs-box -->
+<div class="paging">
+<ul>
+<?php if($page > 1){ ?>
+  <li class="previous"><a href="index.php?page=<?php echo $page-1; ?> ">< 前</a></li>
+<?php } ?>
+<?php for($i=1;$i <= $totalpages; $i++){ ?>
+<?php if($page == $i){ ?>
+  <li class="active"><a href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+<?php }else{ ?>
+  <li><a href="index.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+<?php } ?>
+<?php } ?>
+<?php if($page < $totalpages){ ?>
+  <li class="next"><a href="index.php?page=<?php echo $page+1; ?>">次 ></a></li>
+<?php } ?>
+</ul>
+</div>
 </div><!-- /main -->
 <div id="footer">
 <?php if(isset($tag_footer)){ echo  $tag_footer."\r\n"; } ?>
