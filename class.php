@@ -1,5 +1,7 @@
 <?php
 
+require_once("settings.php");
+
 class dbAccess extends PDO{
 
 	protected $stmt = null;
@@ -300,10 +302,12 @@ class entryDataChk{
 	//プロパティを定義
 	public $title;
 	public $comment;
-
+	public $upfile;
+	
 	public function __construct(){
 		$this->title = "";
 		$this->comment = "";
+		$this->image_file = "";
 	}
 
 	//メソッド定義
@@ -320,6 +324,68 @@ class entryDataChk{
 	public function chkComment(){
 		if(empty($this->comment) || $this->comment == ""){
 			$err_msg = "本文を入力してください。";
+		}else{
+			$err_msg = "";
+		}
+		return $err_msg;
+	}
+	
+	public function chkUploadFile(){
+		
+		if($this->upfile["image_file"]["error"] == 0){
+			
+			//値取得
+			$file_name = $this->upfile["image_file"]["name"];
+			$file_size = $this->upfile["image_file"]["size"];
+			
+			//拡張子チェック
+			$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+			
+			if(($extension != "jpg") && ($extension != "gif")){
+				$err_msg = "アップロード可能な画像ファイルは jpg または gif のみです。";
+				return $err_msg;
+			}
+			
+			//ファイルのサイズ制限チェック
+			if($file_size > IMAGE_MAX_SIZE){
+				$err_msg = "アップロード可能なファイルサイズを超えています。";
+				return $err_msg;
+			}
+			
+			$err_msg = "";
+
+			return $err_msg;
+		}
+	}
+
+}
+
+//tag入力チェック
+class tagDataChk{
+
+	//プロパティを定義
+	public $tag_header;
+	public $tag_footer;
+
+	public function __construct(){
+		$this->tag_header = "";
+		$this->tag_footer = "";
+	}
+
+	//メソッド定義
+	//必須入力
+	public function chkHeader(){
+		if(empty($this->tag_header) || $this->tag_header == ""){
+			$err_msg = "ヘッダーエリアしてください。";
+		}else{
+			$err_msg = "";
+		}
+		return $err_msg;
+	}
+	
+	public function chkFooter(){
+		if(empty($this->tag_footer) || $this->tag_footer == ""){
+			$err_msg = "フッターエリアを入力してください。";
 		}else{
 			$err_msg = "";
 		}
@@ -352,7 +418,6 @@ class paging{
 
 	//全件取得
 	protected function getAllReviews($db){
-		
 		$strSQL = "SELECT COUNT(*) FROM board";
 		$this->total = $db->query($strSQL)->fetchColumn();
 	}

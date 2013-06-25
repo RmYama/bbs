@@ -38,16 +38,23 @@
 			//プロパティに値を代入
 			$err_chk->title = $_POST["title"];
 			$err_chk->comment = $_POST["comment"];
+			$err_chk->upfile = $_FILES;
 			
 			//メソッドを実行して値を取得
 			$err1 = $err_chk->chkTitle();
 			$err2 = $err_chk->chkComment();
+			$err3 = $err_chk->chkUploadFile();
 			
-			if($err1 != "" || $err2 != ""){
+			if($err1 != "" || $err2 != "" || $err3 != ""){
 				//入力エラー
 				//フォームに値のセット
 				$title = $_POST["title"];
 				$comment = $_POST["comment"];
+				
+				if(is_uploaded_file($_FILES["image_file"]["tmp_name"]){
+				
+				}
+				
 				
 				//エラー表示
 				require_once("entry_form.php");

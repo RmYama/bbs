@@ -2,7 +2,6 @@
 	session_start();
 
 	require_once("../../class.php");
-	require_once("../adminclass.php");
 	require_once("model.php");
 
 	//ログイン状態の確認

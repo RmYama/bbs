@@ -11,6 +11,9 @@
 </div><!-- /header -->
 <div id="main">
 <h2><span>*</span>登録会員一覧</h2>
+<?php 
+if($db->rowCount() != 0){
+?>
 <table>
 <tr>
   <th class="btn">削 除</th>
@@ -18,13 +21,28 @@
   <th>ニックネーム</th>
   <th class="btn">詳 細</th>
 </tr>
+<?php
+	while($row = $db->fetch()){
+		$user_name = $row["user_name"];
+		$nickname = $row["nickname"];
+?>
 <tr>
   <td><input type="button" value="削除" onClick="" /></td>
-  <td>test</td>
-  <td>てっちゃん</td>
+  <td><?php echo $user_name; ?></td>
+  <td><?php echo $nickname; ?></td>
   <td><input type="button" value="詳細" onClick="" /></td>
 </tr>
+<?php
+	}
+?>
 </table>
+<?php
+}else{
+?>
+<p>登録ユーザーがいません。</p>
+<?php
+}
+?>
 </div><!-- /main -->
 </body>
 </html>

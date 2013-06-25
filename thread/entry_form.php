@@ -29,7 +29,7 @@ if(isset($state) && $state == "true"){
 <div class="entry-box">
 <h2><span>*</span>スレッド投稿フォーム</h2>
 <p>以下の項目を入力し、「投稿」ボタンを選択してください。</p>
-<form method="post" action="index.php?action=check" name="fm1">
+<form method="post" action="index.php?action=check" name="fm1" enctype="multipart/form-data">
 <table class="entry">
 <tr>
   <th>ニックネーム</th>
@@ -57,6 +57,21 @@ if(isset($state) && $state == "true"){
 	}
   ?>
   </p>
+  </td>
+</tr>
+<tr>
+  <th>画像</th>
+  <td><input type="file" size="43" name="image_file" />
+  <p class="err-txt">
+  <?php
+    if(isset($err3) && $err3 != ""){
+		echo $err3;
+	}
+  ?>
+  </p>
+  <div><img src="<?php if(isset($image_path)){ echo $image_path; } ?>" /><br />
+  <a href="index.php?action=imageDel">削除</a>
+  </div>
   </td>
 </tr>
 <tr>

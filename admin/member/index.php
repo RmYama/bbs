@@ -2,7 +2,6 @@
 	session_start();
 
 	require_once("../../class.php");
-	require_once("../adminclass.php");
 	require_once("model.php");
 
 	//ログイン状態の確認
@@ -15,14 +14,12 @@
 
 	switch($action){
 		case "":
-			//会員一覧
-			
-			
-			//リスト作成
-			
-			
-			
+			//会員一覧取得
+			$db = new dbAccess;
+			$stmt = makeMemberList($db);
+			//表示
 			require_once("list.php");
+			$db->db_cut($db);
 			break;
 
 		default:
