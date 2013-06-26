@@ -116,7 +116,7 @@ class delSession{
 		if (isset($_COOKIE["PHPSESSID"])) {
 	    	setcookie("PHPSESSID", '', time() - 1800, '/');
 		}
-		session_destroy();	
+		session_destroy();
 	}
 }
 
@@ -331,31 +331,27 @@ class entryDataChk{
 	}
 	
 	public function chkUploadFile(){
-		
-		if($this->upfile["image_file"]["error"] == 0){
-			
-			//値取得
-			$file_name = $this->upfile["image_file"]["name"];
-			$file_size = $this->upfile["image_file"]["size"];
-			
-			//拡張子チェック
-			$extension = pathinfo($file_name, PATHINFO_EXTENSION);
-			
-			if(($extension != "jpg") && ($extension != "gif")){
-				$err_msg = "アップロード可能な画像ファイルは jpg または gif のみです。";
-				return $err_msg;
-			}
-			
-			//ファイルのサイズ制限チェック
-			if($file_size > IMAGE_MAX_SIZE){
-				$err_msg = "アップロード可能なファイルサイズを超えています。";
-				return $err_msg;
-			}
-			
-			$err_msg = "";
 
+		//値取得
+		$file_name = $this->upfile["image_file"]["name"];
+		$file_size = $this->upfile["image_file"]["size"];
+		$file_type = $this->upfile["image_file"]["type"];
+		
+		//特定の画像ファイルかチェック
+		if(($file_type != "image/jpeg") && ($file_type != "image/gif") && ($file_type != "image/pjpeg")){
+			$err_msg = "アップロード可能な画像ファイルは jpg または gif のみです。";
 			return $err_msg;
 		}
+		
+		//ファイルのサイズ制限チェック
+		if($file_size > IMAGE_MAX_SIZE){
+			$err_msg = "アップロード可能なファイルサイズを超えています。";
+			return $err_msg;
+		}
+		
+		$err_msg = "";
+
+		return $err_msg;
 	}
 
 }
@@ -390,6 +386,154 @@ class tagDataChk{
 			$err_msg = "";
 		}
 		return $err_msg;
+	}
+}
+
+//画像操作
+class uploadImgFile{
+
+	// _t:サムネイル用, _o:元画像用
+	public $upfile;
+	public $fname_t;
+	public $fname_o;
+	public $img_path_t;
+	public $img_path_o;
+	public $bord_id;
+	public $res_id;
+	
+	
+	public function __construct(){
+		$this->upfile = "";
+		$this->fname_t = "";
+		$this->fname_o = "";
+		$this->img_path_t = "";
+		$this->img_path_o = "";
+		$this->bord_id = "";
+		$this->res_id = "";
+	}
+
+	//ファイルの一時保管
+	public function fileStorage(){
+
+		//ファイルリネイム
+		$this->fileRename("tmp");
+		
+		//画像を移動
+		$this->img_path_o = IMAGE_FILE_TMP_PATH.$this->fname_o;
+		move_uploaded_file($this->upfile['image_file']['tmp_name'], $this->img_path_o);
+		
+		//サムネイル作成
+		$this->img_path_t = $this->fileThumbnail();
+		
+	}
+	
+	//ファイルのサムネイル作成
+	public function fileThumbnail(){
+		 
+		 //元画像取得
+		 $file_type = $this->upfile['image_file']['type'];
+		 
+		 switch($file_type){
+		 	case "image/jpeg" || "image/pjpeg":
+				$image = ImageCreateFromJPEG($this->img_path_o);
+				break;
+		 	case "image/gif":
+				$image = ImageCreateFromGIF($this->img_path_o);
+				break;
+			default:
+			    echo "画像の取得に失敗しました。";
+				exit;
+		 }
+
+		//画像のサイズ取得
+		$width = ImageSX($image);
+		$height = ImageSY($image);
+		
+		//リサイズ指定
+		$new_width = 360;
+		$rate = $new_width / $width;
+		$new_height = $rate * $height;
+		
+		//空の画像を作成
+		$new_image = ImageCreateTrueColor($new_width, $new_height);
+		
+		//空の画像にリサイズした画像をサンプリング
+		ImageCopyResampled($new_image,$image,0,0,0,0,$new_width,$new_height,$width,$height);
+		
+		//ファイルの保存先
+		$new_file_path = IMAGE_FILE_TMP_PATH.$this->fname_t;
+		
+		 switch($file_type){
+		 	case "image/jpeg" || "image/pjpeg":
+				ImageJPEG($new_image, $new_file_path, 100);
+				break;
+		 	case "image/gif":
+				ImageGIF($new_image);
+				break;
+			default:
+		 }
+		
+		//メモリ解放
+	    imagedestroy($new_image);
+	    imagedestroy($image);
+
+		return $new_file_path;
+	}
+
+	//ファイルのアップロード
+	public function fileUpload($thumbnail,$original,$bord_id, $res_id){
+		
+		$this->bord_id = $bord_id;
+		$this->res_id = $res_id;
+		
+		//ファイルリネイム
+		$this->fileRename("up");
+		
+		//画像を移動
+		$this->img_path_t = IMAGE_FILE_PATH.$this->fname_t;
+		$this->img_path_o = IMAGE_FILE_PATH.$this->fname_o;
+		move_uploaded_file($thumbnail, $this->img_path_t);
+		move_uploaded_file($original, $this->img_path_o);
+		
+		//サムネイル作成
+		$this->img_path_t = $this->fileThumbnail();
+		
+
+	}
+	
+	//ファイルのリネイム
+	public function fileRename($mode){
+
+		if($mode == "tmp"){
+
+			//値取得
+			$file_name = $this->upfile["image_file"]["name"];
+
+			//拡張子取得
+			$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+			$this->fname_t = time()."_tmp_t.".$extension;
+			$this->fname_o = time()."_tmp_o.".$extension;
+		}else{
+
+			//直すこと！
+			
+			$this->fname_t = time().$bord_id."_".$res_id."_t.".$extension;
+			$this->fname_o = time().$bord_id."_".$res_id."_o.".$extension;
+		}
+	}
+
+	//ファイルの削除
+	public function fileDelete($original,$thumbnail){
+
+		$flg = false;
+	
+		if((unlink($original) == true) && (unlink($thumbnail) == true)){			
+			$_SESSION["join"]["thumbnail"] = "";
+			$_SESSION["join"]["original"] = "";
+			$flg = true;
+		}
+		return $flg;
 	}
 }
 

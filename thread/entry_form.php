@@ -69,9 +69,22 @@ if(isset($state) && $state == "true"){
 	}
   ?>
   </p>
-  <div><img src="<?php if(isset($image_path)){ echo $image_path; } ?>" /><br />
-  <a href="index.php?action=imageDel">削除</a>
+<?php 
+if(isset($tmp_img_path_t)){
+?>
+  <div><img src="<?php echo $tmp_img_path_t; ?>" /><br />
+  <p style="line-height:1.8;"><a style="color:#FF0000; font-size:14px;" href="index.php?action=imageDel">削除</a></p>
   </div>
+<?php
+}
+?>
+<?php 
+if(isset($del_flg) && $del_flg === true){
+?>
+<p style="color:#FF0000; font-size:14px;">画像を削除しました。</p>
+<?php
+}
+?>
   </td>
 </tr>
 <tr>
