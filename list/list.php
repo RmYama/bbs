@@ -39,6 +39,8 @@ if($flg == true){
 		$contents = $row["contents"];
 		$add_time = $row["add_time"];
 		$writer = $row["writer"];
+		$thumbnail = $row["thumbnail"];
+		$original = $row["original"];
 		$del_flg = $row["del_flg"];
 
 		if($res_no == 0){
@@ -46,11 +48,18 @@ if($flg == true){
 ?>
 			<li class="thread">
 			  <p class="text"><?php echo nl2br($contents) ?></p>
+<?php
+		if($thumbnail !== "none"){
+?>
+			  <p class="img"><a href="<?php echo $original ?>" target="_blank"><img src="<?php echo $thumbnail ?>" /></a></p>
+<?php 
+		}
+?>
 			  <p class="info"><span class="name"><?php echo $writer ?></span>　<span class="time"><?php echo $add_time ?></span></p>
 <?php
 			if(isset($user_id) && $user_id == $writer_id){
 ?>
-				  <div class="links"><a href="index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
+				  <div class="links"><a href="../edit/index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
 <?php 
 			}
 ?>
@@ -66,9 +75,16 @@ if($flg == true){
 			  <p class="info">[<?php echo $res_no ?>] <span class="name"><?php echo $writer ?></span>　<span class="time"><?php echo $add_time ?></span></p>
 			  <p class="text"><?php echo nl2br($contents) ?></p>
 <?php
+		if($thumbnail !== "none"){
+?>
+			  <p class="img"><a href="<?php echo $original ?>" target="_blank"><img src="<?php echo $thumbnail ?>" /></a></p>
+<?php 
+		}
+?>
+<?php
 			  if(isset($nickname) && $nickname == $writer){
 ?>
-			    <div class="links"><a href="index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
+			    <div class="links"><a href="../edit/index.php?action=edit&no=<?php echo $res_no ?>">編集/削除</a></div>
 <?php
 			  }
 
@@ -93,7 +109,7 @@ if(isset($state) && $state == "true"){
 <div class="entry-box">
 <h2><span>*</span>レス投稿フォーム</h2>
 <p>以下の項目を入力し、「投稿」ボタンを選択してください。</p>
-<form method="post" action="index.php?action=check" name="fm1">
+<form method="post" action="index.php?action=check" name="fm1" enctype="multipart/form-data">
 <input type="hidden" name="no" value ="<?php if(isset($no)){ echo $no; } ?>" />
 <table class="entry">
 <tr>
@@ -110,6 +126,34 @@ if(isset($state) && $state == "true"){
 	}
   ?>
   </p>
+  </td>
+</tr>
+<tr>
+  <th>画像</th>
+  <td><input type="file" size="43" name="image_file" />
+  <p class="err-txt">
+  <?php
+    if(isset($err2) && $err2 != ""){
+		echo $err2;
+	}
+  ?>
+  </p>
+<?php 
+if(isset($tmp_img_path_t)){
+?>
+  <div><img src="<?php echo $tmp_img_path_t; ?>" /><br />
+  <p style="line-height:1.8;"><a style="color:#FF0000; font-size:14px;" href="index.php?action=imageDel">削除</a></p>
+  </div>
+<?php
+}
+?>
+<?php 
+if(isset($del_flg) && $del_flg === true){
+?>
+<p style="color:#FF0000; font-size:14px;">画像を削除しました。</p>
+<?php
+}
+?>
   </td>
 </tr>
 <tr>

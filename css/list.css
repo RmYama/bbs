@@ -16,6 +16,11 @@ p.text{
 	font-size: 15px;
 }
 
+p.img{
+	padding: 15px;
+	text-align: right;
+}
+
 p.info{
 	font-size: 14px;
 }

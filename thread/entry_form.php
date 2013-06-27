@@ -61,7 +61,15 @@ if(isset($state) && $state == "true"){
 </tr>
 <tr>
   <th>画像</th>
-  <td><input type="file" size="43" name="image_file" />
+  <td>
+<?php 
+if(isset($tmp_img_path_t)){
+?>
+  <input type="file" size="43" name="image_file" disabled="disabled" />
+  <p style="color:#FF0000; font-size:13px;">※画像を変更したい場合は先にアップロードした画像を削除してください。</p>
+<?php }else{ ?>  
+  <input type="file" size="43" name="image_file" />  
+<?php } ?>  
   <p class="err-txt">
   <?php
     if(isset($err3) && $err3 != ""){

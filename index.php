@@ -36,6 +36,7 @@
 			$db = new dbAccess();
 
 			$flg = listNewThread($db,$offset,$item_cnt);
+
 			
 			require_once("top.php");
 

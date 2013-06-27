@@ -25,9 +25,15 @@
 			break;
 			
 		case "check":
+			//セッションに値を保存
+			$_SESSION["join"]["title"] = $_POST["title"];
+			$_SESSION["join"]["comment"] = $_POST["comment"];
+
 			//プレビュー保持
 			if(isset($_POST["preview"])){
 				$preview = "checked";
+				$_SESSION["join"]["preview"] = $preview;
+
 			}else{
 				$preview = "";
 			}
@@ -64,7 +70,7 @@
 					$tmp_img_path_t = $up_img->img_path_t;
 					$_SESSION["join"]["thumbnail"] = $up_img->img_path_t;
 					$_SESSION["join"]["original"] = $up_img->img_path_o;
-
+					
 				}else{
 					$err_flg += 1; 
 				}
@@ -81,15 +87,8 @@
 
 			}else{
 				
-				//セッションに値を保存
-				$_SESSION["join"]["title"] = $_POST["title"];
-				$_SESSION["join"]["comment"] = $_POST["comment"];
-				
 				//プレビュー判定
 				if($preview == "checked"){
-					
-					//プレビューもセッションに保持
-					$_SESSION["join"]["preview"] = $preview;
 
 					//確認画面表示
 					nextPage("confirm.php");
@@ -111,7 +110,10 @@
 
 		case "imageDel":
 			//画像削除
-			//セッションから画像パス取得
+			//セッションから値取得
+			$title = $_SESSION["join"]["title"];
+			$comment = $_SESSION["join"]["comment"];
+			$preview = $_SESSION["join"]["preview"];
 			$thumbnail = $_SESSION["join"]["thumbnail"];
 			$original = $_SESSION["join"]["original"];
 			
@@ -127,7 +129,8 @@
 				$title = $_SESSION["join"]["title"];
 				$comment = $_SESSION["join"]["comment"];
 				$preview = $_SESSION["join"]["preview"];
-				if(isset($_SESSION["join"]["thumbnail"])){
+
+				if(isset($_SESSION["join"]["thumbnail"]) && $_SESSION["join"]["thumbnail"] !=""){
 					$tmp_img_path_t = $_SESSION["join"]["thumbnail"];
 				}
 
@@ -136,17 +139,13 @@
 			break;
 
 		case "entry":
-			
-			//画像がセットされている場合
-			if(isset($_SESSION["join"]["thumbnail"])){
-				
-			}
-
 			//データベースに登録
 			makeThread();
+
 			//投稿系のセッション破棄
 			$delS = new delSession();
 			$delS->entry();
+
 			//完了画面
 			nextPage("end.php");
 			break;

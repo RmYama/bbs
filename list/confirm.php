@@ -4,6 +4,9 @@
 	//値の受け取り
 	$nickname = $_SESSION['users']['nickname'];
 	$comment = $_SESSION['join']['comment'];
+	if(isset($_SESSION["join"]["thumbnail"]) && $_SESSION["join"]["thumbnail"] !=""){
+		$tmp_img_path_t = $_SESSION["join"]["thumbnail"];
+	}
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
@@ -36,6 +39,13 @@
 <tr>
   <th>レス本文</th>
   <td><?php echo nl2br($comment); ?></td>
+</tr>
+<tr>
+  <th>画像</th>
+  <td><?php if(isset($tmp_img_path_t)){ ?>
+  	<img src="<?php echo $tmp_img_path_t; ?>" />
+   <?php } ?>
+  </td>
 </tr>
 </table>
 <ul style="margin:15px auto 0 auto; width:400px; overflow:hidden;">

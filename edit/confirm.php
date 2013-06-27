@@ -66,9 +66,16 @@ if($action != "del"){
   <th>レス本文</th>
   <td><?php echo nl2br($comment); ?></td>
 </tr>
+<tr>
+  <th>画像</th>
+  <td><?php if(isset($tmp_img_path_t)){ ?>
+  	<img src="<?php echo $tmp_img_path_t; ?>" />
+   <?php } ?>
+  </td>
+</tr>
 </table>
 <ul style="margin:15px auto 0 auto; width:400px; overflow:hidden;">
- <li style="float:left;"><a href="index.php?action=editBack" class="back">前に戻る</a></li>
+ <li style="float:left;"><a href="index.php?action=back" class="back">前に戻る</a></li>
 <?php 
 if($action != "del"){ 
 ?>

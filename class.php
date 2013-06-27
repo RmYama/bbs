@@ -393,13 +393,13 @@ class tagDataChk{
 class uploadImgFile{
 
 	// _t:サムネイル用, _o:元画像用
-	public $upfile;
-	public $fname_t;
-	public $fname_o;
-	public $img_path_t;
-	public $img_path_o;
-	public $bord_id;
-	public $res_id;
+	public $upfile;				//画像情報
+	public $fname_t;			//サムネイルのファイル名
+	public $fname_o;			//元画像のファイル名
+	public $img_path_t;			//サムネイルのファイルパス
+	public $img_path_o;			//元画像のファイルパス
+	public $bord_id;			//スレッドID
+	public $res_id;				//レスID
 	
 	
 	public function __construct(){
@@ -412,21 +412,70 @@ class uploadImgFile{
 		$this->res_id = "";
 	}
 
-	//ファイルの一時保管
+	//ファイルを一時保管場所へアップロード
 	public function fileStorage(){
 
 		//ファイルリネイム
 		$this->fileRename("tmp");
 		
-		//画像を移動
+		//画像アップロード
 		$this->img_path_o = IMAGE_FILE_TMP_PATH.$this->fname_o;
-		move_uploaded_file($this->upfile['image_file']['tmp_name'], $this->img_path_o);
+		if(move_uploaded_file($this->upfile['image_file']['tmp_name'], $this->img_path_o) == true){
+			//サムネイル作成
+			$this->img_path_t = $this->fileThumbnail();
+		}else{
+			echo "エラー：画像のアップロードに失敗しました。";
+			exit();
+		}
+	}
+
+	//ファイルを一時保管場所から画像倉庫へ移動
+	public function fileUpload($thumbnail,$original,$bord_id, $res_id){
 		
-		//サムネイル作成
-		$this->img_path_t = $this->fileThumbnail();
+		$this->bord_id = $bord_id;
+		$this->res_id = $res_id;
+		$this->upfile = $thumbnail;
 		
+		//ファイルリネイム
+		$this->fileRename("up");
+		
+		//画像を移動
+		$this->img_path_t = IMAGE_FILE_PATH.$this->fname_t;
+		$this->img_path_o = IMAGE_FILE_PATH.$this->fname_o;
+
+		if((copy($thumbnail, $this->img_path_t) == true) && (copy($original, $this->img_path_o) == true)){
+			//一時保管場所のファイル削除
+			$this->fileDelete($original,$thumbnail);
+
+		}else{
+			echo "エラー：画像のアップロードに失敗しました。";
+			exit();
+		}
 	}
 	
+	//ファイルのリネイム
+	public function fileRename($mode){
+
+		if($mode == "tmp"){
+
+			//値取得
+			$file_name = $this->upfile["image_file"]["name"];
+
+			//拡張子取得
+			$extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+			$this->fname_t = time()."_tmp_t.".$extension;
+			$this->fname_o = time()."_tmp_o.".$extension;
+		}else{
+
+			//拡張子取得
+			$extension = pathinfo($this->upfile, PATHINFO_EXTENSION);
+			
+			$this->fname_t = time()."_".$this->bord_id."_".$this->res_id."_t.".$extension;
+			$this->fname_o = time()."_".$this->bord_id."_".$this->res_id."_o.".$extension;
+		}
+	}
+
 	//ファイルのサムネイル作成
 	public function fileThumbnail(){
 		 
@@ -480,55 +529,12 @@ class uploadImgFile{
 		return $new_file_path;
 	}
 
-	//ファイルのアップロード
-	public function fileUpload($thumbnail,$original,$bord_id, $res_id){
-		
-		$this->bord_id = $bord_id;
-		$this->res_id = $res_id;
-		
-		//ファイルリネイム
-		$this->fileRename("up");
-		
-		//画像を移動
-		$this->img_path_t = IMAGE_FILE_PATH.$this->fname_t;
-		$this->img_path_o = IMAGE_FILE_PATH.$this->fname_o;
-		move_uploaded_file($thumbnail, $this->img_path_t);
-		move_uploaded_file($original, $this->img_path_o);
-		
-		//サムネイル作成
-		$this->img_path_t = $this->fileThumbnail();
-		
-
-	}
-	
-	//ファイルのリネイム
-	public function fileRename($mode){
-
-		if($mode == "tmp"){
-
-			//値取得
-			$file_name = $this->upfile["image_file"]["name"];
-
-			//拡張子取得
-			$extension = pathinfo($file_name, PATHINFO_EXTENSION);
-
-			$this->fname_t = time()."_tmp_t.".$extension;
-			$this->fname_o = time()."_tmp_o.".$extension;
-		}else{
-
-			//直すこと！
-			
-			$this->fname_t = time().$bord_id."_".$res_id."_t.".$extension;
-			$this->fname_o = time().$bord_id."_".$res_id."_o.".$extension;
-		}
-	}
-
 	//ファイルの削除
 	public function fileDelete($original,$thumbnail){
 
 		$flg = false;
 	
-		if((unlink($original) == true) && (unlink($thumbnail) == true)){			
+		if((unlink($original) == true) && (unlink($thumbnail) == true)){
 			$_SESSION["join"]["thumbnail"] = "";
 			$_SESSION["join"]["original"] = "";
 			$flg = true;

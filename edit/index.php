@@ -20,42 +20,55 @@
 	$action = $getP->action($_GET);
 	
 	switch($action){
-		case "list":
-			//初期表示
+		case "edit":
+			//編集・削除
 			if(array_key_exists("no",$_GET)){
-				$_SESSION["join"]["board_id"] = $_GET["no"];
+				$_SESSION["join"]["res_id"] = $_GET["no"];
+				$res_id = $_GET["no"];
 			}else{
-				exit("エラー");
+				exit("編集・削除エラー");
 			}
 			
-			$board_id = $_SESSION["join"]["board_id"];
-
-			//スレッドタイトル取得
+			//データベースクラスのインスタンス化
 			$db = new dbAccess();
-			$title = getThreadTitle($db,$board_id);
-			$flg = makeList($db,$board_id);
-
-			//セッションに保持
-			$_SESSION["join"]["title"] = $title;
-	
-			require_once("list.php");
-
+			
+			//スレッド修正の場合はタイトル取得。
+			if($res_id == 0){
+				$title = getThreadTitle($db);
+			}
+			//本文取得
+			$result = getRes($db);
+			
+			$comment = $result["comment"];
+			$image_file_t = $result["image_file_t"];
+			$image_file_o = $result["image_file_o"];
+			
+			//画像情報をセッションに保持
+			$_SESSION["join"]["old_thumbnail"] = $image_file_t;
+			$_SESSION["join"]["old_original"] = $image_file_o;
+			
 			//データベース切断
 			$db->db_cut($db);
+			
+			//編集・削除画面表示
+			require_once("edit.php");
 			break;
-
+			
 		case "check":
-			//セッションに値を保存
-			$_SESSION["join"]["comment"] = $_POST["comment"];
+
+			//値の取得
 			$comment = $_POST["comment"];
+
+			if(isset($_POST["title"])){
+				$title = $_POST["title"];
+			}
 
 			if(isset($_POST["preview"])){
 				$preview = "checked";
-				$_SESSION["join"]["preview"] = $preview;
 			}else{
 				$preview = "";
 			}
-
+			
 			//入力チェック
 			$err_flg = 0;
 			$err_chk = new entryDataChk();
@@ -65,6 +78,7 @@
 			
 			//メソッドを実行して値を取得
 			$err1 = $err_chk->chkComment();
+
 			if($err1 != ""){
 				$err_flg += 1;
 			}
@@ -90,33 +104,34 @@
 					$err_flg += 1; 
 				}
 			}
-
-			if($err_flg != 0){
-				//エラー出力
-				//セッションからデータ取得
-				$board_id = $_SESSION["join"]["board_id"];
-				$title = $_SESSION["join"]["title"];
-
-				$db = new dbAccess();
-				$flg = makeList($db,$board_id);
-				
-				require_once("list.php");
-	
-				//データベース切断
-				$db->db_cut($db);	
+			
+			if($err1 != ""){
+				//値をフォームに戻す
+				 $res_id  = $_SESSION["join"]["res_id"];
+				//エラー表示
+				require_once("edit.php");
 
 			}else{
+			
+				//セッションに値を保存
+				$_SESSION["join"]["comment"] = $_POST["comment"];
 				
 				//プレビュー判定
 				if($preview == "checked"){
-					
+
+					//セッションに保持
+					if(isset($title)){
+						$_SESSION["join"]["title"] = $title;
+					}
+					$_SESSION["join"]["preview"] = $preview;
+
 					//確認画面表示
 					nextPage("confirm.php");
 
 				}else{
-					//データベース登録
-					makeRes();
-
+					//データベース修正
+					updateRes();
+					
 					//完了画面
 					nextPage("end.php");
 
@@ -131,53 +146,64 @@
 		case "imageDel":
 			//画像削除
 			//セッションから値取得
-			$board_id = $_SESSION["join"]["board_id"];
 			$title = $_SESSION["join"]["title"];
 			$comment = $_SESSION["join"]["comment"];
 			$preview = $_SESSION["join"]["preview"];
-
 			$thumbnail = $_SESSION["join"]["thumbnail"];
 			$original = $_SESSION["join"]["original"];
 			
 			$up_img = new uploadImgFile();
 			$del_flg = $up_img->fileDelete($original,$thumbnail);
 
-			//データ取得して画面出力
-			//データベースクラスのインスタンス化
-			$db = new dbAccess();
-			$flg = makeList($db,$board_id);
-
-			require_once("list.php");
+//			require_once("list.php");
 			break;
+
 
 		case "back":
 			//確認画面から戻ってきた時
 			//セッションから値を取得して変数に代入
-			$board_id = $_SESSION["join"]["board_id"];
-			$title = $_SESSION["join"]["title"];
-			$comment = $_SESSION["join"]["comment"];
-			$preview = $_SESSION["join"]["preview"];
-
-			if(isset($_SESSION["join"]["thumbnail"]) && $_SESSION["join"]["thumbnail"] !=""){
-				$tmp_img_path_t = $_SESSION["join"]["thumbnail"];
+			$res_id = $_SESSION["join"]["res_id"];
+			
+			if(isset($_SESSION["join"]["title"])){
+				$title = $_SESSION["join"]["title"];
 			}
+			$comment = $_SESSION["join"]["comment"];
+			if(isset($_SESSION["join"]["preview"])){
+				$preview = $_SESSION["join"]["preview"];
+			}
+			require_once("edit.php");
 
-			//データ取得して画面出力
-			//データベースクラスのインスタンス化
-			$db = new dbAccess();
-			$flg = makeList($db,$board_id);
-	
-			require_once("list.php");
-
-			//データベース切断
-			$db->db_cut($db);
 			break;
 
-		case "entry":
-			//データベースに登録
-			makeRes();
-
+		case "update":
+			//修正
+			updateRes();
+			
 			//完了画面
+			nextPage("end.php");
+
+			//投稿系のセッション破棄
+			$delS = new delSession();
+			$delS->entry();
+			break;
+
+		case "delCheck":
+			//値の取得
+			$_SESSION["join"]["comment"] = $_POST["comment"];
+
+			if(isset($_POST["title"])){
+				$_SESSION["join"]["title"] = $_POST["title"];
+			}
+
+			//確認画面表示
+			nextPage("confirm.php?action=del");
+			break;
+
+		case "delete":
+			//削除
+			deleteData();
+			
+			//完了画面へ移動
 			nextPage("end.php");
 
 			//投稿系のセッション破棄

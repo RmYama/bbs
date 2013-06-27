@@ -44,12 +44,11 @@
 			$image_file_o = "none";
 		}
 		
-		
 		//commenteテーブルに新規追加
 		$strSQL2 = "INSERT INTO comment(board_id, res_id, user_id, contents, image_file_t, image_file_o, del_flg)".
-		           " VALUES (:board_id, :res_id, :user_id, :contents, :image_file_t, image_file_o, :del_flg)";
+		           " VALUES (:board_id, :res_id, :user_id, :contents, :image_file_t, :image_file_o, :del_flg)";
 
-		//SQL文準備o
+		//SQL文準備
 		$stmt = null;
 		$stmt = $db->preparation($strSQL2);
 

@@ -26,7 +26,7 @@ function Del(){
 </div><!-- /header -->
 <div id="main">
 <div class="nav">
-<a href="index.php?action=list&no=<?php echo $_SESSION["join"]["board_id"]; ?>"><< 前の画面に戻る</a>
+<a href="../list/index.php?action=list&no=<?php echo $_SESSION["join"]["board_id"]; ?>"><< 前の画面に戻る</a>
 </div>
 <div class="entry-box">
 <h2><span>*</span>編集フォーム</h2>
@@ -34,7 +34,7 @@ function Del(){
 削除を行う場合は、「削除」ボタンを選択してください。削除ボタンを選択すると確認画面へ移動します。<br />
 <span style="color:red;">※スレッドのタイトルやニックネームの変更は出来ません。</span>
 </p>
-<form method="post" action="index.php?action=editCheck" name="fm1">
+<form method="post" action="index.php?action=check" name="fm1">
 <table class="entry">
 <?php if($res_id == 0){ ?>
 <tr>
@@ -56,6 +56,42 @@ function Del(){
 	}
   ?>
   </p>
+  </td>
+</tr>
+<tr>
+  <th>画像</th>
+  <td>
+<?php
+if(isset($image_file_t) && $image_file_t != "none"){
+?>
+  <input type="file" size="43" name="image_file" disabled="disabled" />
+  <p style="color:#FF0000; font-size:13px;">※画像を変更したい場合は先にアップロードした画像を削除してください。</p>
+<?php }else{ ?>  
+  <input type="file" size="43" name="image_file" />  
+<?php } ?>  
+  <p class="err-txt">
+  <?php
+    if(isset($err2) && $err2 != ""){
+		echo $err2;
+	}
+  ?>
+  </p>
+<?php 
+if(isset($image_file_t) && $image_file_t !="none"){
+?>
+  <div><img src="<?php echo $image_file_t; ?>" /><br />
+  <p style="line-height:1.8;"><a style="color:#FF0000; font-size:14px;" href="index.php?action=imageDel">削除</a></p>
+  </div>
+<?php
+}
+?>
+<?php 
+if(isset($del_flg) && $del_flg === true){
+?>
+<p style="color:#FF0000; font-size:14px;">画像を削除しました。</p>
+<?php
+}
+?>
   </td>
 </tr>
 <tr>
