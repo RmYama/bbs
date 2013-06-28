@@ -82,7 +82,7 @@
 					$up_img->fileStorage();
 					
 					//画像パスを変数とセッションにセット
-					$tmp_img_path_t = $up_img->img_path_t;
+					$image_file_t = $up_img->img_path_t;
 					$_SESSION["join"]["thumbnail"] = $up_img->img_path_t;
 					$_SESSION["join"]["original"] = $up_img->img_path_o;
 
@@ -117,13 +117,12 @@
 					//データベース登録
 					makeRes();
 
-					//完了画面
-					nextPage("end.php");
-
 					//投稿系のセッション破棄
 					$delS = new delSession();
 					$delS->entry();
 
+					//完了画面
+					nextPage("end.php");
 				}
 			}
 			break;
@@ -159,7 +158,7 @@
 			$preview = $_SESSION["join"]["preview"];
 
 			if(isset($_SESSION["join"]["thumbnail"]) && $_SESSION["join"]["thumbnail"] !=""){
-				$tmp_img_path_t = $_SESSION["join"]["thumbnail"];
+				$image_file_t = $_SESSION["join"]["thumbnail"];
 			}
 
 			//データ取得して画面出力
@@ -177,12 +176,13 @@
 			//データベースに登録
 			makeRes();
 
-			//完了画面
-			nextPage("end.php");
-
 			//投稿系のセッション破棄
 			$delS = new delSession();
 			$delS->entry();
+
+			//完了画面
+			nextPage("end.php");
+
 			break;
 
 		default:

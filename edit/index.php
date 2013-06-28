@@ -25,6 +25,7 @@
 			if(array_key_exists("no",$_GET)){
 				$_SESSION["join"]["res_id"] = $_GET["no"];
 				$res_id = $_GET["no"];
+
 			}else{
 				exit("編集・削除エラー");
 			}
@@ -35,7 +36,11 @@
 			//スレッド修正の場合はタイトル取得。
 			if($res_id == 0){
 				$title = getThreadTitle($db);
+				$_SESSION["join"]["title"] = $title;
+			}else{
+				$_SESSION["join"]["title"] = "";
 			}
+			
 			//本文取得
 			$result = getRes($db);
 			
@@ -43,7 +48,10 @@
 			$image_file_t = $result["image_file_t"];
 			$image_file_o = $result["image_file_o"];
 			
-			//画像情報をセッションに保持
+			//セッションに保持
+			$_SESSION["join"]["comment"] = $comment;
+			$_SESSION["join"]["thumbnail"] = $image_file_t;
+			$_SESSION["join"]["original"] = $image_file_o;
 			$_SESSION["join"]["old_thumbnail"] = $image_file_t;
 			$_SESSION["join"]["old_original"] = $image_file_o;
 			
@@ -58,13 +66,16 @@
 
 			//値の取得
 			$comment = $_POST["comment"];
+			$_SESSION["join"]["comment"] = $comment;
 
 			if(isset($_POST["title"])){
 				$title = $_POST["title"];
+				$_SESSION["join"]["title"] = $title;
 			}
 
 			if(isset($_POST["preview"])){
 				$preview = "checked";
+				$_SESSION["join"]["preview"] = $preview;
 			}else{
 				$preview = "";
 			}
@@ -99,7 +110,6 @@
 					$tmp_img_path_t = $up_img->img_path_t;
 					$_SESSION["join"]["thumbnail"] = $up_img->img_path_t;
 					$_SESSION["join"]["original"] = $up_img->img_path_o;
-
 				}else{
 					$err_flg += 1; 
 				}
@@ -108,36 +118,25 @@
 			if($err1 != ""){
 				//値をフォームに戻す
 				 $res_id  = $_SESSION["join"]["res_id"];
+
 				//エラー表示
 				require_once("edit.php");
 
 			}else{
 			
-				//セッションに値を保存
-				$_SESSION["join"]["comment"] = $_POST["comment"];
-				
 				//プレビュー判定
 				if($preview == "checked"){
-
-					//セッションに保持
-					if(isset($title)){
-						$_SESSION["join"]["title"] = $title;
-					}
-					$_SESSION["join"]["preview"] = $preview;
-
 					//確認画面表示
 					nextPage("confirm.php");
-
 				}else{
 					//データベース修正
 					updateRes();
-					
-					//完了画面
-					nextPage("end.php");
-
 					//投稿系のセッション破棄
 					$delS = new delSession();
 					$delS->entry();
+					
+					//完了画面
+					nextPage("end.php");
 
 				}
 			}
@@ -146,16 +145,33 @@
 		case "imageDel":
 			//画像削除
 			//セッションから値取得
+			$res_id = $_SESSION["join"]["res_id"];
 			$title = $_SESSION["join"]["title"];
 			$comment = $_SESSION["join"]["comment"];
-			$preview = $_SESSION["join"]["preview"];
+			
+			if(isset($_SESSION["join"]["preview"])){
+				$preview = $_SESSION["join"]["preview"];
+			}
+			
 			$thumbnail = $_SESSION["join"]["thumbnail"];
 			$original = $_SESSION["join"]["original"];
-			
-			$up_img = new uploadImgFile();
-			$del_flg = $up_img->fileDelete($original,$thumbnail);
+			$old_thumbnail = $_SESSION["join"]["old_thumbnail"];
+			$old_original = $_SESSION["join"]["old_original"];
 
-//			require_once("list.php");
+			if(($old_thumbnail === $thumbnail) && ($old_original === $original)){
+				$image_file_t = "none";
+				$del_flg = true;
+			}else{
+				$up_img = new uploadImgFile();
+				$del_flg = $up_img->fileDelete($original,$thumbnail);
+			}
+
+			if($del_flg == true){
+				$_SESSION["join"]["thumbnail"] = "none";
+				$_SESSION["join"]["original"] = "none";
+			}
+
+			require_once("edit.php");
 			break;
 
 
@@ -171,6 +187,11 @@
 			if(isset($_SESSION["join"]["preview"])){
 				$preview = $_SESSION["join"]["preview"];
 			}
+
+			if(isset($_SESSION['join']['thumbnail']) && $_SESSION['join']['thumbnail'] != "none"){
+				$image_file_t = $_SESSION['join']['thumbnail'];
+			}
+			
 			require_once("edit.php");
 
 			break;
@@ -178,13 +199,14 @@
 		case "update":
 			//修正
 			updateRes();
-			
-			//完了画面
-			nextPage("end.php");
 
 			//投稿系のセッション破棄
 			$delS = new delSession();
 			$delS->entry();
+			
+			//完了画面
+			nextPage("end.php");
+
 			break;
 
 		case "delCheck":
@@ -202,13 +224,13 @@
 		case "delete":
 			//削除
 			deleteData();
-			
-			//完了画面へ移動
-			nextPage("end.php");
 
 			//投稿系のセッション破棄
 			$delS = new delSession();
 			$delS->entry();
+			
+			//完了画面へ移動
+			nextPage("end.php");
 			break;
 
 		default:

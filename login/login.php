@@ -61,7 +61,7 @@
 </form>
 </div><!-- /login-box -->
 <div class="signup-link">
-<a href="index.php?action=signup"> > 新規登録はこちら</a>
+<a href="../signup/index.php"> > 新規登録はこちら</a>
 </div>
 </div><!-- /main -->
 </body>

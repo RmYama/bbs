@@ -89,6 +89,6 @@ if($flg != false){
 <div id="footer">
 <?php if(isset($tag_footer)){ echo  $tag_footer."\r\n"; } ?>
 </div>
-<div style="padding:0 15px 15px 0; text-align:right; font-size:12px;"><a href="admin/index.php" style="color:#0FB4D8;">管理画面</a></div>
+<div style="padding:0 15px 15px 0; text-align:right; font-size:12px;"><a href="admin/login/index.php" style="color:#0FB4D8;">管理画面</a></div>
 </body>
 </html>

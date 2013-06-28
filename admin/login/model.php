@@ -8,9 +8,9 @@
 		$db = new dbAccess();
 		
 		//ユーザーチェック
-		$strSQL  = "SELECT * FROM users".
-		           " WHERE user_name = :user_name".
-		           " AND password = :password";
+		$strSQL  = "SELECT * FROM admin".
+		           " WHERE login_id = :user_name".
+		           " AND login_pass = :password";
 
 		//SQL文準備
 		$stmt = $db->preparation($strSQL);
@@ -26,8 +26,8 @@
 
 			$row = $db->fetch();
 
-			$_SESSION["users"]["user_id"] = $row["id"];
-			$_SESSION["users"]["nickname"] = $row["nickname"];
+			$_SESSION["admin"]["id"] = $row["id"];
+			$_SESSION["admin"]["name"] = $row["name"];
 			$user_flg = "success";
 			
 		}else{

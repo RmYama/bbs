@@ -34,7 +34,7 @@ function Del(){
 削除を行う場合は、「削除」ボタンを選択してください。削除ボタンを選択すると確認画面へ移動します。<br />
 <span style="color:red;">※スレッドのタイトルやニックネームの変更は出来ません。</span>
 </p>
-<form method="post" action="index.php?action=check" name="fm1">
+<form method="post" action="index.php?action=check" name="fm1" enctype="multipart/form-data">
 <table class="entry">
 <?php if($res_id == 0){ ?>
 <tr>
@@ -86,7 +86,7 @@ if(isset($image_file_t) && $image_file_t !="none"){
 }
 ?>
 <?php 
-if(isset($del_flg) && $del_flg === true){
+if(isset($del_flg) && $del_flg == true){
 ?>
 <p style="color:#FF0000; font-size:14px;">画像を削除しました。</p>
 <?php

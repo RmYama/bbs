@@ -105,7 +105,7 @@ class delSession{
 		}
 	}
 
-	//ログアウト時
+	//ユーザーログアウト時
 	public function logout(){
 
 		$this->users();
@@ -118,6 +118,30 @@ class delSession{
 		}
 		session_destroy();
 	}
+
+}
+
+class adminDelSession{
+
+	//管理者ログアウト
+	public function admin(){
+		if(isset($_SESSION['admin'])){
+			unset($_SESSION['admin']);
+		}
+	}
+	
+	public function logout(){
+
+		$this->admin();
+			
+		$_SESSION = array();
+	
+		if (isset($_COOKIE["PHPSESSID"])) {
+	    	setcookie("PHPSESSID", '', time() - 1800, '/');
+		}
+		session_destroy();
+	}
+
 }
 
 //アクション判定
@@ -499,10 +523,33 @@ class uploadImgFile{
 		$height = ImageSY($image);
 		
 		//リサイズ指定
-		$new_width = 360;
-		$rate = $new_width / $width;
-		$new_height = $rate * $height;
+		$basis_size = 280;
 		
+		if((($width > $basis_size) OR ($height > $basis_size)) OR 
+		   ($width > $basis_size) AND ($height > $basis_size)){
+		   
+		   if($width > $height){
+			  
+			   //縦より横サイズが大きいときは横幅をベースサイズに縮小
+				$new_width = $basis_size;
+				//圧縮比を求める。
+				$rate = $new_width / $width;
+				//圧縮比に対する縦幅を求める。
+				$new_height = $rate * $height;
+		   
+		   }else if($width < $height){
+		   
+				//横より縦サイズが大きいときは縦をベースサイズに縮小
+				$new_height = $basis_size;
+				$rate = $new_height / $height;
+				$new_width = $rate * $width;
+
+		   }else{
+				$new_width = $basis_size;
+				$new_height = $basis_size;
+		   } 
+		}
+
 		//空の画像を作成
 		$new_image = ImageCreateTrueColor($new_width, $new_height);
 		

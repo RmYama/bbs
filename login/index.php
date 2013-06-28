@@ -62,14 +62,15 @@
 						$move->pagename ="index.php";
 						
 						if(isset($_SESSION["join"]["backpage"])){
-
+						
 							$pagename = $_SESSION["join"]["backpage"];
 
 							if($pagename == "thread"){
 								//スレッド
 								$move->uri = "/bbs/".$pagename;
-	
-							}elseif($page == "list"){
+
+							}elseif($pagename == "list"){
+								
 								//レス
 								if(isset($_SESSION["join"]["board_id"])){
 									$move->uri = "/bbs/".$pagename;

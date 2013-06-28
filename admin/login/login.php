@@ -1,20 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.css">
+<link rel="stylesheet" type="text/css" href="../../css/login.css">
 <title>掲示板 -ログイン画面- </title>
 <script type="text/javascript" src="../js/fcontrol.js"></script>
 </head>
 <body id="login">
 <div id="header">
-<h1><span>*</span> 掲示板 <span>*</span></h1>
+<h1><span>*</span> 管理画面 <span>*</span></h1>
 <div class="btn-menu">
-<ul>
-  <li><a href="../index.php">トップページ</a></li>
-  <li><a href="../signup/index.php">新規登録</a></li>
-  <li><a href="index.php">ログイン</a></li>
-</ul>
 </div>
 <!-- /btn-menu -->
 </div><!-- /header -->
@@ -60,9 +55,6 @@
 </div>
 </form>
 </div><!-- /login-box -->
-<div class="signup-link">
-<a href="index.php?action=signup"> > 新規登録はこちら</a>
-</div>
 </div><!-- /main -->
 </body>
 </html>

@@ -130,7 +130,15 @@ if(isset($state) && $state == "true"){
 </tr>
 <tr>
   <th>画像</th>
-  <td><input type="file" size="43" name="image_file" />
+  <td>
+<?php
+if(isset($image_file_t) && $image_file_t != "none"){
+?>
+  <input type="file" size="43" name="image_file" disabled="disabled" />
+  <p style="color:#FF0000; font-size:13px;">※画像を変更したい場合は先にアップロードした画像を削除してください。</p>
+<?php }else{ ?>  
+  <input type="file" size="43" name="image_file" />
+<?php } ?>  
   <p class="err-txt">
   <?php
     if(isset($err2) && $err2 != ""){
@@ -139,9 +147,9 @@ if(isset($state) && $state == "true"){
   ?>
   </p>
 <?php 
-if(isset($tmp_img_path_t)){
+if(isset($image_file_t)){
 ?>
-  <div><img src="<?php echo $tmp_img_path_t; ?>" /><br />
+  <div><img src="<?php echo $image_file_t; ?>" /><br />
   <p style="line-height:1.8;"><a style="color:#FF0000; font-size:14px;" href="index.php?action=imageDel">削除</a></p>
   </div>
 <?php

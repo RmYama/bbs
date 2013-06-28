@@ -17,7 +17,6 @@ function clearElement(element) {
         case "image":
             return;
         case "file":
-            return;
         case "text":
         case "password":
         case "textarea":

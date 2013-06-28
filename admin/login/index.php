@@ -2,7 +2,7 @@
 	session_start();
 	
 	//ログイン(Controller)
-	 require_once("../class.php");
+	 require_once("../../class.php");
 	 require_once("model.php");
 
 	//アクションの判定をする
@@ -12,14 +12,19 @@
 	switch($action){
 		case "":
 			//初期表示
-
-			//移動してきたページ情報取得
-			$page = $getP->page($_GET);
-			if($page != ""){
-				$_SESSION["join"]["backpage"] = $page;
+			
+			if(isset($_SESSION["admin"]["id"])){
+				//ログインしている状態ならメニューへ
+				//トップページに戻る
+				$move = new pageMove();
+				$move->pagename ="../index.php";
+				$move->redirect();
+				
+			}else{
+				require_once("login.php");
 			}
 
-			require_once("login.php");
+
 			break;
 
 		case "check":
@@ -59,31 +64,7 @@
 					case "success":
 						//前の画面に戻る
 						$move = new pageMove();
-						$move->pagename ="index.php";
-						
-						if(isset($_SESSION["join"]["backpage"])){
-
-							$page = $_SESSION["join"]["backpage"];
-
-							if($page == "thread"){
-								//スレッド
-								$move->uri = "/bbs/".$page;
-	
-							}elseif($page == "list"){
-								//レス
-								if(isset($_SESSION["join"]["board_id"])){
-									$move->uri = "/bbs/".$page;
-									$move->pagename ="index.php?action=".$page."&no=".$_SESSION["join"]["board_id"];
-								}else{
-									//トップページへ
-									$move->uri = "/bbs";
-								}
-							}
-						}else{
-							//トップページへ
-							$move->uri = "/bbs";
-						}
-						
+						$move->pagename ="../index.php";
 						$move->redirect();
 						break;
 				}
@@ -92,7 +73,7 @@
 		
 		case "logout":
 			 //セッション破棄
-			 $delS = new delSession();
+			 $delS = new adminDelSession();
 			 $delS->logout();
 			 //トップページに戻る
 			 $move = new pageMove();

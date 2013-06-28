@@ -11,11 +11,16 @@
 
 	$comment = $_SESSION['join']['comment'];
 	
+	if(isset($_SESSION['join']['thumbnail']) && $_SESSION['join']['thumbnail'] != "none"){
+		$image_file_t = $_SESSION['join']['thumbnail'];
+	}
+
 	if(isset($_GET["action"])){
 		$action = $_GET["action"];
 	}else{
-		$action = "";	
+		$action = "";
 	}
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
@@ -68,8 +73,8 @@ if($action != "del"){
 </tr>
 <tr>
   <th>画像</th>
-  <td><?php if(isset($tmp_img_path_t)){ ?>
-  	<img src="<?php echo $tmp_img_path_t; ?>" />
+  <td><?php if(isset($image_file_t)){ ?>
+  	<img src="<?php echo $image_file_t; ?>" />
    <?php } ?>
   </td>
 </tr>
