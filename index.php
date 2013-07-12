@@ -1,51 +1,13 @@
 <?php
-	session_start();
 
-	require_once("class.php");
-	require_once("model.php");
+// change the following paths if necessary
+$yii=dirname(__FILE__).'/../yii/framework/yii.php';
+$config=dirname(__FILE__).'/protected/config/main.php';
 
-	//ログイン状態の確認
-	$login = new loginState();
-	$state = $login->state();
+// remove the following lines when in production mode
+defined('YII_DEBUG') or define('YII_DEBUG',true);
+// specify how many levels of call stack should be shown in each log message
+defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
-	//アクションの判定をする
-	$getP = new getParameter();
-	$action = $getP->action($_GET);	
-	//現在ページNo取得
-	$page = $getP->pageNo($_GET);
-
-	//ページング
-	$paging = new paging();
-	//オフセットと1Pの件数の取得
-	$offset = $paging->getOffset($page);
-	$item_cnt = $paging->item_cnt;
-	//全件取得
-	$totalpages = $paging->totalpages;
-	
-	switch($action){
-		case "":
-			//初期表示
-			$setLayout = new setLayout();
-			
-			//レイアウト反映
-			$tag_header = $setLayout->setHeader();
-			$tag_footer = $setLayout->setFooter();
-			$site_bgcolor = $setLayout->setSiteBgcolor();
-
-			//クラスのインスタンス化
-			$db = new dbAccess();
-
-			$flg = listNewThread($db,$offset,$item_cnt);
-
-			
-			require_once("top.php");
-
-			//データベース切断
-			$db->db_cut($db);
-			break;
-			
-		default:
-			echo "actionの異常エラー";
-			break;
-	}
-?>
+require_once($yii);
+Yii::createWebApplication($config)->run();

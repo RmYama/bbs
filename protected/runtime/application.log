@@ -1,0 +1,376 @@
+2013/07/12 06:39:14 [error] [php] include(sself.php): failed to open stream: No such file or directory (C:\xampp\htdocs\yii\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\bbs\protected\components\UserIdentity.php(35): spl_autoload_call()
+#1 C:\xampp\htdocs\bbs\protected\models\LoginForm.php(52): UserIdentity->authenticate()
+#2 C:\xampp\htdocs\yii\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 C:\xampp\htdocs\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute()
+#4 C:\xampp\htdocs\yii\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(94): LoginForm->validate()
+#6 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(286): SiteController->runAction()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): SiteController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=site/login
+in C:\xampp\htdocs\bbs\protected\components\UserIdentity.php (35)
+in C:\xampp\htdocs\bbs\protected\models\LoginForm.php (52)
+in C:\xampp\htdocs\bbs\protected\controllers\SiteController.php (94)
+2013/07/12 06:46:17 [error] [php] include(sself.php): failed to open stream: No such file or directory (C:\xampp\htdocs\yii\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\bbs\protected\components\UserIdentity.php(35): spl_autoload_call()
+#1 C:\xampp\htdocs\bbs\protected\models\LoginForm.php(54): UserIdentity->authenticate()
+#2 C:\xampp\htdocs\yii\framework\validators\CInlineValidator.php(42): LoginForm->authenticate()
+#3 C:\xampp\htdocs\yii\framework\validators\CValidator.php(213): CInlineValidator->validateAttribute()
+#4 C:\xampp\htdocs\yii\framework\base\CModel.php(159): CInlineValidator->validate()
+#5 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(94): LoginForm->validate()
+#6 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(286): SiteController->runAction()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): SiteController->run()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=site/login
+in C:\xampp\htdocs\bbs\protected\components\UserIdentity.php (35)
+in C:\xampp\htdocs\bbs\protected\models\LoginForm.php (54)
+in C:\xampp\htdocs\bbs\protected\controllers\SiteController.php (94)
+2013/07/12 07:15:10 [error] [exception.CException] exception 'CException' with message 'CWebApplication やそのビヘイビアには "getState" という名前のメソッドやクロージャはありません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:265
+Stack trace:
+#0 C:\xampp\htdocs\bbs\protected\views\layouts\main.php(28): CComponent->__call('getState', Array)
+#1 C:\xampp\htdocs\bbs\protected\views\layouts\main.php(28): CWebApplication->getState('nickname')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(76): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(54): CContentDecorator->decorate('<div id="conten...')
+#6 C:\xampp\htdocs\yii\framework\web\widgets\COutputProcessor.php(44): CContentDecorator->processOutput('<div id="conten...')
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(206): COutputProcessor->run()
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#9 C:\xampp\htdocs\bbs\protected\views\layouts\column1.php(6): CBaseController->endContent()
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(784): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(32): CController->render('index')
+#14 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/bbs/index.php
+HTTP_REFERER=http://localhost/bbs/index.php?r=site/index
+---
+2013/07/12 08:08:03 [error] [php] include(macth.php): failed to open stream: No such file or directory (C:\xampp\htdocs\yii\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CValidator.php(186): import()
+#1 C:\xampp\htdocs\yii\framework\base\CModel.php(286): createValidator()
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(260): Users->createValidators()
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(303): Users->getValidators()
+#4 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1237): Users->isAttributeRequired()
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(562): activeLabelEx()
+#6 C:\xampp\htdocs\bbs\protected\views\users\_form.php(19): CActiveForm->labelEx()
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): UsersController->renderInternal()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(869): UsersController->renderFile()
+#10 C:\xampp\htdocs\bbs\protected\views\users\create.php(18): UsersController->renderPartial()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): UsersController->renderInternal()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(869): UsersController->renderFile()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(782): UsersController->renderPartial()
+#15 C:\xampp\htdocs\bbs\protected\controllers\UsersController.php(80): UsersController->render()
+#16 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): UsersController->actionCreate()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#18 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): UsersController->runAction()
+#19 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#21 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): UsersController->filterAccessControl()
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(265): UsersController->runActionWithFilters()
+#25 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): UsersController->run()
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#27 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#28 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=users/create
+in C:\xampp\htdocs\bbs\protected\views\users\_form.php (19)
+in C:\xampp\htdocs\bbs\protected\views\users\create.php (18)
+in C:\xampp\htdocs\bbs\protected\controllers\UsersController.php (80)
+2013/07/12 08:08:41 [error] [exception.CException] exception 'CException' with message 'プロパティ "CRegularExpressionValidator.massage" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CValidator.php(189): CComponent->__set('massage', '{attribute}????...')
+#1 C:\xampp\htdocs\yii\framework\base\CModel.php(286): CValidator::createValidator('match', Object(Users), 'user_name', Array)
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(303): CModel->getValidators('user_name')
+#4 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1237): CModel->isAttributeRequired('user_name')
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(562): CHtml::activeLabelEx(Object(Users), 'user_name', Array)
+#6 C:\xampp\htdocs\bbs\protected\views\users\_form.php(19): CActiveForm->labelEx(Object(Users), 'user_name')
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#10 C:\xampp\htdocs\bbs\protected\views\users\create.php(18): CController->renderPartial('_form', Array)
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#15 C:\xampp\htdocs\bbs\protected\controllers\UsersController.php(80): CController->render('create', Array)
+#16 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): UsersController->actionCreate()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#26 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#27 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#28 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+---
+2013/07/12 08:10:38 [error] [exception.CException] exception 'CException' with message 'プロパティ "CRegularExpressionValidator.massage" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CValidator.php(189): CComponent->__set('massage', '{attribute}????...')
+#1 C:\xampp\htdocs\yii\framework\base\CModel.php(286): CValidator::createValidator('match', Object(LoginForm), 'user_name', Array)
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(303): CModel->getValidators('username')
+#4 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1237): CModel->isAttributeRequired('username')
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(562): CHtml::activeLabelEx(Object(LoginForm), 'username', Array)
+#6 C:\xampp\htdocs\bbs\protected\views\site\login.php(28): CActiveForm->labelEx(Object(LoginForm), 'username')
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#11 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(98): CController->render('login', Array)
+#12 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('login')
+#17 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#18 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/bbs/index.php?r=site/login
+---
+2013/07/12 08:11:28 [error] [exception.CException] exception 'CException' with message 'プロパティ "CRegularExpressionValidator.massage" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CValidator.php(189): CComponent->__set('massage', '{attribute}????...')
+#1 C:\xampp\htdocs\yii\framework\base\CModel.php(286): CValidator::createValidator('match', Object(LoginForm), 'username', Array)
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(303): CModel->getValidators('username')
+#4 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1237): CModel->isAttributeRequired('username')
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(562): CHtml::activeLabelEx(Object(LoginForm), 'username', Array)
+#6 C:\xampp\htdocs\bbs\protected\views\site\login.php(28): CActiveForm->labelEx(Object(LoginForm), 'username')
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('login', Array, true)
+#11 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(98): CController->render('login', Array)
+#12 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('login')
+#17 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#18 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/bbs/index.php?r=site/login
+---
+2013/07/12 08:12:23 [error] [exception.CException] exception 'CException' with message 'プロパティ "LoginForm.user_name" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CRegularExpressionValidator.php(45): CComponent->__get('user_name')
+#1 C:\xampp\htdocs\yii\framework\validators\CValidator.php(213): CRegularExpressionValidator->validateAttribute(Object(LoginForm), 'user_name')
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#3 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(94): CModel->validate()
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('login')
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#10 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/bbs/index.php?r=site/login
+HTTP_REFERER=http://localhost/bbs/index.php?r=site/login
+---
+2013/07/12 08:12:42 [error] [exception.CException] exception 'CException' with message 'プロパティ "LoginForm.user_name" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CRegularExpressionValidator.php(45): CComponent->__get('user_name')
+#1 C:\xampp\htdocs\yii\framework\validators\CValidator.php(213): CRegularExpressionValidator->validateAttribute(Object(LoginForm), 'user_name')
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#3 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(94): CModel->validate()
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('login')
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#10 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/bbs/index.php?r=site/login
+HTTP_REFERER=http://localhost/bbs/index.php?r=site/login
+---
+2013/07/12 08:14:27 [error] [exception.CException] exception 'CException' with message 'プロパティ "CRegularExpressionValidator.massage" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\validators\CValidator.php(189): CComponent->__set('massage', '{attribute}????...')
+#1 C:\xampp\htdocs\yii\framework\base\CModel.php(286): CValidator::createValidator('match', Object(LoginForm), 'username', Array)
+#2 C:\xampp\htdocs\yii\framework\base\CModel.php(260): CModel->createValidators()
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(546): CModel->getValidators()
+#4 C:\xampp\htdocs\yii\framework\base\CModel.php(467): CModel->getSafeAttributeNames()
+#5 C:\xampp\htdocs\yii\framework\base\CComponent.php(152): CModel->setAttributes(Array)
+#6 C:\xampp\htdocs\bbs\protected\controllers\SiteController.php(92): CComponent->__set('attributes', Array)
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('login')
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/bbs/index.php?r=site/login
+HTTP_REFERER=http://localhost/bbs/index.php?r=site/login
+---
+2013/07/12 08:33:40 [error] [exception.CException] exception 'CException' with message 'プロパティ "Users.username" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(143): CComponent->__get('username')
+#1 C:\xampp\htdocs\yii\framework\validators\CRegularExpressionValidator.php(45): CActiveRecord->__get('username')
+#2 C:\xampp\htdocs\yii\framework\validators\CValidator.php(213): CRegularExpressionValidator->validateAttribute(Object(Users), 'username')
+#3 C:\xampp\htdocs\yii\framework\base\CModel.php(159): CValidator->validate(Object(Users), NULL)
+#4 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(794): CModel->validate(NULL)
+#5 C:\xampp\htdocs\bbs\protected\controllers\UsersController.php(74): CActiveRecord->save()
+#6 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): UsersController->actionCreate()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#17 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+HTTP_REFERER=http://localhost/bbs/index.php?r=users/create
+---
+2013/07/12 09:04:25 [error] [exception.CException] exception 'CException' with message 'Users やそのビヘイビアには "generateSalt" という名前のメソッドやクロージャはありません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:265
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(225): CComponent->__call('generateSalt', Array)
+#1 C:\xampp\htdocs\bbs\protected\models\Users.php(118): CActiveRecord->__call('generateSalt', Array)
+#2 C:\xampp\htdocs\bbs\protected\models\Users.php(118): Users->generateSalt()
+#3 C:\xampp\htdocs\bbs\protected\models\Users.php(104): Users->hashPassword('salt')
+#4 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1017): Users->beforeSave()
+#5 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(795): CActiveRecord->insert(NULL)
+#6 C:\xampp\htdocs\bbs\protected\controllers\UsersController.php(74): CActiveRecord->save()
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): UsersController->actionCreate()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#17 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#18 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+HTTP_REFERER=http://localhost/bbs/index.php?r=users/create
+---
+2013/07/12 09:17:23 [error] [php] Undefined variable: cots (C:\xampp\htdocs\bbs\protected\models\Users.php:136)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1017): Users->beforeSave()
+#1 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(795): Users->insert()
+#2 C:\xampp\htdocs\bbs\protected\controllers\UsersController.php(74): Users->save()
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): UsersController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): UsersController->runAction()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): UsersController->filterAccessControl()
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): UsersController->runActionWithFilters()
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): UsersController->run()
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=users/create
+in C:\xampp\htdocs\bbs\protected\models\Users.php (136)
+in C:\xampp\htdocs\bbs\protected\models\Users.php (118)
+in C:\xampp\htdocs\bbs\protected\models\Users.php (104)
+2013/07/12 09:43:09 [error] [exception.CException] exception 'CException' with message 'プロパティ "CAccessRule.action" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(112): CComponent->__set('action', Array)
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(1144): CAccessControlFilter->setRules(Array)
+#2 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+---
+2013/07/12 09:43:30 [error] [php] array_map(): Argument #2 should be an array (C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:112)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): UsersController->filterAccessControl()
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(265): UsersController->runActionWithFilters()
+#4 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): UsersController->run()
+#5 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=users/create
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/12 09:44:01 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'あなたはこのアクションを実行する権限がありません。' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), '???????????????...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+---
+2013/07/12 09:47:17 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'あなたはこのアクションを実行する権限がありません。' in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), '???????????????...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('users/create')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/bbs/index.php?r=users/create
+---
