@@ -15,6 +15,10 @@ class Board extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Board the static model class
 	 */
+
+	public $nickname;
+	public $contents;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -36,11 +40,11 @@ class Board extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, created_at', 'required'),
+			array('title, contents', 'required'),
 			array('title', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, created_at', 'safe', 'on'=>'search'),
+			array('id, title, created_at', 'safe', 'on'=>'search')
 		);
 	}
 
@@ -52,6 +56,8 @@ class Board extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Comments'=>array(self::HAS_MANY,'Comment','board_id'),
+
 		);
 	}
 
@@ -62,8 +68,10 @@ class Board extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Title',
-			'created_at' => 'Created At',
+			'title' => 'タイトル',
+			'nickname' => 'ニックネーム',
+			'contents' => 'コメント',
+//			'created_at' => 'Created At',
 		);
 	}
 

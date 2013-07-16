@@ -21,14 +21,25 @@
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
+	<div class="row" style="margin-bottom:15px;">
+		<?php echo $form->labelEx($model,'nickname'); ?>
+		<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
+	</div>
+
 	<div class="row">
-		<?php echo $form->labelEx($model,'created_at'); ?>
-		<?php echo $form->textField($model,'created_at'); ?>
-		<?php echo $form->error($model,'created_at'); ?>
+		<?php echo $form->labelEx($model,'contents'); ?>
+		<?php echo CHtml::activeTextArea($model,'contents',array('rows'=>10,'cols'=>50)) ?>
+		<?php echo $form->error($model,'contents'); ?>
+	</div>
+
+	<div class="row">
+		<?php // echo $form->labelEx($model,'created_at'); ?>
+		<?php // echo $form->textField($model,'created_at'); ?>
+		<?php // echo $form->error($model,'created_at'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? '投稿' : 'Create'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -11,6 +11,9 @@
  */
 class Users extends CActiveRecord
 {
+
+	private $_identity;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,6 +43,7 @@ class Users extends CActiveRecord
 			array('user_name, nickname, password', 'required','on'=>array('create','update')),
 			array('user_name','match', 'pattern'=>'/^[a-zA-Z0-9]+$/','message' =>'{attribute}は半角英数字で入力してください。'),
 			array('user_name, nickname, password', 'length', 'max'=>256),
+			array('user_name','authenticate'),
 
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -55,6 +59,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Comments'=>array(self::HAS_MANY,'Comment','user_id')
 		);
 	}
 
@@ -75,6 +80,16 @@ class Users extends CActiveRecord
 			'nickname' => 'ニックネーム',
 			'password' => 'パスワード',
 		);
+	}
+
+	public function authenticate($attribute,$params)
+	{
+		if(!$this->hasErrors())
+		{
+			$this->_identity=new UserIdentity($this->user_name,$this->password);
+			if($this->_identity->authenticate())
+				$this->addError('user_name','入力されたユーザー名は、他のユーザーが既に使用しています。');
+		}
 	}
 
 	/**
@@ -100,8 +115,6 @@ class Users extends CActiveRecord
 
 	protected function beforeSave()
 	{
-
-
 
 		if(parent::beforeSave()){
 			$this->password=$this->hashPassword($this->password);
