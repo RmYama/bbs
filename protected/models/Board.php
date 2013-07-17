@@ -67,13 +67,15 @@ class Board extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+//			'id' => 'ID',
 			'title' => 'タイトル',
 			'nickname' => 'ニックネーム',
 			'contents' => 'コメント',
 //			'created_at' => 'Created At',
 		);
 	}
+
+
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -93,5 +95,24 @@ class Board extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	protected function beforeSave()
+	{
+		if(parent::beforeSave())
+		{
+			$this->title=htmlspecialchars($this->title, ENT_QUOTES, 'UTF-8');
+			$this->contents=htmlspecialchars($this->contents, ENT_QUOTES, 'UTF-8');
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	protected function afterSave()
+	{
+
+		parent::afterSave();
+		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id);
 	}
 }

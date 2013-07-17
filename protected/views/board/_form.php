@@ -39,7 +39,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? '投稿' : 'Create'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

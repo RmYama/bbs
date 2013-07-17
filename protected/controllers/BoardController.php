@@ -70,8 +70,9 @@ class BoardController extends Controller
 		if(isset($_POST['Board']))
 		{
 			$model->attributes=$_POST['Board'];
-			if($model->save())
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(

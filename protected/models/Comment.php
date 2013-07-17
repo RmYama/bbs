@@ -82,6 +82,15 @@ class Comment extends CActiveRecord
 		);
 	}
 
+	public function insertContens($id,$contents,$user_id)
+	{
+		$comment = new Comment;
+		$comment->board_id = $id;
+		$comment->contents = $contents;
+		$comment->user_id = $user_id;
+		$comment->save();
+	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
