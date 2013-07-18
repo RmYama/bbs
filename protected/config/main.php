@@ -35,6 +35,7 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

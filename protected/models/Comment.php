@@ -42,7 +42,7 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('board_id, res_id, user_id, contents, created_at, del_flg', 'required'),
+			array('board_id, res_id, user_id, contents, del_flg', 'required'),
 			array('board_id, res_id, user_id, del_flg', 'numerical', 'integerOnly'=>true),
 			array('image_file_t, image_file_o', 'length', 'max'=>1024),
 			// The following rule is used by search().
@@ -86,8 +86,10 @@ class Comment extends CActiveRecord
 	{
 		$comment = new Comment;
 		$comment->board_id = $id;
+		$comment->res_id = 0;
 		$comment->contents = $contents;
 		$comment->user_id = $user_id;
+		$comment->del_flg = 0;
 		$comment->save();
 	}
 

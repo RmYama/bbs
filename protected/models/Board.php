@@ -39,9 +39,22 @@ class Board extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		$file = array(
+			'image',
+			'file',
+			'types'=>'jpg,png,gif',
+			'maxSize'=>1024*1024*1,
+			'message'=>'{attribute}が未選択です',
+			'tooLarge'=>'{attribute}のファイルサイズが大きすぎます',
+			'wrongType'=>'{attribute}には {extensions} 以外のファイルはアップロードできません',
+			'on'=>'insert',
+		);
+
 		return array(
 			array('title, contents', 'required'),
 			array('title', 'length', 'max'=>128),
+			$file,
+			array_merge($file,array('on'=>'update','allowEmpty'=>true)),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, created_at', 'safe', 'on'=>'search')
@@ -111,7 +124,6 @@ class Board extends CActiveRecord
 
 	protected function afterSave()
 	{
-
 		parent::afterSave();
 		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id);
 	}

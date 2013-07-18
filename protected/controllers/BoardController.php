@@ -7,6 +7,12 @@ class BoardController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	private $_uploadDir;
+
+	public function init()
+	{
+		$this->uploadDir = Yii::app()->basePath.'/../images/';
+	}
 
 	/**
 	 * @return array action filters

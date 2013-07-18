@@ -33,11 +33,17 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'images'); ?>
+		<?php echo CHtml::activeFileField($model,'images') ?>
+		<?php echo $form->error($model,'images'); ?>
+	</div>
+<!--
+	<div class="row">
 		<?php // echo $form->labelEx($model,'created_at'); ?>
 		<?php // echo $form->textField($model,'created_at'); ?>
 		<?php // echo $form->error($model,'created_at'); ?>
 	</div>
-
+-->
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); ?>
 	</div>
