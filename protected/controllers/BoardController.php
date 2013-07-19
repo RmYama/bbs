@@ -11,7 +11,7 @@ class BoardController extends Controller
 
 	public function init()
 	{
-		$this->uploadDir = Yii::app()->basePath.'/../images/';
+		$this->_uploadDir = Yii::app()->basePath.'/../images/';
 	}
 
 	/**
@@ -68,7 +68,7 @@ class BoardController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Board;
+		$model=new Board();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -76,14 +76,28 @@ class BoardController extends Controller
 		if(isset($_POST['Board']))
 		{
 			$model->attributes=$_POST['Board'];
+			
+			if($model->validate())
+			{
+				$file = CUploadedFile::getInstance($model,'image');
+				$model->image = $this->uniqId.'.'.$file->extensionName;
+				$file->saveAs($this->_uploadDir.$model->image);
+				$model->save(false);
+
+				$this->redirect(array('index'));
+			}
+/*
 			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id));
 			}
+*/
 		}
-
+		$this->render('_form',compact('model'));
+/*
 		$this->render('create',array(
 			'model'=>$model,
 		));
+*/
 	}
 
 	/**
@@ -101,13 +115,26 @@ class BoardController extends Controller
 		if(isset($_POST['Board']))
 		{
 			$model->attributes=$_POST['Board'];
+			if($model->validate())
+			{
+				if($file=CuploadedFile::getInstance($model, 'image'))
+				{
+					$file->saveAs($this->_uploadDir.$model->image);
+				}
+				$model->save(false);
+				$this->redirect(array('index'));
+			}
+/*
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
+*/
 		}
-
+		$this->render('_form', compact('model'));
+/*
 		$this->render('update',array(
 			'model'=>$model,
 		));
+*/
 	}
 
 	/**
@@ -117,11 +144,16 @@ class BoardController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+//		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+//		if(!isset($_GET['ajax']))
+//			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		unlink($this->_uploadDir.$model->image);
+		$model->delete();
+
+		$this->redirect(array('index'));
 	}
 
 	/**
@@ -129,9 +161,16 @@ class BoardController extends Controller
 	 */
 	public function actionIndex()
 	{
+/*
 		$dataProvider=new CActiveDataProvider('Board');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+		));
+*/
+	$this->render('index',array(
+		'models' => Board::model()->findAll(array(
+			'order'=>'t.id DESC',
+			)),
 		));
 	}
 
@@ -176,5 +215,12 @@ class BoardController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	/**
+	 * ユニークなＩＤを作って、その値を返す
+	*/
+	protected function getUniqId()
+	{
+		return md5(uniqid(rand(),true));
 	}
 }

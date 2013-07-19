@@ -18,6 +18,7 @@ class Board extends CActiveRecord
 
 	public $nickname;
 	public $contents;
+	public $image;
 
 	public static function model($className=__CLASS__)
 	{
@@ -84,6 +85,7 @@ class Board extends CActiveRecord
 			'title' => 'タイトル',
 			'nickname' => 'ニックネーム',
 			'contents' => 'コメント',
+			'image' => '画像',
 //			'created_at' => 'Created At',
 		);
 	}

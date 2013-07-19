@@ -5,49 +5,40 @@
 ?>
 
 <div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'board-form',
-	'enableAjaxValidation'=>false,
-)); ?>
-
+<?php echo CHtml::form('', 'post', array('enctype' => 'multipart/form-data')); ?>
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo CHtml::errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'title'); ?>
+		<?php echo CHtml::activeLabel($model,'title'); ?>
+		<?php echo CHtml::activeTextField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo CHtml::error($model,'title'); ?>
 	</div>
 
 	<div class="row" style="margin-bottom:15px;">
-		<?php echo $form->labelEx($model,'nickname'); ?>
+		<?php echo CHtml::activeLabel($model,'nickname'); ?>
 		<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'contents'); ?>
+		<?php echo CHtml::activeLabel($model,'contents'); ?>
 		<?php echo CHtml::activeTextArea($model,'contents',array('rows'=>10,'cols'=>50)) ?>
-		<?php echo $form->error($model,'contents'); ?>
+		<?php echo CHtml::error($model,'contents'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'images'); ?>
-		<?php echo CHtml::activeFileField($model,'images') ?>
-		<?php echo $form->error($model,'images'); ?>
-	</div>
-<!--
+		<?php echo CHtml::activeLabel($model, 'image'); ?>
+		<?php echo CHtml::activeFileField($model, 'image'); ?>
+	</div><!-- /.row -->
+	<?php if (!$model->isNewRecord): ?>
 	<div class="row">
-		<?php // echo $form->labelEx($model,'created_at'); ?>
-		<?php // echo $form->textField($model,'created_at'); ?>
-		<?php // echo $form->error($model,'created_at'); ?>
+		<?php echo CHtml::image(Yii::app()->baseUrl.'/images/'.$model->image, 'image', array('width' => 200)); ?><br />
 	</div>
--->
+	<?php endif; ?>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
-
+<?php echo CHtml::endForm(); ?>
 </div><!-- form -->
