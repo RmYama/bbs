@@ -82,12 +82,13 @@ class Comment extends CActiveRecord
 		);
 	}
 
-	public function insertContens($id,$contents,$user_id)
+	public function insertContens($id,$contents,$user_id,$org_image_path)
 	{
 		$comment = new Comment;
 		$comment->board_id = $id;
 		$comment->res_id = 0;
 		$comment->contents = $contents;
+		$comment->image_file_o = $org_image_path;
 		$comment->user_id = $user_id;
 		$comment->del_flg = 0;
 		$comment->save();

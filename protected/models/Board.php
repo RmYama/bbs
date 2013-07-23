@@ -127,6 +127,6 @@ class Board extends CActiveRecord
 	protected function afterSave()
 	{
 		parent::afterSave();
-		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id);
+		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id,$this->image);
 	}
 }

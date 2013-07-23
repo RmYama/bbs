@@ -11,7 +11,7 @@ class BoardController extends Controller
 
 	public function init()
 	{
-		$this->_uploadDir = Yii::app()->basePath.'/../images/';
+		$this->_uploadDir = Yii::getPathOfAlias('webroot.images')."/";
 	}
 
 	/**
@@ -73,7 +73,8 @@ class BoardController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Board']))
+		if(isset($_POST['confirm']))
+//		if(isset($_POST['Board']))
 		{
 			$model->attributes=$_POST['Board'];
 			
@@ -82,8 +83,8 @@ class BoardController extends Controller
 				$file = CUploadedFile::getInstance($model,'image');
 				$model->image = $this->uniqId.'.'.$file->extensionName;
 				$file->saveAs($this->_uploadDir.$model->image);
+				$model->image = $this->_uploadDir.$model->image;
 				$model->save(false);
-
 				$this->redirect(array('index'));
 			}
 /*
@@ -91,6 +92,10 @@ class BoardController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 			}
 */
+		}else if (isset($_POST['back'])) {
+			# code...
+		}else if (isset($_POST['finish'])) {
+			# code...
 		}
 		$this->render('_form',compact('model'));
 /*
@@ -167,7 +172,10 @@ class BoardController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 */
+	$dataProvider=new CActiveDataProvider('Board');
+
 	$this->render('index',array(
+		'dataProvider'=>$dataProvider,
 		'models' => Board::model()->findAll(array(
 			'order'=>'t.id DESC',
 			)),
