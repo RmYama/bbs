@@ -37,7 +37,10 @@
 	<?php endif; ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); ?>
+		<?php 
+		 //echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); 
+		 echo CHtml::submitButton('確 認',array('name' => 'confirm'));
+		?>
 	</div>
 
 <?php echo CHtml::endForm(); ?>

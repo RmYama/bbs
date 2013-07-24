@@ -1272,3 +1272,30 @@ in C:\xampp\htdocs\bbs\index.php (13)
 2013/07/23 09:12:26 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
 in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (78)
 in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 06:18:36 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (79)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 07:41:13 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (79)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 07:41:39 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (79)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 07:42:58 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (79)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 07:45:55 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (79)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 08:08:28 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (81)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 08:11:06 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (81)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 08:14:32 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (81)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/24 08:41:47 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)

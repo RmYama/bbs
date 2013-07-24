@@ -8,10 +8,13 @@ class BoardController extends Controller
 	 */
 	public $layout='//layouts/column2';
 	private $_uploadDir;
+	private $_tmpUploadDir;
+	private $_imageUrl = 'http://localhost/bbs/images/tmp/';
 
 	public function init()
 	{
 		$this->_uploadDir = Yii::getPathOfAlias('webroot.images')."/";
+		$this->_tmpUploadDir = Yii::getPathOfAlias('webroot.images')."/tmp/";
 	}
 
 	/**
@@ -81,11 +84,13 @@ class BoardController extends Controller
 			if($model->validate())
 			{
 				$file = CUploadedFile::getInstance($model,'image');
-				$model->image = $this->uniqId.'.'.$file->extensionName;
-				$file->saveAs($this->_uploadDir.$model->image);
-				$model->image = $this->_uploadDir.$model->image;
-				$model->save(false);
-				$this->redirect(array('index'));
+				if(!is_null($file)){
+					$model->image = $this->uniqId.'.'.$file->extensionName;
+					$file->saveAs($this->_tmpUploadDir.$model->image);
+					$model->image = $this->_imageUrl.$model->image;
+				}
+				$this->render('confirm', compact('model'));
+				return;
 			}
 /*
 			if($model->save()){
@@ -93,9 +98,13 @@ class BoardController extends Controller
 			}
 */
 		}else if (isset($_POST['back'])) {
-			# code...
+			$model->attributes = $this->getPageState('create');
 		}else if (isset($_POST['finish'])) {
-			# code...
+			$model->attributes = $this->getPageState('create');
+			if($model->save())
+			{
+				$this->redirect(array('index'));
+			}
 		}
 		$this->render('_form',compact('model'));
 /*
