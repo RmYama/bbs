@@ -1299,3 +1299,302 @@ in C:\xampp\htdocs\bbs\index.php (13)
 2013/07/24 08:41:47 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
 in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
 in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 03:39:34 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 03:52:57 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 03:52:57 [error] [exception.CException] exception 'CException' with message 'Board やそのビヘイビアには "dispImage" という名前のメソッドやクロージャはありません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:265
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(225): CComponent->__call('dispImage', Array)
+#1 C:\xampp\htdocs\bbs\protected\controllers\BoardController.php(91): CActiveRecord->__call('dispImage', Array)
+#2 C:\xampp\htdocs\bbs\protected\controllers\BoardController.php(91): Board->dispImage()
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): BoardController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('board/create')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/bbs/index.php?r=board/create
+HTTP_REFERER=http://localhost/bbs/index.php?r=board/create
+---
+2013/07/25 03:53:33 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:12:51 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:12:51 [error] [exception.CException] exception 'CException' with message 'プロパティ "Board.img_path_o" が定義されていません。' in C:\xampp\htdocs\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(143): CComponent->__get('img_path_o')
+#1 C:\xampp\htdocs\bbs\protected\models\Board.php(140): CActiveRecord->__get('img_path_o')
+#2 C:\xampp\htdocs\bbs\protected\controllers\BoardController.php(91): Board->dispImage(Object(CUploadedFile))
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): BoardController->actionCreate()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('board/create')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\bbs\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/bbs/index.php?r=board/create
+HTTP_REFERER=http://localhost/bbs/index.php?r=board/create
+---
+2013/07/25 06:13:55 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:26:50 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:26:50 [error] [php] imagesx() expects parameter 1 to be resource, string given (C:\xampp\htdocs\bbs\protected\models\Board.php:150)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): BoardController->actionCreate()
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): BoardController->runAction()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): BoardController->filterAccessControl()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): BoardController->runActionWithFilters()
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): BoardController->run()
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=board/create
+in C:\xampp\htdocs\bbs\protected\models\Board.php (150)
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (91)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:31:39 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:32:27 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:40:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 06:42:51 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:24:24 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:24:44 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:27:30 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:32:28 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:32:32 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (103)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:36:31 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:36:34 [warning] [application] "Board" の安全でない属性"model"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (103)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:40:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:41:23 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:44:42 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:45:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:46:27 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:46:31 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:49:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:49:42 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (106)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:52:53 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:52:57 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:54:08 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:54:13 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:55:21 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:55:26 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 07:56:37 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:01:43 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:01:46 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:04:04 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:04:07 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:34:47 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:34:51 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:34:59 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:35:04 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:35:23 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:35:25 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:40:29 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:40:54 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:50:49 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (83)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:50:53 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (105)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:50:53 [error] [php] Use of undefined constant image - assumed 'image' (C:\xampp\htdocs\bbs\protected\controllers\BoardController.php:107)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): BoardController->runAction()
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): BoardController->filterAccessControl()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): BoardController->runActionWithFilters()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): BoardController->run()
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=board/create
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (107)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:55:35 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:55:39 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:59:37 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 08:59:44 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:10:23 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:10:28 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:10:50 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:10:53 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:12:47 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:12:51 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:25:34 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:25:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (108)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:46:12 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (82)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:46:18 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (104)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:49:54 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (83)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:49:57 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (109)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:49:57 [error] [php] Undefined index: Board (C:\xampp\htdocs\bbs\protected\controllers\BoardController.php:111)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): BoardController->runAction()
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): BoardController->filterAccessControl()
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): BoardController->runActionWithFilters()
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): BoardController->run()
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\bbs\index.php(13): CWebApplication->run()
+REQUEST_URI=/bbs/index.php?r=board/create
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (111)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:50:34 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (83)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:50:38 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (109)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:51:09 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (83)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:51:12 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (105)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:51:58 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (83)
+in C:\xampp\htdocs\bbs\index.php (13)
+2013/07/25 09:52:13 [warning] [application] "Board" の安全でない属性"image"をセットできませんでした。
+in C:\xampp\htdocs\bbs\protected\controllers\BoardController.php (109)
+in C:\xampp\htdocs\bbs\index.php (13)

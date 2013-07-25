@@ -10,6 +10,7 @@ class BoardController extends Controller
 	private $_uploadDir;
 	private $_tmpUploadDir;
 	private $_imageUrl = 'http://localhost/bbs/images/tmp/';
+	private $_imageValue;
 
 	public function init()
 	{
@@ -87,8 +88,11 @@ class BoardController extends Controller
 				if(!is_null($file)){
 					$model->image = $this->uniqId.'.'.$file->extensionName;
 					$file->saveAs($this->_tmpUploadDir.$model->image);
+					$_POST['Board']['image'] = $this->_tmpUploadDir.$model->image;
 					$model->image = $this->_imageUrl.$model->image;
+					$model->dispImage($file);
 				}
+				$this->setPageState('create',$_POST['Board']);
 				$this->render('confirm', compact('model'));
 				return;
 			}
@@ -99,12 +103,16 @@ class BoardController extends Controller
 */
 		}else if (isset($_POST['back'])) {
 			$model->attributes = $this->getPageState('create');
+
+
 		}else if (isset($_POST['finish'])) {
 			$model->attributes = $this->getPageState('create');
-			if($model->save())
-			{
-				$this->redirect(array('index'));
-			}
+			$this->_imageValue = $this->getPageState('create');
+			var_dump($this->_imageValue['image']);
+			exit();
+
+			$model->save(false);
+			$this->redirect(array('index'));
 		}
 		$this->render('_form',compact('model'));
 /*

@@ -19,6 +19,9 @@ class Board extends CActiveRecord
 	public $nickname;
 	public $contents;
 	public $image;
+	public $fileType;
+	public $fileWidth;
+	private $_newImage;
 
 	public static function model($className=__CLASS__)
 	{
@@ -126,7 +129,32 @@ class Board extends CActiveRecord
 
 	protected function afterSave()
 	{
+		var_dump($this->image);
+		exit();
 		parent::afterSave();
 		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id,$this->image);
+	}
+
+	public function dispImage($file)
+	{
+		$this->fileType = $file->getType();
+
+		switch($this->fileType){
+			case "image/jpeg" || "image/pjpeg":
+				$this->_newImage = ImageCreateFromJPEG($this->image);
+				break;
+			case "image/gif":
+				$this->_newImage = ImageCreateFromGIF($this->image);
+				break;
+			default:
+				exit();
+		}
+
+		$this->fileWidth = imageSx($this->_newImage);
+
+		if($this->fileWidth > 700)
+		{
+			$this->fileWidth = 700;
+		}
 	}
 }

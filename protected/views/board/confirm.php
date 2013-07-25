@@ -24,7 +24,7 @@ $this->breadcrumbs=array(
 	</div>
 	<div class="row">
 		<?php echo Chtml::activeLabel($model,'image'); ?><br />
-		<?php echo Chtml::image($model->image); ?>
+		<?php echo Chtml::image($model->image, 'image', array('width' => $model->fileWidth)); ?>
 	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('戻 る', array('name' => 'back')); ?>

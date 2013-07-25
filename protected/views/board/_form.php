@@ -6,6 +6,7 @@
 
 <div class="form">
 <?php echo CHtml::form('', 'post', array('enctype' => 'multipart/form-data')); ?>
+<?php echo CHtml::statefulForm(); ?> 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 	<?php echo CHtml::errorSummary($model); ?>
 
@@ -32,7 +33,7 @@
 	</div><!-- /.row -->
 	<?php if (!$model->isNewRecord): ?>
 	<div class="row">
-		<?php echo CHtml::image(Yii::app()->baseUrl.'/images/'.$model->image, 'image', array('width' => 200)); ?><br />
+		<?php echo CHtml::image(Yii::app()->baseUrl.'/images/'.$model->image, 'image', array('width' => $model->fileWidth)); ?><br />
 	</div>
 	<?php endif; ?>
 
