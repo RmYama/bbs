@@ -107,9 +107,12 @@ class BoardController extends Controller
 
 		}else if (isset($_POST['finish'])) {
 			$model->attributes = $this->getPageState('create');
-			$this->_imageValue = $this->getPageState('create');
-			var_dump($this->_imageValue['image']);
+			var_dump($model->contents);
+			var_dump($model->image);
 			exit();
+//			$this->_imageValue = $this->getPageState('create');
+//			var_dump($this->_imageValue['image']);
+//			exit();
 
 			$model->save(false);
 			$this->redirect(array('index'));

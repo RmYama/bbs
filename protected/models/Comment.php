@@ -21,6 +21,9 @@ class Comment extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Comment the static model class
 	 */
+
+	public $nickname;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -42,8 +45,8 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('board_id, res_id, user_id, contents, del_flg', 'required'),
-			array('board_id, res_id, user_id, del_flg', 'numerical', 'integerOnly'=>true),
+			array('board_id, res_id, user_id, contents', 'required'),
+			array('board_id, res_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('image_file_t, image_file_o', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -70,14 +73,14 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'contents' => 'コメント',
 			'id' => 'ID',
 			'board_id' => 'Board',
 			'res_id' => 'Res',
 			'user_id' => 'User',
-			'contents' => 'Contents',
 			'image_file_t' => 'Image File T',
 			'image_file_o' => 'Image File O',
-			'created_at' => 'Created At',
+			'created_at' => '投稿日',
 			'del_flg' => 'Del Flg',
 		);
 	}
