@@ -21,10 +21,12 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
+		'title',
 		'id',
 		'board_id',
 		'res_id',
 		'user_id',
+		'nickname',
 		'contents',
 		'image_file_t',
 		'image_file_o',

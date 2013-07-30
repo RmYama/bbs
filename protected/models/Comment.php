@@ -22,6 +22,7 @@ class Comment extends CActiveRecord
 	 * @return Comment the static model class
 	 */
 
+	public $title;
 	public $nickname;
 
 	public static function model($className=__CLASS__)
@@ -73,11 +74,13 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'title' => 'タイトル',
 			'contents' => 'コメント',
 			'id' => 'ID',
 			'board_id' => 'Board',
 			'res_id' => 'Res',
 			'user_id' => 'User',
+			'nickname' => 'ニックネーム',
 			'image_file_t' => 'Image File T',
 			'image_file_o' => 'Image File O',
 			'created_at' => '投稿日',

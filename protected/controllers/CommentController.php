@@ -122,16 +122,18 @@ class CommentController extends Controller
 	 */
 	public function actionIndex()
 	{
+
 		$dataProvider=new CActiveDataProvider('Comment', array(
 			'criteria'=>array(
+				'select' => 'Comment.*,u.nickname as nickname',
 				'join' => 'LEFT JOIN users as u ON u.id=user_id',
 				'condition' => 'board_id=2',
 				'order' => 'res_id',
 				'with' => 'author',
 				),
 			));
-
 		$this->render('index',array(
+			'title'=>$title,
 			'dataProvider'=>$dataProvider
 			));
 	}

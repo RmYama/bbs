@@ -74,6 +74,7 @@ class Board extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'Comments'=>array(self::HAS_MANY,'Comment','board_id'),
+			'resCount'=>array(self::STAT,'Comment','res_id','condition'=>'res_id > 0'),
 
 		);
 	}

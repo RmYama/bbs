@@ -192,13 +192,21 @@ class BoardController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 */
-	$dataProvider=new CActiveDataProvider('Board');
+
+	$criteria=new CDbCriteria(array(
+		'order'=>'id DESC',
+		'with'=>'resCount',
+	));
+
+	$dataProvider=new CActiveDataProvider('Board',array(
+		'pagination'=>array(
+				'pageSize'=>5,
+		),
+		'criteria'=>$criteria,
+		));
 
 	$this->render('index',array(
 		'dataProvider'=>$dataProvider,
-		'models' => Board::model()->findAll(array(
-			'order'=>'t.id DESC',
-			)),
 		));
 	}
 
