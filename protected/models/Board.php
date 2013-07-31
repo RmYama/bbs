@@ -73,9 +73,9 @@ class Board extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Comments'=>array(self::HAS_MANY,'Comment','board_id'),
-			'resCount'=>array(self::STAT,'Comment','res_id','condition'=>'res_id > 0'),
-
+			'comments'=>array(self::HAS_MANY,'Comment','board_id'),
+			'resCount'=>array(self::STAT,'Comment','board_id',
+				'condition'=>'res_id > 0'),
 		);
 	}
 
@@ -85,7 +85,7 @@ class Board extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-//			'id' => 'ID',
+			'id' => 'ID',
 			'title' => 'タイトル',
 			'nickname' => 'ニックネーム',
 			'contents' => 'コメント',
@@ -94,46 +94,15 @@ class Board extends CActiveRecord
 		);
 	}
 
-
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
+	//コメント（レス）投稿
+	public function addComment($comment)
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('created_at',$this->created_at,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	protected function beforeSave()
-	{
-		if(parent::beforeSave())
-		{
-			$this->title=htmlspecialchars($this->title, ENT_QUOTES, 'UTF-8');
-			$this->contents=htmlspecialchars($this->contents, ENT_QUOTES, 'UTF-8');
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	protected function afterSave()
-	{
-		var_dump($this->image);
+		$comment->board_id=$this->id;
+		$comment->user_id=Yii::app()->user->id;
+		$comment->res_id=$this->maxResNum + 1;
+		var_dump($comment->res_id);
 		exit();
-		parent::afterSave();
-		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id,$this->image);
+		return $comment->save();
 	}
 
 	public function dispImage($file)
@@ -157,5 +126,53 @@ class Board extends CActiveRecord
 		{
 			$this->fileWidth = 700;
 		}
+	}
+
+	public function getUrl()
+	{
+		return Yii::app()->createUrl('post/view', array(
+			'id'=>$this->id,
+			'title'=>$this->title,
+		));
+	}
+
+	protected function beforeSave()
+	{
+		if(parent::beforeSave())
+		{
+			$this->title=htmlspecialchars($this->title, ENT_QUOTES, 'UTF-8');
+			$this->contents=htmlspecialchars($this->contents, ENT_QUOTES, 'UTF-8');
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	protected function afterSave()
+	{
+		var_dump($this->image);
+		exit();
+		parent::afterSave();
+		Comment::model()->insertContens($this->id,$this->contents,Yii::app()->user->id,$this->image);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('created_at',$this->created_at,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
 	}
 }

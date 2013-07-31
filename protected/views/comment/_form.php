@@ -16,16 +16,16 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo CHtml::activeLabel($model,'nickname'); ?>
+		<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'contents'); ?>
 		<?php echo $form->textArea($model,'contents',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'contents'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'image_file_o'); ?>
-		<?php echo $form->textField($model,'image_file_o',array('size'=>60,'maxlength'=>1024)); ?>
-		<?php echo $form->error($model,'image_file_o'); ?>
-	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

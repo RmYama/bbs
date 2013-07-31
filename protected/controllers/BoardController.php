@@ -11,6 +11,7 @@ class BoardController extends Controller
 	private $_tmpUploadDir;
 	private $_imageUrl = 'http://localhost/bbs/images/tmp/';
 	private $_imageValue;
+	private $_model;
 
 	public function init()
 	{
@@ -61,9 +62,27 @@ class BoardController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$board=$this->loadModel();
+		$comment=$this->newComment($board);
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$board,
+			'comment'=>$comment,
 		));
+	}
+
+	protected function newComment($board)
+	{
+		$comment=new Comment;
+		if(isset($_POST['Comment']))
+		{
+			$comment->attributes=$_POST['Comment'];
+			if($board->addComment($comment))
+			{
+				$this->refresh();
+			}
+		}
+		return $comment;
 	}
 
 	/**
@@ -130,9 +149,9 @@ class BoardController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate()
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -167,10 +186,10 @@ class BoardController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
 //		$this->loadModel($id)->delete();
-		$model = $this->loadModel($id);
+		$model = $this->loadModel();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 //		if(!isset($_GET['ajax']))
@@ -186,27 +205,20 @@ class BoardController extends Controller
 	 */
 	public function actionIndex()
 	{
-/*
-		$dataProvider=new CActiveDataProvider('Board');
+		$criteria=new CDbCriteria(array(
+			'order'=>'id DESC',
+			'with'=>'resCount',
+		));
+
+		$dataProvider=new CActiveDataProvider('Board',array(
+			'pagination'=>array(
+					'pageSize'=>10,
+			),
+			'criteria'=>$criteria,
+		));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
-*/
-
-	$criteria=new CDbCriteria(array(
-		'order'=>'id DESC',
-		'with'=>'resCount',
-	));
-
-	$dataProvider=new CActiveDataProvider('Board',array(
-		'pagination'=>array(
-				'pageSize'=>5,
-		),
-		'criteria'=>$criteria,
-		));
-
-	$this->render('index',array(
-		'dataProvider'=>$dataProvider,
 		));
 	}
 
@@ -232,12 +244,30 @@ class BoardController extends Controller
 	 * @return Board the loaded model
 	 * @throws CHttpException
 	 */
+/*
 	public function loadModel($id)
 	{
 		$model=Board::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+*/
+
+	public function loadModel()
+	{
+		if($this->_model===null)
+		{
+			if(isset($_GET['id']))
+			{
+				$id = $_GET['id'];
+				$this->_model=Board::model()->findByPk($id);
+			}
+			if($this->_model===null){
+				throw new CHttpException(404,'The requested page does not exist.');
+			}
+		}
+		return $this->_model;
 	}
 
 	/**

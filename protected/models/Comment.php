@@ -63,8 +63,8 @@ class Comment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'author'=>array(self::BELONGS_TO,'Users','user_id'),
-			'board'=>array(self::BELONGS_TO,'Board','board_id')
+			'author'=>array(self::BELONGS_TO, 'Users', 'user_id'),
+			'board'=>array(self::BELONGS_TO,'Board','board_id'),
 		);
 	}
 
@@ -88,6 +88,13 @@ class Comment extends CActiveRecord
 		);
 	}
 
+	public function getUrl($board=null)
+	{
+		if($board===null)
+			$board=$this->board;
+		return $board->url.'#c'.$this->id;
+	}
+
 	public function insertContens($id,$contents,$user_id,$org_image_path)
 	{
 		$comment = new Comment;
@@ -99,6 +106,44 @@ class Comment extends CActiveRecord
 		$comment->del_flg = 0;
 		$comment->save();
 	}
+
+	public function getNickname($user_id)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->select='nickname';
+		$criteria->condition='id=:user_id';
+		$criteria->params=array(':user_id'=>$user_id);
+		$users=Users::model()->find($criteria);
+		$nickname=$users->nickname;
+
+		return $nickname;
+	}
+
+/*
+	public function getThread($board_id)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->select='contents';
+		$criteria->condition='board_id=:board_id';
+		$criteria->
+		$criteria->params=array(':board_id'=>$board_id);
+	}
+*/
+/*
+	public function getMaxResNum()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->select='MAX(res_id)';
+		$criteria->condition='board_id=:board_id';
+		$criteria->params=array(':board_id'=>$this->board_id);
+		$comment=Comment::model()->find($criteria);
+		var_dump($comment);
+		exit();
+//		$cnt=$comment->res_cnt;
+
+		return $cnt+1;
+	}
+*/
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

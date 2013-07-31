@@ -133,7 +133,6 @@ class CommentController extends Controller
 				),
 			));
 		$this->render('index',array(
-			'title'=>$title,
 			'dataProvider'=>$dataProvider
 			));
 	}
