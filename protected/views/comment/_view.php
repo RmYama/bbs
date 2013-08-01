@@ -4,29 +4,15 @@
 ?>
 
 <div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php echo CHtml::encode($data->title); ?>
+<?php
+/*
+	<b><?php //echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
+	<?php //echo CHtml::encode($data->title); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('board_id')); ?>:</b>
-	<?php echo CHtml::encode($data->board_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('res_id')); ?>:</b>
-	<?php echo CHtml::encode($data->res_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
-	<br />
-
+*/
+?>
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nickname')); ?>:</b>
-	<?php echo CHtml::encode($data->nickname); ?>
+	<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('contents')); ?>:</b>
@@ -43,15 +29,7 @@
 	<br />
 	*/ ?>
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created_at')); ?>:</b>
 	<?php echo CHtml::encode($data->created_at); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('del_flg')); ?>:</b>
-	<?php echo CHtml::encode($data->del_flg); ?>
-	<br />
-
-	*/ ?>
-
 </div>

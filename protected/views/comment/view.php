@@ -3,7 +3,7 @@
 /* @var $model Comment */
 
 $this->breadcrumbs=array(
-	'Comments'=>array('index'),
+	'Comments'=>array('board/index'),
 	$model->id,
 );
 
@@ -22,15 +22,10 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'title',
-		'id',
-		'board_id',
-		'res_id',
-		'user_id',
 		'nickname',
 		'contents',
-		'image_file_t',
-		'image_file_o',
+//		'image_file_t',
+//		'image_file_o',
 		'created_at',
-		'del_flg',
 	),
 )); ?>

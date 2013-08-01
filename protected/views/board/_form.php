@@ -27,6 +27,8 @@
 		<?php echo CHtml::error($model,'contents'); ?>
 	</div>
 
+<?php
+/*
 	<div class="row">
 		<?php echo CHtml::activeLabel($model, 'image'); ?>
 		<?php echo CHtml::activeFileField($model, 'image'); ?>
@@ -36,7 +38,8 @@
 		<?php echo CHtml::image(Yii::app()->baseUrl.'/images/'.$model->image, 'image', array('width' => $model->fileWidth)); ?><br />
 	</div>
 	<?php endif; ?>
-
+*/
+	?>
 	<div class="row buttons">
 		<?php 
 		 //echo CHtml::submitButton($model->isNewRecord ? '投 稿' : '更 新'); 

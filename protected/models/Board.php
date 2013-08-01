@@ -73,6 +73,7 @@ class Board extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'author'=>array(self::MANY_MANY,'Users','comment(user_id)'),
 			'comments'=>array(self::HAS_MANY,'Comment','board_id'),
 			'resCount'=>array(self::STAT,'Comment','board_id',
 				'condition'=>'res_id > 0'),
@@ -99,9 +100,8 @@ class Board extends CActiveRecord
 	{
 		$comment->board_id=$this->id;
 		$comment->user_id=Yii::app()->user->id;
-		$comment->res_id=$this->maxResNum + 1;
-		var_dump($comment->res_id);
-		exit();
+		$comment->res_id=$comment->maxResNum;
+
 		return $comment->save();
 	}
 
@@ -126,14 +126,6 @@ class Board extends CActiveRecord
 		{
 			$this->fileWidth = 700;
 		}
-	}
-
-	public function getUrl()
-	{
-		return Yii::app()->createUrl('post/view', array(
-			'id'=>$this->id,
-			'title'=>$this->title,
-		));
 	}
 
 	protected function beforeSave()

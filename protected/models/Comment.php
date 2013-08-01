@@ -88,11 +88,30 @@ class Comment extends CActiveRecord
 		);
 	}
 
-	public function getUrl($board=null)
+	public function getUrl($mode)
 	{
+
+		if($mode==0)
+		{
+			//編集
+			return Yii::app()->createUrl('comment/update', array(
+				'id'=>$this->id,
+			));
+
+		}elseif($mode==1){
+			return Yii::app()->createUrl('comment/view', array(
+				'id'=>$this->id,
+			));
+		}
+/*
+
 		if($board===null)
+		{
 			$board=$this->board;
+		}
+
 		return $board->url.'#c'.$this->id;
+*/
 	}
 
 	public function insertContens($id,$contents,$user_id,$org_image_path)
@@ -109,6 +128,7 @@ class Comment extends CActiveRecord
 
 	public function getNickname($user_id)
 	{
+
 		$criteria=new CDbCriteria;
 		$criteria->select='nickname';
 		$criteria->condition='id=:user_id';
@@ -118,32 +138,26 @@ class Comment extends CActiveRecord
 
 		return $nickname;
 	}
-
 /*
 	public function getThread($board_id)
 	{
 		$criteria=new CDbCriteria;
 		$criteria->select='contents';
-		$criteria->condition='board_id=:board_id';
-		$criteria->
-		$criteria->params=array(':board_id'=>$board_id);
+		$criteria->condition='board_id=:board_id AND res_id=:res_id';
+		$criteria->params=array(':board_id'=>$board_id,':res_id'=>0);
 	}
 */
-/*
 	public function getMaxResNum()
 	{
 		$criteria=new CDbCriteria;
-		$criteria->select='MAX(res_id)';
+		$criteria->select='MAX(res_id) as res_id';
 		$criteria->condition='board_id=:board_id';
 		$criteria->params=array(':board_id'=>$this->board_id);
 		$comment=Comment::model()->find($criteria);
-		var_dump($comment);
-		exit();
-//		$cnt=$comment->res_cnt;
+		$cnt=$comment->res_id;
 
 		return $cnt+1;
 	}
-*/
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

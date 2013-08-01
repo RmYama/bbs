@@ -43,7 +43,7 @@
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 */
-				array('label'=>'ホーム', 'url'=>array('/site/index')),
+				array('label'=>'ホーム', 'url'=>array('/board/index')),
 //				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'ログイン', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
