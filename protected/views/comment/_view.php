@@ -4,13 +4,12 @@
 ?>
 
 <div class="view">
-<?php
-/*
-	<b><?php //echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php //echo CHtml::encode($data->title); ?>
+<?php if($data->res_id==0):?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
+	<?php echo CHtml::encode($data->title); ?>
 	<br />
-*/
-?>
+<?php endif;?>
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nickname')); ?>:</b>
 	<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
 	<br />

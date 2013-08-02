@@ -135,18 +135,18 @@ class Comment extends CActiveRecord
 		$criteria->params=array(':user_id'=>$user_id);
 		$users=Users::model()->find($criteria);
 		$nickname=$users->nickname;
-
 		return $nickname;
 	}
-/*
-	public function getThread($board_id)
+
+
+
+	public function getTitle($board_id)
 	{
-		$criteria=new CDbCriteria;
-		$criteria->select='contents';
-		$criteria->condition='board_id=:board_id AND res_id=:res_id';
-		$criteria->params=array(':board_id'=>$board_id,':res_id'=>0);
+		$board=Board::model()->findByPk($board_id);
+		$title=$board->title;
+		return $title;
 	}
-*/
+
 	public function getMaxResNum()
 	{
 		$criteria=new CDbCriteria;

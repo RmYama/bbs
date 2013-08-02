@@ -73,7 +73,6 @@ class Board extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'author'=>array(self::MANY_MANY,'Users','comment(user_id)'),
 			'comments'=>array(self::HAS_MANY,'Comment','board_id'),
 			'resCount'=>array(self::STAT,'Comment','board_id',
 				'condition'=>'res_id > 0'),
@@ -91,7 +90,7 @@ class Board extends CActiveRecord
 			'nickname' => 'ニックネーム',
 			'contents' => 'コメント',
 			'image' => '画像',
-//			'created_at' => 'Created At',
+			'created_at' => '投稿日',
 		);
 	}
 
@@ -103,6 +102,18 @@ class Board extends CActiveRecord
 		$comment->res_id=$comment->maxResNum;
 
 		return $comment->save();
+	}
+
+	public function getThreadContents($board_id)
+	{
+		$criteria=new CDbCriteria;
+		$criteria->select='contents';
+		$criteria->condition='board_id=:board_id and res_id=:res_id';
+		$criteria->params=array(':board_id'=>$board_id,':res_id'=>0);
+		$comment=Comment::model()->find($criteria);
+		$contents=$comment->contents;
+
+		return $contents;
 	}
 
 	public function dispImage($file)

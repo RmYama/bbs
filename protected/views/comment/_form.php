@@ -14,7 +14,6 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
 	<div class="row">
 		<?php echo CHtml::activeLabel($model,'nickname'); ?>
 		<?php echo CHtml::encode(Yii::app()->user->getState('nickname')); ?>
@@ -27,7 +26,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? '投稿' : '更新'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

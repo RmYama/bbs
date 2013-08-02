@@ -3,9 +3,9 @@
 <div class="comment" id="c<?php echo $comment->res_id; ?>">
 <?php if($comment->res_id>0): ?>
 	No.<?php echo CHtml::encode($comment->res_id); ?> 
-	<b class="nickname">
+	<span class="nickname">
 		<?php echo CHtml::encode($comment->getNickname($comment->user_id)); ?>
-	</b>
+	</span>
 	<div class="content">
 		<?php echo nl2br(CHtml::encode($comment->contents)); ?>
 	</div>
